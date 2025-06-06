@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.log
+Replay/*.json
+Napad/*.json
+PoC/*.pdf
+*.db

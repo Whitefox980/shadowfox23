@@ -1,0 +1,905 @@
+{
+  "forms": [],
+  "js_files": [
+    {
+      "url": "https://www.syfe.com/onelink-smart-script-v2.0.0.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/64d3542964db4e6ae6de7d1d%2F6544eda5f000985a163a8687%2F6810611ca263205d0463cfb0%2Ffinsweetcomponentsconfig-1.0.0.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com"
+    },
+    {
+      "url": "https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=64d3542964db4e6ae6de7d1d",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/64d3542964db4e6ae6de7d1d/js/syfe-v4.schunk.5855de91e9c02c3c.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/64d3542964db4e6ae6de7d1d/js/syfe-v4.schunk.4150642731f7afc7.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/64d3542964db4e6ae6de7d1d/js/syfe-v4.111d9837.07ca747a9a92db9e.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com"
+    },
+    {
+      "url": "https://www.datadoghq-browser-agent.com/datadog-rum.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-content/plugins/gutena-accordion/build/view.js?ver=5ee49e43fe188c4120bb",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-includes/js/jquery/jquery.min.js?ver=3.7.1",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://a.mailmunch.co/app/v1/site.js",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://static.zdassets.com/ekr/snippet.js?key=3c9f72fa-764d-4d39-84e8-3a2ffa4616f6",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/64d3542964db4e6ae6de7d1d/js/syfe-v4.schunk.d4c0b6d1e515a6d0.js",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/64d3542964db4e6ae6de7d1d/js/syfe-v4.schunk.edb6ffb6a204c99e.js",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/64d3542964db4e6ae6de7d1d/js/syfe-v4.4b7f2ef1.b6445feb2b283e9b.js",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://www.syfe.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/64d3542964db4e6ae6de7d1d/js/syfe-v4.schunk.0e6f2ffd2694aa48.js",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/64d3542964db4e6ae6de7d1d/js/syfe-v4.schunk.16049ecf1251028a.js",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/64d3542964db4e6ae6de7d1d/js/syfe-v4.a15eecd1.c1be1e31a0f3dcfd.js",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://code.jquery.com/jquery-3.6.0.min.js",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-includes/js/dist/hooks.min.js?ver=4d63a3d491d11ffd8ac6",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-includes/js/dist/i18n.min.js?ver=5e580eb46a90c2b997e6",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-content/plugins/contact-form-7/includes/swv/js/index.js?ver=6.0.6",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-content/plugins/contact-form-7/includes/js/index.js?ver=6.0.6",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-content/plugins/podcast-subscribe-buttons/assets/js/modal.min.js?ver=1.0.0",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-content/plugins/wpcf7-redirect/build/js/wpcf7r-fe.js?ver=1.1",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-content/plugins/duracelltomi-google-tag-manager/dist/js/gtm4wp-form-move-tracker.js?ver=1.20.2",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-content/plugins/td-composer/legacy/Newspaper/js/tagdiv_theme.min.js?ver=12.6.8",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-content/plugins/td-composer/legacy/Newspaper/js/tdPostImages.js?ver=12.6.8",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-content/plugins/td-composer/legacy/Newspaper/js/tdSocialSharing.js?ver=12.6.8",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-content/plugins/td-composer/legacy/Newspaper/js/tdModalPostImages.js?ver=12.6.8",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-includes/js/comment-reply.min.js?ver=2e7794fb3fba5ffabcd7b20931d1880c",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-content/plugins/td-standard-pack/Newspaper/syfe/js/build/syfeV13.js?ver=2e7794fb3fba5ffabcd7b20931d1880c",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-content/plugins/td-cloud-library/assets/js/js_files_for_front.min.js?ver=b33652f2535d2f3812f59e306e26300d",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-content/plugins/td-composer/legacy/Newspaper/js/tdToTop.js?ver=12.6.8",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-content/plugins/td-composer/legacy/Newspaper/js/tdMenu.js?ver=12.6.8",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-content/plugins/td-composer/legacy/Newspaper/js/tdAjaxSearch.js?ver=12.6.8",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://stats.wp.com/e-202523.js",
+      "source_page": "https://www.syfe.com/magazine/beware-of-scammers-impersonating-syfe-and-its-officers-or-employees/"
+    },
+    {
+      "url": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/campaign/cash-flexi-sgd-promo"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/campaign/cash-flexi-sgd-promo"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/campaign/cash-flexi-sgd-promo"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/64d3542964db4e6ae6de7d1d/js/syfe-v4.06a577f3.9443b3df6daa57ab.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/campaign/cash-flexi-sgd-promo"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/campaign/cash-flexi-sgd-promo"
+    },
+    {
+      "url": "https://www.googletagmanager.com/gtag/js?id=G-2SS2K7R85Y",
+      "source_page": "https://www.selfwealth.com.au/"
+    },
+    {
+      "url": "https://events.framer.com/script?v=2",
+      "source_page": "https://www.selfwealth.com.au/"
+    },
+    {
+      "url": "https://static.zdassets.com/ekr/snippet.js?key=8755cecf-1a66-4645-9557-74c5f3be5c30",
+      "source_page": "https://www.selfwealth.com.au/"
+    },
+    {
+      "url": "https://framerusercontent.com/sites/4F3oHxmU3SAGEDBi0JHGB5/script_main.ZBJTSLI2.mjs",
+      "source_page": "https://www.selfwealth.com.au/"
+    },
+    {
+      "url": "https://assets.calendly.com/assets/external/widget.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/managed-portfolio"
+    },
+    {
+      "url": "https://npmcdn.com/react@15.0.2/dist/react-with-addons.min.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/core"
+    },
+    {
+      "url": "https://npmcdn.com/react-dom@15.0.2/dist/react-dom.min.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/core"
+    },
+    {
+      "url": "https://npmcdn.com/react-dom@15.0.2/dist/react-dom-server.min.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/core"
+    },
+    {
+      "url": "https://unpkg.com/recharts@0.12.7/umd/Recharts.min.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/core"
+    },
+    {
+      "url": "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/core"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js             ",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/reit-plus"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/chart.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/cash-management/cash-plus-flexi"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/srs"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/brokerage"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-content/plugins/td-composer/legacy/Newspaper/js/tdLoadingBox.js?ver=12.6.8",
+      "source_page": "https://www.syfe.com/magazine/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-content/plugins/td-composer/legacy/Newspaper/js/tdInfiniteLoader.js?ver=12.6.8",
+      "source_page": "https://www.syfe.com/magazine/category/news/"
+    },
+    {
+      "url": "https://www.syfe.com/magazine/wp-content/plugins/td-composer/legacy/Newspaper/js/tdLoopAjax.js?ver=12.6.8",
+      "source_page": "https://www.syfe.com/magazine/category/news/"
+    },
+    {
+      "url": "https://www.google.com/recaptcha/enterprise.js?render=6Lc9jmIlAAAAABzWpA-bQI0fZNVhfkrdtWyOQxqU",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/faq"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/zendeskNext.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/faq"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/polyfills-42372ed130431b0a.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/faq"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/onelink-smart-script-v2.0.0.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/faq"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/resetPasswordNext.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/faq"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/webpack-e46f2e7052c89559.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/faq"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/framework-33392e9905bd0fa8.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/faq"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/main-5c33704ed7f11b12.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/faq"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/pages/_app-52596d5ffcc0e949.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/faq"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/pages/faq-e7104e8ed5ed89c7.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/faq"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/h_mIjGjqqa2Gu13jN10Yz/_buildManifest.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/faq"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/h_mIjGjqqa2Gu13jN10Yz/_ssgManifest.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/faq"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/pages/open-store-0aaf2ace21face65.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/open-store"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/444b5184-82daf10c7b217bd3.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/login"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/5912-906a1b2e830dc814.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/login"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/6340-be47299f013c3864.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/login"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/6684-77ab39ed48effcf8.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/login"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/8862-0d0ba7c2cf97778f.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/login"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/8263-f93b7de38bba770c.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/login"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/5601-453097388380cf96.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/login"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/4310-8749c7b21c209a4f.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/login"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/2908-fbbb1b77aefd6c52.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/login"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/5808-aa355c952aacd5cc.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/login"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/6735-98a81801e0b0ec9f.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/login"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/2030-d60dfa13eb2c33dc.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/login"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/4418-d6a6fb8c477621d3.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/login"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/2465-d2fdd595b1c74516.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/login"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/2801-67c99c037c42d3e6.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/login"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/6485-1c7b05fd740cbebc.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/login"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/4544-d8baa4df10cb4420.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/login"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/pages/login-016111b5c21723d7.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/login"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/1854-8219014e08e8ad3d.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/dashboard"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/6810-aaebd5861b3dc385.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/dashboard"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/8040-08b5bfd27cfaf6ca.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/dashboard"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/4462-59b00e2dc9bce1dc.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/dashboard"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/2790-93079d97c88020a9.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/dashboard"
+    },
+    {
+      "url": "https://uat-bugbounty.nonprod.syfe.com/_next/static/chunks/pages/dashboard-e3a625b3d0183b93.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/dashboard"
+    },
+    {
+      "url": "https://www.google.com/recaptcha/enterprise.js?render=6LdhG2QlAAAAAE6v5yXTxJCdWWmcAqOpxb1asNZg",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/zendeskNext.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/polyfills-42372ed130431b0a.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/resetPasswordNext.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/webpack-e46f2e7052c89559.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/framework-33392e9905bd0fa8.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/main-5c33704ed7f11b12.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/pages/_app-52596d5ffcc0e949.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/444b5184-82daf10c7b217bd3.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/5912-906a1b2e830dc814.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/6340-be47299f013c3864.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/6684-77ab39ed48effcf8.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/8862-0d0ba7c2cf97778f.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/8263-f93b7de38bba770c.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/5601-453097388380cf96.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/4310-8749c7b21c209a4f.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/2908-fbbb1b77aefd6c52.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/5808-aa355c952aacd5cc.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/6735-98a81801e0b0ec9f.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/2030-d60dfa13eb2c33dc.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/4418-d6a6fb8c477621d3.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/2465-d2fdd595b1c74516.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/6485-1c7b05fd740cbebc.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/chunks/pages/create-account-377b1382a41b2b8f.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/h_mIjGjqqa2Gu13jN10Yz/_buildManifest.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://www.syfe.com/_next/static/h_mIjGjqqa2Gu13jN10Yz/_ssgManifest.js",
+      "source_page": "https://www.syfe.com/create-account?promoCode=FIXED4"
+    },
+    {
+      "url": "https://securepubads.g.doubleclick.net/tag/js/gpt.js",
+      "source_page": "https://www.businesstimes.com.sg/garage/digital-brokerage-platform-syfe-to-make-australian-debut-in-early-august"
+    },
+    {
+      "url": "https://adtag.sphdigital.com/tag/ads/ads_checker.js",
+      "source_page": "https://www.businesstimes.com.sg/garage/digital-brokerage-platform-syfe-to-make-australian-debut-in-early-august"
+    },
+    {
+      "url": "https://www.businesstimes.com.sg/assets-web2/nr-loader-spa.1.252.0.min-DkQvycqG.js",
+      "source_page": "https://www.businesstimes.com.sg/garage/digital-brokerage-platform-syfe-to-make-australian-debut-in-early-august"
+    },
+    {
+      "url": "https://www.businesstimes.com.sg/assets-web2/index-DvXdbsk2.js",
+      "source_page": "https://www.businesstimes.com.sg/garage/digital-brokerage-platform-syfe-to-make-australian-debut-in-early-august"
+    },
+    {
+      "url": "https://assets.adobedtm.com/a2ef59fba8e9/d6969c3828c3/launch-1ee49e3e9eb5.min.js",
+      "source_page": "https://www.cnbc.com/video/2020/09/23/robo-advisor-syfe-wants-to-be-holistic-platform-with-proprietary-products.html"
+    },
+    {
+      "url": "https://zephr-templates.cnbc.com/integration.js",
+      "source_page": "https://www.cnbc.com/video/2020/09/23/robo-advisor-syfe-wants-to-be-holistic-platform-with-proprietary-products.html"
+    },
+    {
+      "url": "https://techcrunch.com/_static/??-eJytzEsKAjEQhOELmelxCOpGPEumU5CMeWi6g3h7I27Etcuifj563EwsnLqH0CY0JvIKP+VYpk129PP7KEq+ZtPg/PO74loURUkD8miVzWI/+ZoqX4Vc14py7+h4SwoO3HrhQFI5umQkuIY/cK5p5AQT0OrgLvm8P9rDbOflZLcX5xVXoA==",
+      "source_page": "https://techcrunch.com/2021/07/13/investment-app-syfe-raises-29-6m-series-b-led-by-returning-investor-valar-ventures/"
+    },
+    {
+      "url": "https://public.servenobid.com/partner/163965/163966/wrapup_1.0.0.js?ver=ff0db1dc27d8b42d99d0",
+      "source_page": "https://techcrunch.com/2021/07/13/investment-app-syfe-raises-29-6m-series-b-led-by-returning-investor-valar-ventures/"
+    },
+    {
+      "url": "https://techcrunch.com/_static/??-eJyFj8EOgjAQRH/IsoFgCAfjt5R2hW3agt1tCH9vRTHGi6eZZN9sZmBdlJmjYBSQCQMyiFFNC5ZYwDHc0n61akJtK8cnKAmKxmdb2AK4e8a0vaUKFP9CKtCYtOA3fHRYfB4pMrAmL1PKaiU74t7k5SrOA5tEA/5GjaciKmR1PClLdNR+EzL8GWTmwGZOz/g1XOqu7etz1ze9ewAXn2Kk",
+      "source_page": "https://techcrunch.com/2021/07/13/investment-app-syfe-raises-29-6m-series-b-led-by-returning-investor-valar-ventures/"
+    },
+    {
+      "url": "https://sb.scorecardresearch.com/beacon.js?ver=250606",
+      "source_page": "https://techcrunch.com/2021/07/13/investment-app-syfe-raises-29-6m-series-b-led-by-returning-investor-valar-ventures/"
+    },
+    {
+      "url": "https://techcrunch.com/wp-content/client-mu-plugins/tc-editor/dist/blocks/techcrunch/mega-menu/view-module.js?ver=995fcb08926d5af3be1c",
+      "source_page": "https://techcrunch.com/2021/07/13/investment-app-syfe-raises-29-6m-series-b-led-by-returning-investor-valar-ventures/"
+    },
+    {
+      "url": "https://techcrunch.com/wp-content/client-mu-plugins/tc-editor/dist/blocks/techcrunch/seamless-scroll-container/view-module.js?ver=3fad718f50c2ba7b097d",
+      "source_page": "https://techcrunch.com/2021/07/13/investment-app-syfe-raises-29-6m-series-b-led-by-returning-investor-valar-ventures/"
+    },
+    {
+      "url": "https://techcrunch.com/wp-content/client-mu-plugins/tc-editor/dist/blocks/techcrunch/seamless-scroll/view-module.js?ver=0c333c4a1079a99c918c",
+      "source_page": "https://techcrunch.com/2021/07/13/investment-app-syfe-raises-29-6m-series-b-led-by-returning-investor-valar-ventures/"
+    },
+    {
+      "url": "https://techcrunch.com/wp-content/client-mu-plugins/tc-editor/dist/blocks/techcrunch/site-header/view-module.js?ver=8b67243caa59c39ad427",
+      "source_page": "https://techcrunch.com/2021/07/13/investment-app-syfe-raises-29-6m-series-b-led-by-returning-investor-valar-ventures/"
+    },
+    {
+      "url": "https://techcrunch.com/wp-content/client-mu-plugins/tc-editor/dist/blocks/techcrunch/site-search/view-module.js?ver=ffd4722b28b402f14477",
+      "source_page": "https://techcrunch.com/2021/07/13/investment-app-syfe-raises-29-6m-series-b-led-by-returning-investor-valar-ventures/"
+    },
+    {
+      "url": "https://techcrunch.com/_static/??-eJydzTsOwjAQhOELYYaEKIQCcRbLXogtP6LddRC3B1Klpprq+wevxbhalIpCZ8okUGf6ASsVXxndqS3wVm2yb2IIO0TBgzfij1EO2BVcCt8xuZkltWcoW8xVJvgg+pMyW6Y/3O7xnm/dZeiv52kax/gB0l9FuA==",
+      "source_page": "https://techcrunch.com/2021/07/13/investment-app-syfe-raises-29-6m-series-b-led-by-returning-investor-valar-ventures/"
+    },
+    {
+      "url": "https://www.google.com/recaptcha/api.js?render=6LcKaMEUAAAAACNhMymsVMHg25lFfksvZZO9EMTZ&ver=0.1.0",
+      "source_page": "https://techcrunch.com/2021/07/13/investment-app-syfe-raises-29-6m-series-b-led-by-returning-investor-valar-ventures/"
+    },
+    {
+      "url": "https://techcrunch.com/_static/??/wp-includes/js/dist/html-entities.min.js,/wp-includes/js/dist/hooks.min.js?m=1746040284j",
+      "source_page": "https://techcrunch.com/2021/07/13/investment-app-syfe-raises-29-6m-series-b-led-by-returning-investor-valar-ventures/"
+    },
+    {
+      "url": "https://techcrunch.com/wp-includes/js/dist/i18n.min.js?ver=5e580eb46a90c2b997e6",
+      "source_page": "https://techcrunch.com/2021/07/13/investment-app-syfe-raises-29-6m-series-b-led-by-returning-investor-valar-ventures/"
+    },
+    {
+      "url": "https://techcrunch.com/_static/??/wp-includes/js/dist/vendor/wp-polyfill.min.js,/wp-includes/js/dist/url.min.js?m=1746040284j",
+      "source_page": "https://techcrunch.com/2021/07/13/investment-app-syfe-raises-29-6m-series-b-led-by-returning-investor-valar-ventures/"
+    },
+    {
+      "url": "https://techcrunch.com/wp-includes/js/dist/api-fetch.min.js?ver=d387b816bc1ed2042e28",
+      "source_page": "https://techcrunch.com/2021/07/13/investment-app-syfe-raises-29-6m-series-b-led-by-returning-investor-valar-ventures/"
+    },
+    {
+      "url": "https://techcrunch.com/_static/??-eJydzN0KwjAMhuEbMgZnYTsRr6Wmnabrz2hSh3ev7EAQRMWjwEeeF5cZqGT1WZEiPw6kBnNsZ86CjWFiBZs5WfVwioUmQceiGARfZ7iyX0Co8qzbIBv8WFaC0CqLY1IuGcZS1NdneqyrdD+FrJM/YbbxpkzfuV588qvpzLvnYzrsetN3+2EwJtwBA89+bg==",
+      "source_page": "https://techcrunch.com/2021/07/13/investment-app-syfe-raises-29-6m-series-b-led-by-returning-investor-valar-ventures/"
+    },
+    {
+      "url": "https://adtag.sphdigital.com/tag/smx/sites/st/format_options.js",
+      "source_page": "https://www.straitstimes.com/business/companies-markets/singapores-syfe-enters-stockbroking-on-retail-investor-wave"
+    },
+    {
+      "url": "https://static1.straitstimes.com.sg/js/betterads_head.js",
+      "source_page": "https://www.straitstimes.com/business/companies-markets/singapores-syfe-enters-stockbroking-on-retail-investor-wave"
+    },
+    {
+      "url": "https://www.straitstimes.com/web2-assets/nr-loader-spa.1.252.0.min-BUVuuJoZ.js",
+      "source_page": "https://www.straitstimes.com/business/companies-markets/singapores-syfe-enters-stockbroking-on-retail-investor-wave"
+    },
+    {
+      "url": "https://www.straitstimes.com/web2-assets/index-KJ3MBRdv.js",
+      "source_page": "https://www.straitstimes.com/business/companies-markets/singapores-syfe-enters-stockbroking-on-retail-investor-wave"
+    },
+    {
+      "url": "https://static.chartbeat.com/js/chartbeat_mab.js",
+      "source_page": "https://www.straitstimes.com/business/companies-markets/singapores-syfe-enters-stockbroking-on-retail-investor-wave"
+    },
+    {
+      "url": "https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/en-hk?rp=ls"
+    },
+    {
+      "url": "https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=656031831c9018f84b939869",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/en-hk?rp=ls"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/656031831c9018f84b939869/js/syfe-hk-v1.schunk.36b8fb49256177c8.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/en-hk?rp=ls"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/656031831c9018f84b939869/js/syfe-hk-v1.schunk.f84f4e6958b0b847.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/en-hk?rp=ls"
+    },
+    {
+      "url": "https://cdn.prod.website-files.com/656031831c9018f84b939869/js/syfe-hk-v1.7cce8756.6a279e9341077198.js",
+      "source_page": "https://uat-bugbounty.nonprod.syfe.com/en-hk?rp=ls"
+    },
+    {
+      "url": "https://www.gstatic.com/_/boq-play/_/js/k=boq-play.PlayStoreUi.en_SG.nMRE7QHc-3c.es5.O/am=p9tMWK8PAEyaA_7Fb3ELAAQ/d=1/excm=_b,_tp,appdetailsview/ed=1/dg=0/wt=2/ujg=1/rs=AB1caFUQF-Ak2oTQOsrnlgk5d4d_Qa26BQ/m=_b,_tp",
+      "source_page": "https://play.google.com/store/apps/details?id=com.syfe&hl=en_SG&gl=SG&pli=1"
+    },
+    {
+      "url": "https://js-cdn.music.apple.com/musickit/v2/amp/musickit.js?t=1746450392228",
+      "source_page": "https://apps.apple.com/sg/app/syfe/id1497156434"
+    },
+    {
+      "url": "https://js-cdn.music.apple.com/musickit/v2/components/musickit-components//musickit-components.esm.js?t=1746450392228",
+      "source_page": "https://apps.apple.com/sg/app/syfe/id1497156434"
+    },
+    {
+      "url": "https://js-cdn.music.apple.com/musickit/v2/components/musickit-components//musickit-components.js?t=1746450392228",
+      "source_page": "https://apps.apple.com/sg/app/syfe/id1497156434"
+    },
+    {
+      "url": "https://apps.apple.com/assets/vendor-26bd1339a01a0e81ef6771b21cf772ec.js",
+      "source_page": "https://apps.apple.com/sg/app/syfe/id1497156434"
+    },
+    {
+      "url": "https://apps.apple.com/assets/chunk.705.3247db7e0cd66da5bcbd.js",
+      "source_page": "https://apps.apple.com/sg/app/syfe/id1497156434"
+    },
+    {
+      "url": "https://apps.apple.com/assets/chunk.143.0b2129362f122892bd9e.js",
+      "source_page": "https://apps.apple.com/sg/app/syfe/id1497156434"
+    },
+    {
+      "url": "https://apps.apple.com/assets/web-experience-app-66ef58dfcce71e07f0ed3bbbcbc21631.js",
+      "source_page": "https://apps.apple.com/sg/app/syfe/id1497156434"
+    },
+    {
+      "url": "https://apps.apple.com/assets/web-experience-app-582ef751da0d1a9aef195e35e118d9bd.modern.js",
+      "source_page": "https://apps.apple.com/sg/app/syfe/id1497156434"
+    },
+    {
+      "url": "data:application/x-javascript; charset=utf-8;base64,Oy8qRkJfUEtHX0RFTElNKi8KCnZhciBkYXRhRWxlbWVudD1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgiZW52anNvbiIpO2lmKGRhdGFFbGVtZW50IT1udWxsKXt2YXIgY29weVZhcmlhYmxlcz1mdW5jdGlvbihhKXtmb3IodmFyIGIgaW4gdmFyaWFibGVzKWFbYl09dmFyaWFibGVzW2JdfSx2YXJpYWJsZXM9SlNPTi5wYXJzZShkYXRhRWxlbWVudC50ZXh0Q29udGVudCk7d2luZG93LnJlcXVpcmVMYXp5P3dpbmRvdy5yZXF1aXJlTGF6eShbIkVudiJdLGNvcHlWYXJpYWJsZXMpOih3aW5kb3cuRW52PXdpbmRvdy5FbnZ8fHt9LGNvcHlWYXJpYWJsZXMod2luZG93LkVudikpfQovLyMgc291cmNlVVJMPWh0dHBzOi8vc3RhdGljLmNkbmluc3RhZ3JhbS5jb20vcnNyYy5waHAvdjQveUwvci9kYmdyTXNuRDE4cC5qcwo=",
+      "source_page": "https://www.instagram.com/SyfeSG/"
+    },
+    {
+      "url": "data:application/x-javascript; charset=utf-8;base64,Oy8qRkJfUEtHX0RFTElNKi8KCl9fYW5ub3RhdG9yPWZ1bmN0aW9uKGEpe3JldHVybiBhfSxfX2Rfc3R1Yj1bXSxfX2Q9ZnVuY3Rpb24oYSxiLGMsZCl7X19kX3N0dWIucHVzaChbYSxiLGMsZF0pfSxfX3JsX3N0dWI9W10scmVxdWlyZUxhenk9ZnVuY3Rpb24oKXtfX3JsX3N0dWIucHVzaChhcmd1bWVudHMpfTsKLy8jIHNvdXJjZVVSTD1odHRwczovL3N0YXRpYy5jZG5pbnN0YWdyYW0uY29tL3JzcmMucGhwL3Y0L3kyL3IvY01kX1Nab3Y5RWkuanMK",
+      "source_page": "https://www.instagram.com/SyfeSG/"
+    },
+    {
+      "url": "data:application/x-javascript; charset=utf-8;base64,Oy8qRkJfUEtHX0RFTElNKi8KCl9idGxkcj17fSxfbm93SW5sPWZ1bmN0aW9uKCl7dmFyIGE9d2luZG93LnBlcmZvcm1hbmNlO3JldHVybiBhJiZhLm5vdyYmYS50aW1pbmcmJmEudGltaW5nLm5hdmlnYXRpb25TdGFydD9hLm5vdygpK2EudGltaW5nLm5hdmlnYXRpb25TdGFydDpuZXcgRGF0ZSgpLmdldFRpbWUoKX0sX3FwbElubD1mdW5jdGlvbigpe3ZhciBhPXtjbGllbnQ6e319O3JldHVybnthZGRQb2ludDpmdW5jdGlvbihiKXthLmNsaWVudFtiXT1fbm93SW5sKCl9LGdldFBvaW50czpmdW5jdGlvbigpe3JldHVybiBhfX19KCksX3FwbElubC5hZGRQb2ludCgiaHRtbEZsdXNoIik7Ci8vIyBzb3VyY2VVUkw9aHR0cHM6Ly9zdGF0aWMuY2RuaW5zdGFncmFtLmNvbS9yc3JjLnBocC92NC95Qi9yL292OWgtVjhMS0tULmpzCg==",
+      "source_page": "https://www.instagram.com/SyfeSG/"
+    },
+    {
+      "url": "data:application/x-javascript; charset=utf-8;base64,Oy8qRkJfUEtHX0RFTElNKi8KCnZhciBkYXRhRWxlbWVudD1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgiX19lcW1jIik7aWYoZGF0YUVsZW1lbnQhPW51bGwpe3ZhciBwYXJhbXM9SlNPTi5wYXJzZShkYXRhRWxlbWVudC50ZXh0Q29udGVudCksdXJpPXBhcmFtcy51LGV2ZW50X2lkPXBhcmFtcy5lLHNjcmlwdF9wYXRoPXBhcmFtcy5zLHdlaWdodD1wYXJhbXMudyxmYl9kdHNnPXBhcmFtcy5mLGxzZD1wYXJhbXMubDtpZihuYXZpZ2F0b3Iuc2VuZEJlYWNvbil7dmFyIG1hcms9ZnVuY3Rpb24oYSxiKXt2YXIgYz1wJiZwLm5vdz9NYXRoLmZsb29yKHAubm93KCkpOk1hdGgubWF4KERhdGUubm93KCktc3RhcnQsMCk7YT0iZXZlbnRfaWQ9IitldmVudF9pZCsoYT09bnVsbD8iIjoiJm1hcmtlcl9pZD0iK2EpKyImbWFya2VyX3BhZ2VfdGltZT0iK2MrIiZzY3JpcHRfcGF0aD0iK2VuY29kZVVSSUNvbXBvbmVudChzY3JpcHRfcGF0aCkrIiZ3ZWlnaHQ9Iit3ZWlnaHQrKGI/IiZjbGllbnRfc3RhcnQ9MSI6IiIpKyhmYl9kdHNnPyImZmJfZHRzZz0iK2VuY29kZVVSSUNvbXBvbmVudChmYl9kdHNnKToiIikrKGxzZD8iJmxzZD0iK2VuY29kZVVSSUNvbXBvbmVudChsc2QpOiIiKTtjPW5ldyBCbG9iKFthXSx7dHlwZToiYXBwbGljYXRpb24veC13d3ctZm9ybS11cmxlbmNvZGVkIn0pO25hdmlnYXRvci5zZW5kQmVhY29uKHVyaSxjKX0sc3RhcnQ9RGF0ZS5ub3coKSxwPXdpbmRvdy5wZXJmb3JtYW5jZTttYXJrKHdlaWdodD4wPyJDbGllbnRTY3JpcHRTdGFydCI6bnVsbCwhMCk7d2VpZ2h0PjAmJndpbmRvdy5hZGRFdmVudExpc3RlbmVyKCJiZWZvcmV1bmxvYWQiLGZ1bmN0aW9uKCl7bWFyaygiQ2xpZW50VW5sb2FkIiwhMSl9KX19Ci8vIyBzb3VyY2VVUkw9aHR0cHM6Ly9zdGF0aWMuY2RuaW5zdGFncmFtLmNvbS9yc3JjLnBocC92NC95by9yL3JNalVWM3RsZzUtLmpzCg==",
+      "source_page": "https://www.instagram.com/SyfeSG/"
+    },
+    {
+      "url": "data:application/x-javascript; charset=utf-8;base64,Oy8qRkJfUEtHX0RFTElNKi8KCndpbmRvdy5vcGVuRGF0YWJhc2UmJih3aW5kb3cub3BlbkRhdGFiYXNlPWZ1bmN0aW9uKCl7dGhyb3cgbmV3IEVycm9yKCl9KTsKLy8jIHNvdXJjZVVSTD1odHRwczovL3N0YXRpYy5jZG5pbnN0YWdyYW0uY29tL3JzcmMucGhwL3Y0L3lZL3IvOUJPeWVES0wtZEMuanMK",
+      "source_page": "https://www.instagram.com/SyfeSG/"
+    },
+    {
+      "url": "data:application/x-javascript; charset=utf-8;base64,Oy8qRkJfUEtHX0RFTElNKi8KCihmdW5jdGlvbigpe2Z1bmN0aW9uIGEoYSl7cmV0dXJuIGEucGFyZW50RWxlbWVudCE9PWRvY3VtZW50LmJvZHkmJmEucGFyZW50RWxlbWVudCE9PWRvY3VtZW50LmhlYWR9ZnVuY3Rpb24gYihhKXtyZXR1cm4gYS5ub2RlTmFtZT09PSJTQ1JJUFQifHxhLm5vZGVOYW1lPT09IkxJTksiJiYoKGE9YyhhKSk9PW51bGw/dm9pZCAwOmEuYXN5bmNDc3MpfWZ1bmN0aW9uIGMoYSl7cmV0dXJuIShhLmRhdGFzZXQgaW5zdGFuY2VvZiB3aW5kb3cuRE9NU3RyaW5nTWFwKT9udWxsOmEuZGF0YXNldH1mdW5jdGlvbiBkKGQpe3ZhciBlO3RyeXtpZihkLm5vZGVUeXBlIT09Tm9kZS5FTEVNRU5UX05PREUpcmV0dXJufWNhdGNoKGEpe3JldHVybn1pZihhKGQpfHwhYihkKSlyZXR1cm47dmFyIGY9KGU9YyhkKSk9PW51bGw/dm9pZCAwOmUuYm9vdGxvYWRlckhhc2g7aWYoZiE9bnVsbCYmZiE9PSIiKXt2YXIgZz1udWxsLGg9ZnVuY3Rpb24oKXt3aW5kb3cuX2J0bGRyW2ZdPTEsZz09bnVsbD92b2lkIDA6ZygpfTtnPWZ1bmN0aW9uKCl7ZC5yZW1vdmVFdmVudExpc3RlbmVyKCJsb2FkIixoKSxkLnJlbW92ZUV2ZW50TGlzdGVuZXIoImVycm9yIixoKX07ZC5hZGRFdmVudExpc3RlbmVyKCJsb2FkIixoKTtkLmFkZEV2ZW50TGlzdGVuZXIoImVycm9yIixoKX19QXJyYXkuZnJvbShkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCdzY3JpcHQsbGlua1tkYXRhLWFzeW5jLWNzcz0iMSJdJykpLmZvckVhY2goZnVuY3Rpb24oYSl7cmV0dXJuIGQoYSl9KTt2YXIgZT1uZXcgTXV0YXRpb25PYnNlcnZlcihmdW5jdGlvbihhLGIpe2EuZm9yRWFjaChmdW5jdGlvbihhKXthLnR5cGU9PT0iY2hpbGRMaXN0IiYmQXJyYXkuZnJvbShhLmFkZGVkTm9kZXMpLmZvckVhY2goZnVuY3Rpb24oYSl7ZChhKX0pfSl9KTtlLm9ic2VydmUoZG9jdW1lbnQuZ2V0RWxlbWVudHNCeVRhZ05hbWUoImh0bWwiKVswXSx7YXR0cmlidXRlczohMSxjaGlsZExpc3Q6ITAsc3VidHJlZTohMH0pfSkoKTsKLy8jIHNvdXJjZVVSTD1odHRwczovL3N0YXRpYy5jZG5pbnN0YWdyYW0uY29tL3JzcmMucGhwL3Y0L3l2L3IvdHNxUDFCV0dPamMuanMK",
+      "source_page": "https://www.instagram.com/SyfeSG/"
+    },
+    {
+      "url": "data:text/javascript;base64,cmVxdWlyZUxhenkoWyJTZXJ2ZXJKU1BheWxvYWRMaXN0ZW5lciJdLGZ1bmN0aW9uKG0pe20ucHJvY2VzcygpO30sbnVsbCwweDEwMCk=",
+      "source_page": "https://www.instagram.com/SyfeSG/"
+    },
+    {
+      "url": "https://static.cdninstagram.com/rsrc.php/v4/yA/r/w9xOuY_fWrW.js",
+      "source_page": "https://www.instagram.com/SyfeSG/"
+    },
+    {
+      "url": "https://static.cdninstagram.com/rsrc.php/v4i8pJ4/yF/l/en_US/XvhNLn_fZFxVOwyWXn_Cw1qzcseLzHPo4zpED9PWs3AjxNEkM44K5ZUaBpW5Udc-MfIp21wyStSJtFrE9WRgYU-OzNHMq96UVfFY4-rnlhkqAMar4GoveLLUOwkz-N8AiK5ycupysCKoOPOvBRVRaCfAzVqbuwhRgaKvpy4LYoWxC22kGBrIJ1GdNAxbC9TrbPU3j_EajSL0EaNhZ0jtI38B1Z-jr7YowlT_YSRuUHpUXdq2JdvsWqehdEtWw397qFyFcaSD5yzIrtSg1gl0NX2Tg92UVk1-RfokkNf3cMKSPKuAkuWttwbwf9BVd3qCpLlkdGCSmZ.js",
+      "source_page": "https://www.instagram.com/SyfeSG/"
+    },
+    {
+      "url": "https://static.cdninstagram.com/rsrc.php/v4iSaV4/ym/l/en_US/WyGXq_kGGq80d6q1rZxNa15cWj4gbKJoc7-r2-fpXCB_dZb1-sJPPDL.js",
+      "source_page": "https://www.instagram.com/SyfeSG/"
+    },
+    {
+      "url": "https://static.cdninstagram.com/rsrc.php/v4ihI-4/y0/l/en_US/mNRhMCSRqbt.js",
+      "source_page": "https://www.instagram.com/SyfeSG/"
+    },
+    {
+      "url": "https://static.cdninstagram.com/rsrc.php/v4iFlm4/y2/l/en_US/joO4Zk0gXB-Ja8c2w9iTYXOaoS9RMuF8DbkHldlwpZrx9qMEkYMFZyz.js",
+      "source_page": "https://www.instagram.com/SyfeSG/"
+    },
+    {
+      "url": "https://static.cdninstagram.com/rsrc.php/v4iusG4/yZ/l/en_US/q0TOB0uVgnm.js",
+      "source_page": "https://www.instagram.com/SyfeSG/"
+    },
+    {
+      "url": "https://static.cdninstagram.com/rsrc.php/v4iV5-4/yZ/l/en_US/51KBnAs_E0b.js",
+      "source_page": "https://www.instagram.com/SyfeSG/"
+    },
+    {
+      "url": "https://static.cdninstagram.com/rsrc.php/v4/yr/r/KiienQ_lzug.js",
+      "source_page": "https://www.instagram.com/SyfeSG/"
+    },
+    {
+      "url": "https://static.cdninstagram.com/rsrc.php/v4icWE4/y3/l/en_US/ngLbpikkbAL.js",
+      "source_page": "https://www.instagram.com/SyfeSG/"
+    },
+    {
+      "url": "data:application/x-javascript; charset=utf-8;base64,Oy8qRkJfUEtHX0RFTElNKi8KCiJ1c2Ugc3RyaWN0Ijt3aW5kb3cuX3FwbElubCYmdHlwZW9mIHdpbmRvdy5fcXBsSW5sPT09Im9iamVjdCImJndpbmRvdy5fcXBsSW5sLmFkZFBvaW50JiZ0eXBlb2Ygd2luZG93Ll9xcGxJbmwuYWRkUG9pbnQ9PT0iZnVuY3Rpb24iJiZ3aW5kb3cuX3FwbElubC5hZGRQb2ludCgidGllck9uZVJlY2VpdmVkIik7Ci8vIyBzb3VyY2VVUkw9aHR0cHM6Ly9zdGF0aWMuY2RuaW5zdGFncmFtLmNvbS9yc3JjLnBocC92NC95eC9yL3N6LUlmNm5PLWpjLmpzCg==",
+      "source_page": "https://www.instagram.com/SyfeSG/"
+    },
+    {
+      "url": "data:application/x-javascript; charset=utf-8;base64,Oy8qRkJfUEtHX0RFTElNKi8KCiJ1c2Ugc3RyaWN0Ijt3aW5kb3cuX3FwbElubCYmdHlwZW9mIHdpbmRvdy5fcXBsSW5sPT09Im9iamVjdCImJndpbmRvdy5fcXBsSW5sLmFkZFBvaW50JiZ0eXBlb2Ygd2luZG93Ll9xcGxJbmwuYWRkUG9pbnQ9PT0iZnVuY3Rpb24iJiZ3aW5kb3cuX3FwbElubC5hZGRQb2ludCgidGllclR3b1JlY2VpdmVkIik7Ci8vIyBzb3VyY2VVUkw9aHR0cHM6Ly9zdGF0aWMuY2RuaW5zdGFncmFtLmNvbS9yc3JjLnBocC92NC95di9yL2wtZEE3d3Q2TFlhLmpzCg==",
+      "source_page": "https://www.instagram.com/SyfeSG/"
+    },
+    {
+      "url": "data:application/x-javascript; charset=utf-8;base64,Oy8qRkJfUEtHX0RFTElNKi8KCiJ1c2Ugc3RyaWN0Ijt3aW5kb3cuX3FwbElubCYmdHlwZW9mIHdpbmRvdy5fcXBsSW5sPT09Im9iamVjdCImJndpbmRvdy5fcXBsSW5sLmFkZFBvaW50JiZ0eXBlb2Ygd2luZG93Ll9xcGxJbmwuYWRkUG9pbnQ9PT0iZnVuY3Rpb24iJiZ3aW5kb3cuX3FwbElubC5hZGRQb2ludCgidGllclRocmVlUmVjZWl2ZWQiKTsKLy8jIHNvdXJjZVVSTD1odHRwczovL3N0YXRpYy5jZG5pbnN0YWdyYW0uY29tL3JzcmMucGhwL3Y0L3lrL3IvWkVkYkF5MTk4QWEuanMK",
+      "source_page": "https://www.instagram.com/SyfeSG/"
+    },
+    {
+      "url": "data:application/x-javascript; charset=utf-8;base64,Oy8qRkJfUEtHX0RFTElNKi8KCnZhciBkYXRhRWxlbWVudD1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgiZW52anNvbiIpO2lmKGRhdGFFbGVtZW50IT1udWxsKXt2YXIgY29weVZhcmlhYmxlcz1mdW5jdGlvbihhKXtmb3IodmFyIGIgaW4gdmFyaWFibGVzKWFbYl09dmFyaWFibGVzW2JdfSx2YXJpYWJsZXM9SlNPTi5wYXJzZShkYXRhRWxlbWVudC50ZXh0Q29udGVudCk7d2luZG93LnJlcXVpcmVMYXp5P3dpbmRvdy5yZXF1aXJlTGF6eShbIkVudiJdLGNvcHlWYXJpYWJsZXMpOih3aW5kb3cuRW52PXdpbmRvdy5FbnZ8fHt9LGNvcHlWYXJpYWJsZXMod2luZG93LkVudikpfQovLyMgc291cmNlVVJMPWh0dHBzOi8vc3RhdGljLnh4LmZiY2RuLm5ldC9yc3JjLnBocC92NC95TC9yL2RiZ3JNc25EMThwLmpzCg==",
+      "source_page": "https://www.facebook.com/SyfeSG/"
+    },
+    {
+      "url": "data:application/x-javascript; charset=utf-8;base64,Oy8qRkJfUEtHX0RFTElNKi8KCl9fYW5ub3RhdG9yPWZ1bmN0aW9uKGEpe3JldHVybiBhfSxfX2Rfc3R1Yj1bXSxfX2Q9ZnVuY3Rpb24oYSxiLGMsZCl7X19kX3N0dWIucHVzaChbYSxiLGMsZF0pfSxfX3JsX3N0dWI9W10scmVxdWlyZUxhenk9ZnVuY3Rpb24oKXtfX3JsX3N0dWIucHVzaChhcmd1bWVudHMpfTsKLy8jIHNvdXJjZVVSTD1odHRwczovL3N0YXRpYy54eC5mYmNkbi5uZXQvcnNyYy5waHAvdjQveTIvci9jTWRfU1pvdjlFaS5qcwo=",
+      "source_page": "https://www.facebook.com/SyfeSG/"
+    },
+    {
+      "url": "data:application/x-javascript; charset=utf-8;base64,Oy8qRkJfUEtHX0RFTElNKi8KCl9idGxkcj17fSxfbm93SW5sPWZ1bmN0aW9uKCl7dmFyIGE9d2luZG93LnBlcmZvcm1hbmNlO3JldHVybiBhJiZhLm5vdyYmYS50aW1pbmcmJmEudGltaW5nLm5hdmlnYXRpb25TdGFydD9hLm5vdygpK2EudGltaW5nLm5hdmlnYXRpb25TdGFydDpuZXcgRGF0ZSgpLmdldFRpbWUoKX0sX3FwbElubD1mdW5jdGlvbigpe3ZhciBhPXtjbGllbnQ6e319O3JldHVybnthZGRQb2ludDpmdW5jdGlvbihiKXthLmNsaWVudFtiXT1fbm93SW5sKCl9LGdldFBvaW50czpmdW5jdGlvbigpe3JldHVybiBhfX19KCksX3FwbElubC5hZGRQb2ludCgiaHRtbEZsdXNoIik7Ci8vIyBzb3VyY2VVUkw9aHR0cHM6Ly9zdGF0aWMueHguZmJjZG4ubmV0L3JzcmMucGhwL3Y0L3lCL3Ivb3Y5aC1WOExLS1QuanMK",
+      "source_page": "https://www.facebook.com/SyfeSG/"
+    },
+    {
+      "url": "data:application/x-javascript; charset=utf-8;base64,Oy8qRkJfUEtHX0RFTElNKi8KCnZhciBkYXRhRWxlbWVudD1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgiX19lcW1jIik7aWYoZGF0YUVsZW1lbnQhPW51bGwpe3ZhciBwYXJhbXM9SlNPTi5wYXJzZShkYXRhRWxlbWVudC50ZXh0Q29udGVudCksdXJpPXBhcmFtcy51LGV2ZW50X2lkPXBhcmFtcy5lLHNjcmlwdF9wYXRoPXBhcmFtcy5zLHdlaWdodD1wYXJhbXMudyxmYl9kdHNnPXBhcmFtcy5mLGxzZD1wYXJhbXMubDtpZihuYXZpZ2F0b3Iuc2VuZEJlYWNvbil7dmFyIG1hcms9ZnVuY3Rpb24oYSxiKXt2YXIgYz1wJiZwLm5vdz9NYXRoLmZsb29yKHAubm93KCkpOk1hdGgubWF4KERhdGUubm93KCktc3RhcnQsMCk7YT0iZXZlbnRfaWQ9IitldmVudF9pZCsoYT09bnVsbD8iIjoiJm1hcmtlcl9pZD0iK2EpKyImbWFya2VyX3BhZ2VfdGltZT0iK2MrIiZzY3JpcHRfcGF0aD0iK2VuY29kZVVSSUNvbXBvbmVudChzY3JpcHRfcGF0aCkrIiZ3ZWlnaHQ9Iit3ZWlnaHQrKGI/IiZjbGllbnRfc3RhcnQ9MSI6IiIpKyhmYl9kdHNnPyImZmJfZHRzZz0iK2VuY29kZVVSSUNvbXBvbmVudChmYl9kdHNnKToiIikrKGxzZD8iJmxzZD0iK2VuY29kZVVSSUNvbXBvbmVudChsc2QpOiIiKTtjPW5ldyBCbG9iKFthXSx7dHlwZToiYXBwbGljYXRpb24veC13d3ctZm9ybS11cmxlbmNvZGVkIn0pO25hdmlnYXRvci5zZW5kQmVhY29uKHVyaSxjKX0sc3RhcnQ9RGF0ZS5ub3coKSxwPXdpbmRvdy5wZXJmb3JtYW5jZTttYXJrKHdlaWdodD4wPyJDbGllbnRTY3JpcHRTdGFydCI6bnVsbCwhMCk7d2VpZ2h0PjAmJndpbmRvdy5hZGRFdmVudExpc3RlbmVyKCJiZWZvcmV1bmxvYWQiLGZ1bmN0aW9uKCl7bWFyaygiQ2xpZW50VW5sb2FkIiwhMSl9KX19Ci8vIyBzb3VyY2VVUkw9aHR0cHM6Ly9zdGF0aWMueHguZmJjZG4ubmV0L3JzcmMucGhwL3Y0L3lvL3Ivck1qVVYzdGxnNS0uanMK",
+      "source_page": "https://www.facebook.com/SyfeSG/"
+    },
+    {
+      "url": "data:application/x-javascript; charset=utf-8;base64,Oy8qRkJfUEtHX0RFTElNKi8KCndpbmRvdy5vcGVuRGF0YWJhc2UmJih3aW5kb3cub3BlbkRhdGFiYXNlPWZ1bmN0aW9uKCl7dGhyb3cgbmV3IEVycm9yKCl9KTsKLy8jIHNvdXJjZVVSTD1odHRwczovL3N0YXRpYy54eC5mYmNkbi5uZXQvcnNyYy5waHAvdjQveVkvci85Qk95ZURLTC1kQy5qcwo=",
+      "source_page": "https://www.facebook.com/SyfeSG/"
+    },
+    {
+      "url": "data:application/x-javascript; charset=utf-8;base64,Oy8qRkJfUEtHX0RFTElNKi8KCihmdW5jdGlvbigpe2Z1bmN0aW9uIGEoYSl7cmV0dXJuIGEucGFyZW50RWxlbWVudCE9PWRvY3VtZW50LmJvZHkmJmEucGFyZW50RWxlbWVudCE9PWRvY3VtZW50LmhlYWR9ZnVuY3Rpb24gYihhKXtyZXR1cm4gYS5ub2RlTmFtZT09PSJTQ1JJUFQifHxhLm5vZGVOYW1lPT09IkxJTksiJiYoKGE9YyhhKSk9PW51bGw/dm9pZCAwOmEuYXN5bmNDc3MpfWZ1bmN0aW9uIGMoYSl7cmV0dXJuIShhLmRhdGFzZXQgaW5zdGFuY2VvZiB3aW5kb3cuRE9NU3RyaW5nTWFwKT9udWxsOmEuZGF0YXNldH1mdW5jdGlvbiBkKGQpe3ZhciBlO3RyeXtpZihkLm5vZGVUeXBlIT09Tm9kZS5FTEVNRU5UX05PREUpcmV0dXJufWNhdGNoKGEpe3JldHVybn1pZihhKGQpfHwhYihkKSlyZXR1cm47dmFyIGY9KGU9YyhkKSk9PW51bGw/dm9pZCAwOmUuYm9vdGxvYWRlckhhc2g7aWYoZiE9bnVsbCYmZiE9PSIiKXt2YXIgZz1udWxsLGg9ZnVuY3Rpb24oKXt3aW5kb3cuX2J0bGRyW2ZdPTEsZz09bnVsbD92b2lkIDA6ZygpfTtnPWZ1bmN0aW9uKCl7ZC5yZW1vdmVFdmVudExpc3RlbmVyKCJsb2FkIixoKSxkLnJlbW92ZUV2ZW50TGlzdGVuZXIoImVycm9yIixoKX07ZC5hZGRFdmVudExpc3RlbmVyKCJsb2FkIixoKTtkLmFkZEV2ZW50TGlzdGVuZXIoImVycm9yIixoKX19QXJyYXkuZnJvbShkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCdzY3JpcHQsbGlua1tkYXRhLWFzeW5jLWNzcz0iMSJdJykpLmZvckVhY2goZnVuY3Rpb24oYSl7cmV0dXJuIGQoYSl9KTt2YXIgZT1uZXcgTXV0YXRpb25PYnNlcnZlcihmdW5jdGlvbihhLGIpe2EuZm9yRWFjaChmdW5jdGlvbihhKXthLnR5cGU9PT0iY2hpbGRMaXN0IiYmQXJyYXkuZnJvbShhLmFkZGVkTm9kZXMpLmZvckVhY2goZnVuY3Rpb24oYSl7ZChhKX0pfSl9KTtlLm9ic2VydmUoZG9jdW1lbnQuZ2V0RWxlbWVudHNCeVRhZ05hbWUoImh0bWwiKVswXSx7YXR0cmlidXRlczohMSxjaGlsZExpc3Q6ITAsc3VidHJlZTohMH0pfSkoKTsKLy8jIHNvdXJjZVVSTD1odHRwczovL3N0YXRpYy54eC5mYmNkbi5uZXQvcnNyYy5waHAvdjQveXYvci90c3FQMUJXR09qYy5qcwo=",
+      "source_page": "https://www.facebook.com/SyfeSG/"
+    },
+    {
+      "url": "https://static.xx.fbcdn.net/rsrc.php/v4/yA/r/w9xOuY_fWrW.js",
+      "source_page": "https://www.facebook.com/SyfeSG/"
+    },
+    {
+      "url": "https://static.xx.fbcdn.net/rsrc.php/v4iyOx4/yX/l/en_US/RqMxv8a1G1fyYD13V85S49aXW-L1XaNkEYSolXDBq8gRYfukHg4q1bTfOkEN1ctinsx77zXBvtiK3pU-Q101fo__GoiMt_RY_Bx7SRssC1D5JpoARZsfh-hV2_XEJ1-HwUR21Rdzuzi16ygJdQ0JoDdlT1yu5mdqSYhpZNZQ22DtuaXLrDG3dmiXJN4HnsYNsuC0kUgxoWEoHAgzNktIaun7D97sqfiULb8IhPTcQ47WjxjhFNLDczav0pBCHfuFZO4v9aC1Dl5p4qPfwvop55HfXW__mMzi95_wmB-51MKSPKuAkuWtq7870jKf_SNGsXcG4xa-CQ.js",
+      "source_page": "https://www.facebook.com/SyfeSG/"
+    },
+    {
+      "url": "https://static.xx.fbcdn.net/rsrc.php/v4i5ot4/yz/l/en_US/8V99RC1X54dEZKYugwNQ3Ewg5PaQbg1rKcBePFex96ZsQ1b6KCS8gbOAzna3MtT4DpareOgSbYm2q6cp7cNKLqJsThygw0CzCzIqzt-Jwp41UEwiAR0R0DG7YrVnMaVDa5Gl.js",
+      "source_page": "https://www.facebook.com/SyfeSG/"
+    },
+    {
+      "url": "https://static.xx.fbcdn.net/rsrc.php/v4iHZq4/yi/l/en_US/jXOBAJd0ZeS.js",
+      "source_page": "https://www.facebook.com/SyfeSG/"
+    },
+    {
+      "url": "https://static.xx.fbcdn.net/rsrc.php/v4idBq4/yO/l/en_US/Y7k8aqFe4tM.js",
+      "source_page": "https://www.facebook.com/SyfeSG/"
+    },
+    {
+      "url": "https://static.xx.fbcdn.net/rsrc.php/v4i7Gr4/yM/l/en_US/GXD4Cj5mUk4yCdg2J5XSNKeUoarW4CxNsGmPBjFWJhPQN-5COTNBjN2lUV7BVDeuTYGXAldPtVIYy_4JglYDfRjfJKwVSLZm6LLvHmdSPsOpbhvS8rA6FaFIL6CKjUusUKGhj_foWnKGoe4eLqhK1-CtdAM1jbcGOLPLz.js",
+      "source_page": "https://www.facebook.com/SyfeSG/"
+    },
+    {
+      "url": "https://static.xx.fbcdn.net/rsrc.php/v4/y5/r/2RNZOA-BCSG.js",
+      "source_page": "https://www.facebook.com/SyfeSG/"
+    },
+    {
+      "url": "https://static.xx.fbcdn.net/rsrc.php/v4ixZd4/y_/l/en_US/BBAInkLFEhZ.js",
+      "source_page": "https://www.facebook.com/SyfeSG/"
+    },
+    {
+      "url": "https://static.xx.fbcdn.net/rsrc.php/v4/yE/r/t22Jx58h_ev.js",
+      "source_page": "https://www.facebook.com/SyfeSG/"
+    },
+    {
+      "url": "data:application/x-javascript; charset=utf-8;base64,Oy8qRkJfUEtHX0RFTElNKi8KCiJ1c2Ugc3RyaWN0Ijt3aW5kb3cuX3FwbElubCYmdHlwZW9mIHdpbmRvdy5fcXBsSW5sPT09Im9iamVjdCImJndpbmRvdy5fcXBsSW5sLmFkZFBvaW50JiZ0eXBlb2Ygd2luZG93Ll9xcGxJbmwuYWRkUG9pbnQ9PT0iZnVuY3Rpb24iJiZ3aW5kb3cuX3FwbElubC5hZGRQb2ludCgidGllck9uZVJlY2VpdmVkIik7Ci8vIyBzb3VyY2VVUkw9aHR0cHM6Ly9zdGF0aWMueHguZmJjZG4ubmV0L3JzcmMucGhwL3Y0L3l4L3Ivc3otSWY2bk8tamMuanMK",
+      "source_page": "https://www.facebook.com/SyfeSG/"
+    },
+    {
+      "url": "data:application/x-javascript; charset=utf-8;base64,Oy8qRkJfUEtHX0RFTElNKi8KCiJ1c2Ugc3RyaWN0Ijt3aW5kb3cuX3FwbElubCYmdHlwZW9mIHdpbmRvdy5fcXBsSW5sPT09Im9iamVjdCImJndpbmRvdy5fcXBsSW5sLmFkZFBvaW50JiZ0eXBlb2Ygd2luZG93Ll9xcGxJbmwuYWRkUG9pbnQ9PT0iZnVuY3Rpb24iJiZ3aW5kb3cuX3FwbElubC5hZGRQb2ludCgidGllclR3b1JlY2VpdmVkIik7Ci8vIyBzb3VyY2VVUkw9aHR0cHM6Ly9zdGF0aWMueHguZmJjZG4ubmV0L3JzcmMucGhwL3Y0L3l2L3IvbC1kQTd3dDZMWWEuanMK",
+      "source_page": "https://www.facebook.com/SyfeSG/"
+    },
+    {
+      "url": "data:application/x-javascript; charset=utf-8;base64,Oy8qRkJfUEtHX0RFTElNKi8KCiJ1c2Ugc3RyaWN0Ijt3aW5kb3cuX3FwbElubCYmdHlwZW9mIHdpbmRvdy5fcXBsSW5sPT09Im9iamVjdCImJndpbmRvdy5fcXBsSW5sLmFkZFBvaW50JiZ0eXBlb2Ygd2luZG93Ll9xcGxJbmwuYWRkUG9pbnQ9PT0iZnVuY3Rpb24iJiZ3aW5kb3cuX3FwbElubC5hZGRQb2ludCgidGllclRocmVlUmVjZWl2ZWQiKTsKLy8jIHNvdXJjZVVSTD1odHRwczovL3N0YXRpYy54eC5mYmNkbi5uZXQvcnNyYy5waHAvdjQveWsvci9aRWRiQXkxOThBYS5qcwo=",
+      "source_page": "https://www.facebook.com/SyfeSG/"
+    },
+    {
+      "url": "https://static.whatsapp.net/rsrc.php/v4/yF/r/eReUKp-24Yr.js",
+      "source_page": "https://api.whatsapp.com/send?phone=6531381215&amp;text=Hi%2c%20Got%20your%20reference%20from%20your%20Website.%20I%20want%20to%20learn%20more%20about%20digital%20visiting%20card%20and%20make%20one%20for%20me.&amp;source=&amp;data=&amp;app_absent="
+    },
+    {
+      "inline": "!function(o,c){var n=c.documentElement,t=\" w-mod-\";n.className+=t+\"js\",(\"ontouchstart\"in o||o.Docume..."
+    },
+    {
+      "inline": "\n  if (window.location.host === 'www.syfe.com') {\n    // only enabled in production\n    Sentry.init(..."
+    },
+    {
+      "inline": "\n  var PLATFORM_URL = \"\";\n  var DOMAIN='https://api.syfe.com';\n  var BASEAPI_URL=DOMAIN;\n  var GTM_I..."
+    },
+    {
+      "inline": "(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':\n                                         ..."
+    },
+    {
+      "inline": "\n  {\n      \"@context\": \"https://schema.org\",\n      \"@type\": \"Organization\",\n      \"url\": \"https://ww..."
+    },
+    {
+      "inline": "\n  {\n      \"@context\": \"https://schema.org\",\n      \"@type\": \"WebSite\",\n      \"@id\": \"https://www.syf..."
+    },
+    {
+      "inline": "\n  const convertUTCDateToLocalDate = (date) => {\n    let newDate = new Date(date);\n    newDate.setMi..."
+    },
+    "https://www.syfe.com/onelink-smart-script-v2.0.0.js",
+    "https://cdn.prod.website-files.com/64d3542964db4e6ae6de7d1d%2F6544eda5f000985a163a8687%2F6810611ca263205d0463cfb0%2Ffinsweetcomponentsconfig-1.0.0.js",
+    {
+      "inline": "\n// hellobar close logic\nconst hellobarIcons = document.getElementsByClassName(`helllo-bar-cross-ico..."
+    },
+    {
+      "inline": "\nwindow.addEventListener('', () => {\n  const imgArr = Array.from(document.getElementsByClassName('he..."
+    },
+    {
+      "inline": "\nconst el = document.querySelector('#geo-redirection-overlay');\nconst heading = document.querySelect..."
+    },
+    {
+      "inline": "\nconst el = document.querySelector('#geo-redirection-overlay');\nconst heading = document.querySelect..."
+    },
+    "https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=64d3542964db4e6ae6de7d1d",
+    "https://cdn.prod.website-files.com/64d3542964db4e6ae6de7d1d/js/syfe-v4.schunk.5855de91e9c02c3c.js",
+    "https://cdn.prod.website-files.com/64d3542964db4e6ae6de7d1d/js/syfe-v4.schunk.4150642731f7afc7.js",
+    "https://cdn.prod.website-files.com/64d3542964db4e6ae6de7d1d/js/syfe-v4.111d9837.07ca747a9a92db9e.js",
+    {
+      "inline": "\n  $('#custom-button-1').on('click', function (evt) {\n    $('#target-tab-link-1').triggerHandler('cl..."
+    },
+    {
+      "inline": "\n  $('#custom-button-2').on('click', function (evt) {\n    $('#target-tab-link-2').triggerHandler('cl..."
+    },
+    {
+      "inline": "\n  // Navbar animation\n  const navbar = document.getElementById(\"navbar\");\n  const logoWhite = docum..."
+    },
+    {
+      "inline": "\n  var toggleElements = document.querySelectorAll('.w-dropdown-toggle');\n  var iconWraps = document...."
+    },
+    {
+      "inline": "\n  // $('.w-nav').on('click',function () {\n  //   $('.body-2').toggleClass('menu-open');\n  // });\n..."
+    },
+    {
+      "inline": "\n  $(function () {\n\n    // $(\".faq-accordion-content:not(:first-of-type)\").css(\"display\", \"none\");\n ..."
+    },
+    {
+      "inline": "\n  /*$(window).scroll(function () {\n    var navHeight = $('#navbar').height();\n    var sticky = $('#..."
+    },
+    {
+      "inline": "\n  $(document).on('click','.is-popup', function(){\n    $('.body-2').addClass('show-modal');\n  });\n  ..."
+    },
+    {
+      "inline": "\n  window.onload = function () {   \n    const urlParams = new URLSearchParams(window.location.search..."
+    },
+    {
+      "inline": "\n  $(document).ready(function () {\n    const viewMore = $(\".btn-view-more\").on('click', viewMoreTabl..."
+    },
+    {
+      "inline": "\n  // accordion code\n  /* because of the way sticky behaves when a parent has overflow hidden, the t..."
+    },
+    {
+      "inline": "\n  const activateZendeskChat = () => {\n    // window.zE.activate();\n    window.zE('messenger', 'open..."
+    },
+    "https://www.datadoghq-browser-agent.com/datadog-rum.js",
+    {
+      "inline": "\n  try {\n    if (ENVIRONMENT_NAME === 'production') {\n      window.DD_RUM &&\n        window.DD_RUM.i..."
+    },
+    {
+      "inline": "\n  var accordion = (function(){\n\n    var $accordion = $('.add-ons_js-accordion');\n    var $accordion..."
+    },
+    {
+      "inline": "\n  $(\".tooltip\").on('click', function(){\n    const zendeskIcon = $('iframe#launcher')\n    if (zendes..."
+    },
+    {
+      "inline": "\n  // Function to get all URL parameters as an object\n  function getUrlParameters() {\n    var params..."
+    },
+    {
+      "inline": "(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createEleme..."
+    }
+  ],
+  "discovered_params": {}
+}

@@ -1,0 +1,13 @@
+{
+  "mission_id": "SHADOW_SYFE",
+  "target": "https://uat-bugbounty.nonprod.syfe.com/",
+  "headers": {
+    "User-Agent": "ShadowFoxAgent/1.0",
+    "X-HackerOne-Research": "H1:whitefox980"
+  },
+  "stealth_mode": true,
+  "aggression_level": "low",
+  "retries": 1,
+  "timeout": 10,
+  "verbose": false
+}

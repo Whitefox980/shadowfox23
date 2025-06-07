@@ -1,437 +1,465 @@
 #!/usr/bin/env python3
 """
-🦊 SHADOWFOX CLI ORCHESTRATOR
-Centralni komandni centar za sve ShadowFox operacije
-Autor: Whitefox980 | Verzija: 2025.06.06
+ShadowFox CLI Command Center
+Advanced Cybersecurity Toolkit Interface
 """
 
-import argparse
 import os
 import sys
 import json
-import time
 import subprocess
-import threading
+import time
 from datetime import datetime
 from pathlib import Path
-import http.server
-import socketserver
-from urllib.parse import urlparse
-import webbrowser
-from http.server import SimpleHTTPRequestHandler
-import socketserver
-
-
 
 class ShadowFoxCLI:
     def __init__(self):
-        self.version = "2025.06.06"
-        self.banner = """
-╔═══════════════════════════════════════════════════════════╗
-║  🦊 SHADOWFOX TACTICAL BOUNTY SYSTEM v{version}            ║  
-║  ═══════════════════════════════════════════════════════  ║
-║  Modular AI-Powered Bug Bounty Hunting Platform          ║
-║  Created by: Whitefox980 | Status: OPERATIONAL           ║
-╚═══════════════════════════════════════════════════════════╝
-        """.format(version=self.version)
+        self.version = "2.3.1"
+        self.project_name = "ShadowFox"
+        self.base_dir = Path(__file__).parent
+        self.mission_info = self.load_mission_info()
         
-        self.modules = {
-            "recon": "ShadowRecon/shadow_recon.py",
-            "header_fuzz": "Napad/attack_header_fuzz.py", 
-            "param_fuzz": "Napad/attack_param_fuzz.py",
-            "mutator": "Centar/mutator_core.py",
-            "ai_eval": "Centar/ai_evaluator.py",
-            "replay": "Replay/replay_executor.py",
-            "poc": "PoC/PoC_Reporter.py",
-            "filter": "ShadowRecon/chupko_filter.py"
-        }
-        
-        self.server_port = 8888
-        self.server_thread = None
-        self.server_running = False
-        
-    def print_banner(self):
-        """Prikaz ShadowFox banner-a"""
-        print(self.banner)
-        
-    def check_structure(self):
-        """Provera strukture foldera i fajlova"""
-        print("🔍 [CHECK] Provera ShadowFox strukture...")
-        
-        required_dirs = [
-            "Meta", "ShadowRecon", "Napad", "Centar", 
-            "Replay", "PoC", "Izlaz"
-        ]
-        
-        required_files = [
-            "targets.txt",
-            "Meta/mission_info.json"
-        ]
-        
-        missing_dirs = []
-        missing_files = []
-        
-        # Proveri direktorijume
-        for dir_name in required_dirs:
-            if not os.path.exists(dir_name):
-                missing_dirs.append(dir_name)
-                
-        # Proveri fajlove
-        for file_name in required_files:
-            if not os.path.exists(file_name):
-                missing_files.append(file_name)
-                
-        if missing_dirs or missing_files:
-            print("❌ [ERROR] Nedostaju komponente:")
-            for missing_dir in missing_dirs:
-                print(f"   📁 mkdir {missing_dir}")
-            for missing_file in missing_files:
-                print(f"   📄 touch {missing_file}")
-            return False
-        
-        print("✅ [CHECK] ShadowFox struktura kompletna")
-        return True
-        
-    def create_structure(self):
-        """Kreiranje osnovne strukture foldera"""
-        print("🔧 [SETUP] Kreiranje ShadowFox strukture...")
-        
-        dirs = [
-            "Meta", "ShadowRecon", "Napad", "Centar", 
-            "Replay", "PoC", "Izlaz"
-        ]
-        
-        for dir_name in dirs:
-            os.makedirs(dir_name, exist_ok=True)
-            print(f"📁 [CREATED] {dir_name}/")
-            
-        # Kreiranje osnovnih fajlova
-        if not os.path.exists("targets.txt"):
-            with open("targets.txt", "w") as f:
-                f.write("# ShadowFox Target URLs\n")
-                f.write("# Dodaj mete, jedan URL po liniji\n")
-                f.write("https://example.com\n")
-            print("📄 [CREATED] targets.txt")
-            
-        if not os.path.exists("Meta/mission_info.json"):
-            template = {
-                "mission_id": f"SHADOW_MISSION_{datetime.now().strftime('%Y%m%d')}",
-                "target_root": "https://example.com",
-                "program": "Example Bug Bounty",
-                "scope": ["https://example.com"],
-                "default_headers": {
-                    "User-Agent": "ShadowFox-Recon/1.0",
-                    "Accept": "*/*",
-                    "X-HackerOne-Research": "Whitefox980"
-                },
-                "stealth_mode": True,
-                "rate_delay_seconds": 2.5,
-                "retry_limit": 3,
-                "priority_keywords": ["token", "jwt", "auth", "reset", "session", "email"],
-                "avoid_keywords": ["logout", "cancel", "facebook", "linkedin"],
-                "ai_score_threshold": 3.1,
-                "report_folder": "Izlaz/",
-                "log_folder": "Izlaz/"
-            }
-            
-            with open("Meta/mission_info.json", "w") as f:
-                json.dump(template, f, indent=2)
-            print("📄 [CREATED] Meta/mission_info.json")
-            
-        print("✅ [SETUP] ShadowFox struktura kreirana")
-        
-    def run_module(self, module_name, args=None):
-        """Pokretanje pojedinačnog modula"""
-        if module_name not in self.modules:
-            print(f"❌ [ERROR] Nepoznat modul: {module_name}")
-            return False
-            
-        module_path = self.modules[module_name]
-        
-        if not os.path.exists(module_path):
-            print(f"❌ [ERROR] Modul ne postoji: {module_path}")
-            return False
-            
-        print(f"🚀 [RUN] Pokretanje modula: {module_name}")
-        print(f"📂 [PATH] {module_path}")
-        
+    def load_mission_info(self):
+        """Load mission info with fallback"""
         try:
-            cmd = [sys.executable, module_path]
+            with open(self.base_dir / "Meta" / "mission_info.json", 'r') as f:
+                return json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError):
+            return {
+                "mission": "Unknown Mission",
+                "target": "Not specified",
+                "status": "active",
+                "created": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            }
+    
+    def print_header(self):
+        """Print stylized CLI header"""
+        print("\n" + "═" * 80)
+        print(f"🦊 {self.project_name.upper()} COMMAND CENTER v{self.version} 🦊")
+        print("═" * 80)
+        print(f"🎯 Mission: {self.mission_info.get('mission', 'Unknown')}")
+        print(f"🌐 Target: {self.mission_info.get('target', 'Not specified')}")
+        print(f"📅 Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        print("═" * 80)
+    
+    def print_menu(self):
+        """Display main menu options"""
+        menu_items = [
+            ("1", "📡", "Recon Scan", "shadow_recon.py"),
+            ("2", "🧠", "AI Recon Filter", "chupko_filter.py"),
+            ("3", "⚔️", "Fuzz Attack", "Napad/ attacks"),
+            ("4", "🧬", "Mutator Core", "mutator_core.py"),
+            ("5", "🔁", "Replay Engine", "replay_executor.py"),
+            ("6", "🛡️", "SSRF Detection Proxy", "ssrf_detection_proxy.py"),
+            ("7", "🤖", "AI Evaluator", "ai_evaluator.py"),
+            ("8", "💣", "Advanced AgentX Attack", "agent_x_mutated_attack.py"),
+            ("9", "🗂️", "View Reports", "AI, Replay, PoC logs"),
+            ("10", "🔄", "GitHub Sync", "pull/push operations"),
+            ("11", "📊", "System Analysis", "stats & file analysis"),
+            ("0", "🚪", "Exit", "shutdown CLI")
+        ]
+        
+        print("\n┌─────────────────────────────────────────────────────────────┐")
+        print("│                      🎮 MAIN MENU                          │")
+        print("├─────────────────────────────────────────────────────────────┤")
+        
+        for num, icon, name, desc in menu_items:
+            print(f"│ {num:>2} │ {icon} {name:<20} │ {desc:<25} │")
+        
+        print("└─────────────────────────────────────────────────────────────┘")
+    
+    def execute_script(self, script_path, args=None):
+        """Execute script with error handling"""
+        try:
+            cmd = [sys.executable, script_path]
             if args:
                 cmd.extend(args)
-                
-            result = subprocess.run(cmd, capture_output=True, text=True)
+            
+            print(f"\n🚀 Executing: {script_path}")
+            print("─" * 50)
+            
+            result = subprocess.run(cmd, cwd=self.base_dir, capture_output=False)
             
             if result.returncode == 0:
-                print(f"✅ [SUCCESS] Modul {module_name} završen uspešno")
-                if result.stdout:
-                    print("📤 [OUTPUT]")
-                    print(result.stdout)
-                return True
+                print("─" * 50)
+                print("✅ Operation completed successfully!")
             else:
-                print(f"❌ [ERROR] Modul {module_name} neuspešan")
-                if result.stderr:
-                    print("📥 [ERROR OUTPUT]")
-                    print(result.stderr)
-                return False
+                print("─" * 50)
+                print(f"⚠️  Process exited with code: {result.returncode}")
                 
+        except FileNotFoundError:
+            print(f"❌ Error: {script_path} not found!")
         except Exception as e:
-            print(f"❌ [EXCEPTION] {str(e)}")
-            return False
-            
-    def run_full_mission(self):
-        """Pokretanje kompletne ShadowFox misije"""
-        print("🎯 [MISSION] Pokretanje kompletne ShadowFox misije")
-        print("=" * 60)
+            print(f"❌ Error executing {script_path}: {str(e)}")
         
-        mission_flow = [
-            ("recon", "🕷️  Izviđanje i mapiranje mete"),
-            ("header_fuzz", "🔥 Header fuzzing napadi"),
-            ("param_fuzz", "💥 Parameter fuzzing napadi"), 
-            ("mutator", "🧬 Mutacija i evolucija payload-a"),
-            ("ai_eval", "🤖 AI analiza ranjivosti"),
-            ("replay", "🔄 Replay i potvrda napada"),
-            ("poc", "📋 Generisanje PoC izveštaja")
-        ]
-        
-        successful_modules = []
-        failed_modules = []
-        
-        for module_name, description in mission_flow:
-            print(f"\n{description}")
-            print("-" * 40)
-            
-            if self.run_module(module_name):
-                successful_modules.append(module_name)
-                time.sleep(2)  # Kratka pauza između modula
-            else:
-                failed_modules.append(module_name)
-                print(f"⚠️  [WARNING] Modul {module_name} neuspešan, nastavljam...")
-                
-        # Sažetak misije
-        print("\n🏁 [MISSION COMPLETE] Sažetak operacije")
-        print("=" * 60)
-        print(f"✅ Uspešni moduli: {len(successful_modules)}")
-        for module in successful_modules:
-            print(f"   • {module}")
-            
-        if failed_modules:
-            print(f"❌ Neuspešni moduli: {len(failed_modules)}")
-            for module in failed_modules:
-                print(f"   • {module}")
-                
-        # Proveri da li je PoC generisan
-        poc_files = list(Path("Izlaz").glob("*.json"))
-        if poc_files:
-            print(f"\n📁 [RESULTS] Pronađeni PoC fajlovi:")
-            for poc_file in poc_files:
-                print(f"   📄 {poc_file}")
-    def start_live_server(self):
-        """Pokretanje live servera za praćenje napada"""
-        if self.server_running:
-            print("⚠️ [SERVER] Server već radi")
+        input("\n📎 Press Enter to continue...")
+    
+    def recon_scan(self):
+        """Execute reconnaissance scan"""
+        if (self.base_dir / "ShadowRecon" / "shadow_recon.py").exists():
+            self.execute_script("ShadowRecon/shadow_recon.py")
+        else:
+            print("❌ shadow_recon.py not found in ShadowRecon/")
+            input("📎 Press Enter to continue...")
+    
+    def ai_recon_filter(self):
+        """Execute AI recon filtering"""
+        if (self.base_dir / "ShadowRecon" / "chupko_filter.py").exists():
+            self.execute_script("ShadowRecon/chupko_filter.py")
+        else:
+            print("❌ chupko_filter.py not found in ShadowRecon/")
+            input("📎 Press Enter to continue...")
+    
+    def fuzz_attack_menu(self):
+        """Fuzzing attack submenu"""
+        napad_dir = self.base_dir / "Napad"
+        if not napad_dir.exists():
+            print("❌ Napad directory not found!")
+            input("📎 Press Enter to continue...")
             return
-
-        print(f"🌐 [SERVER] Pokretanje live servera na portu {self.server_port}")
-
+        
+        # Get all Python attack files
+        attack_files = [f for f in napad_dir.glob("attack_*.py")]
+        
+        if not attack_files:
+            print("❌ No attack files found in Napad/")
+            input("📎 Press Enter to continue...")
+            return
+        
+        print("\n┌─────────────────────────────────────────────┐")
+        print("│           ⚔️  FUZZ ATTACK MENU             │")
+        print("├─────────────────────────────────────────────┤")
+        
+        for i, attack_file in enumerate(attack_files, 1):
+            attack_name = attack_file.stem.replace("attack_", "").replace("_", " ").title()
+            print(f"│ {i:>2} │ {attack_name:<35} │")
+        
+        print("│  0 │ Back to Main Menu                   │")
+        print("└─────────────────────────────────────────────┘")
+        
         try:
-            os.chdir("Izlaz")  # folder sa rezultatima
-            handler = http.server.SimpleHTTPRequestHandler
-            httpd = socketserver.TCPServer(("", self.server_port), handler)
-
-            def run_server():
-                self.server_running = True
-                print(f"✅ [SERVER] Server pokrenut: http://localhost:{self.server_port}")
-                print(f"🧪 [SERVER] Pristup rezultatima: http://localhost:{self.server_port}")
-                httpd.serve_forever()
-
-            self.server_thread = threading.Thread(target=run_server, daemon=True)
-            self.server_thread.start()
-
-        # Opcionalno otvori browser
-            time.sleep(1)
-            webbrowser.open(f"http://localhost:{self.server_port}")
-
-        except Exception as e:
-            print(f"❌ [SERVER ERROR] {str(e)}")
-            self.server_running = False
-    def stop_live_server(self):
-        """Zaustavljanje live servera"""
-        if not self.server_running:
-            print("⚠️  [SERVER] Server nije pokrenut")
-            return
+            choice = input("\n🎯 Select attack: ").strip()
+            if choice == "0":
+                return
             
-        print("🛑 [SERVER] Zaustavljanje servera...")
-        self.server_running = False
-        # Note: SimpleHTTPServer ne može da se zaustavi elegantno
-        print("✅ [SERVER] Server zaustavljen")
-        
-    def show_status(self):
-        """Prikaz statusa ShadowFox sistema"""
-        print("📊 [STATUS] ShadowFox System Status")
-        print("=" * 50)
-        
-        # Proveri Meta config
-        if os.path.exists("Meta/mission_info.json"):
-            with open("Meta/mission_info.json", "r") as f:
-                meta = json.load(f)
-            print(f"🎯 Misija: {meta.get('mission_id', 'UNKNOWN')}")
-            print(f"🌐 Meta: {meta.get('target_root', 'UNKNOWN')}")
-            print(f"⚙️  Stealth Mode: {meta.get('stealth_mode', False)}")
-        else:
-            print("❌ Meta konfiguracija nije pronađena")
-            
-        # Proveri targets.txt
-        if os.path.exists("targets.txt"):
-            with open("targets.txt", "r") as f:
-                targets = [line.strip() for line in f if line.strip() and not line.startswith("#")]
-            print(f"🎯 Aktivnih meta: {len(targets)}")
-            for target in targets[:3]:
-                print(f"   • {target}")
-            if len(targets) > 3:
-                print(f"   ... i {len(targets) - 3} više")
-        else:
-            print("❌ targets.txt nije pronađen")
-            
-        # Proveri module
-        print(f"\n🔧 Dostupni moduli: {len(self.modules)}")
-        for name, path in self.modules.items():
-            status = "✅" if os.path.exists(path) else "❌"
-            print(f"   {status} {name}: {path}")
-            
-        # Proveri rezultate
-        if os.path.exists("Izlaz"):
-            results = list(Path("Izlaz").glob("*.json"))
-            print(f"\n📁 Rezultati: {len(results)} fajlova")
-            for result in results[-5:]:  # Poslednih 5
-                print(f"   📄 {result.name}")
-                
-        # Server status
-        print(f"\n🌐 Live Server: {'🟢 AKTIVAN' if self.server_running else '🔴 NEAKTIVAN'}")
-        if self.server_running:
-            print(f"   📊 URL: http://localhost:{self.server_port}")
-            
-    def interactive_menu(self):
-        """Interaktivni meni za ShadowFox"""
-        while True:
-            print("\n🦊 SHADOWFOX INTERACTIVE MENU")
-            print("=" * 40)
-            print("1. 🕷️  Recon (Izviđanje)")
-            print("2. 🔥 Header Fuzzing")
-            print("3. 💥 Parameter Fuzzing")
-            print("4. 🧬 Mutator Core")
-            print("5. 🤖 AI Evaluator")
-            print("6. 🔄 Replay Executor")
-            print("7. 📋 PoC Reporter")
-            print("8. 🎯 Full Mission (All)")
-            print("9. 🌐 Start Live Server")
-            print("10. 📊 System Status")
-            print("0. 🚪 Exit")
-            
-            choice = input("\n👤 Izbor: ").strip()
-            
-            if choice == "1":
-                self.run_module("recon")
-            elif choice == "2":
-                self.run_module("header_fuzz")
-            elif choice == "3":
-                self.run_module("param_fuzz")
-            elif choice == "4":
-                self.run_module("mutator")
-            elif choice == "5":
-                self.run_module("ai_eval")
-            elif choice == "6":
-                self.run_module("replay")
-            elif choice == "7":
-                self.run_module("poc")
-            elif choice == "8":
-                self.run_full_mission()
-            elif choice == "9":
-                self.start_live_server()
-            elif choice == "10":
-                self.show_status()
-            elif choice == "0":
-                if self.server_running:
-                    self.stop_live_server()
-                print("👋 ShadowFox shutdown complete")
-                break
+            attack_idx = int(choice) - 1
+            if 0 <= attack_idx < len(attack_files):
+                self.execute_script(str(attack_files[attack_idx]))
             else:
-                print("❌ Nepoznat izbor")
+                print("❌ Invalid selection!")
+                input("📎 Press Enter to continue...")
+        except (ValueError, IndexError):
+            print("❌ Invalid input!")
+            input("📎 Press Enter to continue...")
+    
+    def mutator_core(self):
+        """Execute mutator core"""
+        if (self.base_dir / "Centar" / "mutator_core.py").exists():
+            self.execute_script("Centar/mutator_core.py")
+        else:
+            print("❌ mutator_core.py not found in Centar/")
+            input("📎 Press Enter to continue...")
+    
+    def replay_engine(self):
+        """Execute replay engine"""
+        if (self.base_dir / "Replay" / "replay_executor.py").exists():
+            self.execute_script("Replay/replay_executor.py")
+        else:
+            print("❌ replay_executor.py not found in Replay/")
+            input("📎 Press Enter to continue...")
+    
+    def ssrf_detection_proxy(self):
+        """SSRF Detection Proxy with mode selection"""
+        script_path = self.base_dir / "ssrf_detection_proxy.py"
+        if not script_path.exists():
+            print("❌ ssrf_detection_proxy.py not found!")
+            input("📎 Press Enter to continue...")
+            return
+        
+        print("\n┌─────────────────────────────────────────┐")
+        print("│        🛡️  SSRF PROXY MODES            │")
+        print("├─────────────────────────────────────────┤")
+        print("│ 1 │ Passive Monitoring Mode         │")
+        print("│ 2 │ Active Detection Mode           │")
+        print("│ 3 │ Advanced Analysis Mode          │")
+        print("│ 0 │ Back to Main Menu               │")
+        print("└─────────────────────────────────────────┘")
+        
+        try:
+            choice = input("\n🔧 Select mode: ").strip()
+            modes = {"1": "passive", "2": "active", "3": "advanced"}
+            
+            if choice == "0":
+                return
+            elif choice in modes:
+                self.execute_script(str(script_path), ["--mode", modes[choice]])
+            else:
+                print("❌ Invalid selection!")
+                input("📎 Press Enter to continue...")
+        except Exception as e:
+            print(f"❌ Error: {str(e)}")
+            input("📎 Press Enter to continue...")
+    
+    def ai_evaluator(self):
+        """Execute AI evaluator"""
+        if (self.base_dir / "Centar" / "ai_evaluator.py").exists():
+            self.execute_script("Centar/ai_evaluator.py")
+        else:
+            print("❌ ai_evaluator.py not found in Centar/")
+            input("📎 Press Enter to continue...")
+    
+    def advanced_agentx_attack(self):
+        """Execute Advanced AgentX Attack"""
+        if (self.base_dir / "AdvanceNapad" / "agent_x_mutated_attack.py").exists():
+            self.execute_script("AdvanceNapad/agent_x_mutated_attack.py")
+        else:
+            print("❌ agent_x_mutated_attack.py not found in AdvanceNapad/")
+            input("📎 Press Enter to continue...")
+    
+    def view_reports(self):
+        """View various reports and logs"""
+        print("\n┌─────────────────────────────────────────────┐")
+        print("│            🗂️  REPORTS VIEWER              │")
+        print("├─────────────────────────────────────────────┤")
+        print("│ 1 │ AI Evaluation Reports             │")
+        print("│ 2 │ Replay Engine Logs               │")
+        print("│ 3 │ PoC Reports (JSON, PDF, PNG)     │")
+        print("│ 4 │ Attack Logs                      │")
+        print("│ 5 │ Recon Logs                       │")
+        print("│ 0 │ Back to Main Menu                │")
+        print("└─────────────────────────────────────────────┘")
+        
+        try:
+            choice = input("\n📊 Select report type: ").strip()
+            
+            if choice == "0":
+                return
+            elif choice == "1":
+                self.show_directory_contents("Centar", "*.json")
+            elif choice == "2":
+                self.show_directory_contents("Replay", "*.json")
+            elif choice == "3":
+                self.show_directory_contents("PoC", "*")
+            elif choice == "4":
+                self.show_directory_contents("log", "*.log")
+            elif choice == "5":
+                self.show_directory_contents("ShadowRecon", "*.json")
+            else:
+                print("❌ Invalid selection!")
+                input("📎 Press Enter to continue...")
+        except Exception as e:
+            print(f"❌ Error: {str(e)}")
+            input("📎 Press Enter to continue...")
+    
+    def show_directory_contents(self, directory, pattern):
+        """Show contents of a directory"""
+        dir_path = self.base_dir / directory
+        if not dir_path.exists():
+            print(f"❌ Directory {directory} not found!")
+            input("📎 Press Enter to continue...")
+            return
+        
+        files = list(dir_path.glob(pattern))
+        if not files:
+            print(f"❌ No files matching {pattern} found in {directory}/")
+            input("📎 Press Enter to continue...")
+            return
+        
+        print(f"\n📁 Files in {directory}/:")
+        print("─" * 50)
+        for i, file in enumerate(files, 1):
+            size = file.stat().st_size if file.is_file() else 0
+            mod_time = datetime.fromtimestamp(file.stat().st_mtime).strftime("%Y-%m-%d %H:%M")
+            print(f"{i:>2}. {file.name:<30} ({size:>8} bytes) {mod_time}")
+        
+        print("─" * 50)
+        input("📎 Press Enter to continue...")
+    
+    def github_sync(self):
+        """GitHub synchronization menu"""
+        while True:
+            os.system("clear")
+            print("\n🌀  GITHUB SYNC MENU")
+            print("=" * 50)
+            print(" 1. Git Status")
+            print(" 2. Git Pull (Update from remote)")
+            print(" 3. Git Push (Upload changes)")
+            print(" 4. Git Add All & Commit")
+            print(" 5. Full Sync (Pull → Add → Commit → Push)")
+            print(" 6. View Last 5 Commits")
+            print(" 7. Reset Changes (Hard Reset)")
+            print(" 8. View .gitignore")
+            print(" 9. Back to Main Menu")
+            print("=" * 50)
+
+            choice = input("🛠  Select git operation: ").strip()
+
+            try:
+                if choice == "1":
+                    self.run_git_command(["git", "status"])
+                elif choice == "2":
+                    self.run_git_command(["git", "pull", "origin", "main"])
+                elif choice == "3":
+                    self.run_git_command(["git", "push", "origin", "main"])
+                elif choice == "4":
+                    commit_msg = input("✏️  Enter commit message: ").strip() or "Auto commit"
+                    self.run_git_command(["git", "add", "."])
+                    self.run_git_command(["git", "commit", "-m", commit_msg])
+                elif choice == "5":
+                    self.full_sync()
+                elif choice == "6":
+                    self.run_git_command(["git", "log", "--oneline", "-n", "5"])
+                elif choice == "7":
+                    confirm = input("⚠️  Type 'yes' to hard reset: ").strip().lower()
+                    if confirm == "yes":
+                        self.run_git_command(["git", "reset", "--hard", "origin/main"])
+                    else:
+                        print("❎  Cancelled.")
+                elif choice == "8":
+                    os.system("cat .gitignore" if os.path.exists(".gitignore") else "echo 'No .gitignore file found'")
+                elif choice == "9":
+                    break
+                else:
+                    print("❌ Invalid selection!")
+            except Exception as e:
+                print(f"❌ Git Error: {str(e)}")
+
+            input("⏎ Press Enter to continue...")
+    def run_git_command(self, cmd):
+        """Execute git command"""
+        try:
+            print(f"\n🔄 Running: {' '.join(cmd)}")
+            print("─" * 50)
+            result = subprocess.run(cmd, cwd=self.base_dir, capture_output=False)
+            print("─" * 50)
+            if result.returncode == 0:
+                print("✅ Git operation completed!")
+            else:
+                print(f"⚠️  Git operation finished with code: {result.returncode}")
+        except Exception as e:
+            print(f"❌ Git error: {str(e)}")
+    
+    def full_sync(self):
+        """Perform full git synchronization"""
+        print("\n🔄 Starting full synchronization...")
+        
+        # Pull latest changes
+        print("\n1️⃣ Pulling latest changes...")
+        self.run_git_command(["git", "pull", "origin", "main"])
+        
+        # Add all files
+        print("\n2️⃣ Adding all files...")
+        self.run_git_command(["git", "add", "."])
+        
+        # Commit
+        print("\n3️⃣ Committing changes...")
+        commit_msg = f"Auto sync from ShadowFox CLI - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+        self.run_git_command(["git", "commit", "-m", commit_msg])
+        
+        # Push
+        print("\n4️⃣ Pushing to remote...")
+        self.run_git_command(["git", "push", "origin", "main"])
+        
+        print("\n✅ Full synchronization completed!")
+        input("📎 Press Enter to continue...")
+    
+    def system_analysis(self):
+        """Perform system analysis and statistics"""
+        print("\n┌─────────────────────────────────────────────┐")
+        print("│           📊 SYSTEM ANALYSIS                │")
+        print("├─────────────────────────────────────────────┤")
+        
+        # Count files by type
+        stats = {
+            "Python files": len(list(self.base_dir.rglob("*.py"))),
+            "JSON files": len(list(self.base_dir.rglob("*.json"))),
+            "Log files": len(list(self.base_dir.rglob("*.log"))),
+            "Text files": len(list(self.base_dir.rglob("*.txt"))),
+            "Total directories": len([d for d in self.base_dir.rglob("*") if d.is_dir()]),
+            "Total files": len([f for f in self.base_dir.rglob("*") if f.is_file()])
+        }
+        
+        # Count payloads and attacks
+        napad_dir = self.base_dir / "Napad"
+        if napad_dir.exists():
+            stats["Attack files"] = len(list(napad_dir.glob("attack_*.py")))
+            stats["Fuzz files"] = len(list(napad_dir.glob("*_fuzz.py")))
+        
+        # Count recon data
+        recon_dir = self.base_dir / "ShadowRecon"
+        if recon_dir.exists():
+            stats["Recon backups"] = len(list(recon_dir.glob("shadow_recon_backup*.json")))
+        
+        for key, value in stats.items():
+            print(f"│ {key:<25} │ {value:>10} │")
+        
+        print("├─────────────────────────────────────────────┤")
+        
+        # Directory sizes
+        for dir_name in ["Napad", "ShadowRecon", "Centar", "PoC", "log"]:
+            dir_path = self.base_dir / dir_name
+            if dir_path.exists():
+                size = sum(f.stat().st_size for f in dir_path.rglob("*") if f.is_file())
+                size_mb = size / (1024 * 1024)
+
+                print(f"│ {dir_name:<18} │ {size_mb:>8.2f} MB │")
+        
+        print("└─────────────────────────────────────────────┘")
+        input("\n📎 Press Enter to continue...")
+    
+    def run(self):
+        """Main CLI loop"""
+        try:
+            while True:
+                os.system('clear' if os.name == 'posix' else 'cls')
+                self.print_header()
+                self.print_menu()
+                
+                choice = input("\n🎯 Enter your choice: ").strip()
+                
+                if choice == "0":
+                    print("\n👋 Goodbye! ShadowFox CLI shutting down...")
+                    time.sleep(1)
+                    break
+                elif choice == "1":
+                    self.recon_scan()
+                elif choice == "2":
+                    self.ai_recon_filter()
+                elif choice == "3":
+                    self.fuzz_attack_menu()
+                elif choice == "4":
+                    self.mutator_core()
+                elif choice == "5":
+                    self.replay_engine()
+                elif choice == "6":
+                    self.ssrf_detection_proxy()
+                elif choice == "7":
+                    self.ai_evaluator()
+                elif choice == "8":
+                    self.advanced_agentx_attack()
+                elif choice == "9":
+                    self.view_reports()
+                elif choice == "10":
+                    self.github_sync()
+                elif choice == "11":
+                    self.system_analysis()
+                else:
+                    print("\n❌ Invalid choice! Please select a valid option.")
+                    time.sleep(2)
+                    
+        except KeyboardInterrupt:
+            print("\n\n🛑 CLI interrupted by user. Shutting down...")
+            sys.exit(0)
+        except Exception as e:
+            print(f"\n❌ Unexpected error: {str(e)}")
+            print("🔄 Restarting CLI...")
+            time.sleep(3)
+            self.run()
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="🦊 ShadowFox Tactical Bounty System",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-Primeri korišćenja:
-  python3 shadowfox_cli.py --setup          # Kreiranje strukture
-  python3 shadowfox_cli.py --check          # Provera strukture
-  python3 shadowfox_cli.py --recon          # Pokretanje recon modula
-  python3 shadowfox_cli.py --full-mission   # Kompletna misija
-  python3 shadowfox_cli.py --server         # Live server za rezultate
-  python3 shadowfox_cli.py --interactive    # Interaktivni meni
-        """
-    )
-    
-    parser.add_argument("--setup", action="store_true", help="Kreiranje ShadowFox strukture")
-    parser.add_argument("--check", action="store_true", help="Provera strukture sistema")
-    parser.add_argument("--recon", action="store_true", help="Pokretanje recon modula")
-    parser.add_argument("--header-fuzz", action="store_true", help="Header fuzzing")
-    parser.add_argument("--param-fuzz", action="store_true", help="Parameter fuzzing")
-    parser.add_argument("--mutator", action="store_true", help="Mutator core")
-    parser.add_argument("--ai-eval", action="store_true", help="AI evaluator")
-    parser.add_argument("--replay", action="store_true", help="Replay executor")
-    parser.add_argument("--poc", action="store_true", help="PoC reporter")
-    parser.add_argument("--full-mission", action="store_true", help="Kompletna misija")
-    parser.add_argument("--server", action="store_true", help="Pokretanje live servera")
-    parser.add_argument("--interactive", action="store_true", help="Interaktivni meni")
-    parser.add_argument("--status", action="store_true", help="Prikaz statusa sistema")
-    parser.add_argument("--port", type=int, default=8888, help="Port za live server")
-    
-    args = parser.parse_args()
-    
+    """Main entry point"""
     cli = ShadowFoxCLI()
-    cli.server_port = args.port
-    
-    # Ako nema argumenata, prikaži banner i interaktivni meni
-    if len(sys.argv) == 1:
-        cli.print_banner()
-        cli.interactive_menu()
-        return
-    
-    cli.print_banner()
-    
-    if args.setup:
-        cli.create_structure()
-    elif args.check:
-        cli.check_structure()
-    elif args.recon:
-        cli.run_module("recon")
-    elif args.header_fuzz:
-        cli.run_module("header_fuzz")
-    elif args.param_fuzz:
-        cli.run_module("param_fuzz")
-    elif args.mutator:
-        cli.run_module("mutator")
-    elif args.ai_eval:
-        cli.run_module("ai_eval")
-    elif args.replay:
-        cli.run_module("replay")
-    elif args.poc:
-        cli.run_module("poc")
-    elif args.full_mission:
-        cli.run_full_mission()
-    elif args.server:
-        cli.start_live_server()
-        try:
-            while cli.server_running:
-                time.sleep(1)
-        except KeyboardInterrupt:
-            cli.stop_live_server()
-    elif args.status:
-        cli.show_status()
-    elif args.interactive:
-        cli.interactive_menu()
+    cli.run()
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,114 @@
+{
+  "mission_info": {
+    "mission_id": "SHADOW_SYFE",
+    "target": "https://uat-bugbounty.nonprod.syfe.com/",
+    "headers": {
+      "User-Agent": "ShadowFoxAgent/1.0",
+      "X-HackerOne-Research": "H1:whitefox980"
+    },
+    "stealth_mode": true,
+    "aggression_level": "low",
+    "retries": 1,
+    "timeout": 10,
+    "verbose": false
+  },
+  "analysis_summary": {},
+  "payload_effectiveness": {
+    "all_payloads": {},
+    "top_effective_payloads": {},
+    "payload_categories_performance": {},
+    "recommendations": []
+  },
+  "parameter_risk_analysis": {
+    "all_parameters": {},
+    "high_risk_parameters": {},
+    "risk_distribution": {
+      "CRITICAL": 0,
+      "HIGH": 0,
+      "MEDIUM": 0,
+      "LOW": 0
+    },
+    "attack_surface_summary": {
+      "total_parameters": 0,
+      "high_risk_count": 0,
+      "risk_ratio": 0.0
+    }
+  },
+  "attack_pattern_analysis": {
+    "temporal_patterns": {
+      "peak_vulnerability_times": [],
+      "response_time_correlation": {},
+      "attack_frequency_analysis": {}
+    },
+    "response_clustering": {
+      "error": "'ShadowAIEvaluator' object has no attribute 'attack_data'"
+    },
+    "payload_chains": {
+      "error": "'ShadowAIEvaluator' object has no attribute 'attack_data'"
+    },
+    "attack_vectors": {
+      "error": "'ShadowAIEvaluator' object has no attribute 'attack_data'"
+    },
+    "defensive_patterns": {
+      "error": "'ShadowAIEvaluator' object has no attribute 'attack_data'"
+    }
+  },
+  "improvement_recommendations": [
+    {
+      "category": "Payload Expansion",
+      "priority": "HIGH",
+      "description": "Insufficient effective payloads detected",
+      "specific_recommendations": [
+        "Add more context-specific payloads",
+        "Implement custom payload generation",
+        "Focus on application-specific injection vectors"
+      ],
+      "impact": "Increased vulnerability detection rate"
+    },
+    {
+      "category": "Coverage Improvement",
+      "priority": "MEDIUM",
+      "description": "Identified gaps in attack coverage",
+      "specific_recommendations": [
+        "Missing attack categories: xss_basic, path_traversal, sqli_basic, command_injection"
+      ],
+      "impact": "More comprehensive security assessment"
+    }
+  ],
+  "ai_scoring": {
+    "overall_mission_score": 3.5,
+    "completeness_factors": {
+      "recon_coverage": 10.0,
+      "attack_comprehensiveness": 0.0,
+      "vulnerability_confidence": 5.0,
+      "payload_effectiveness": 0.0
+    },
+    "score_breakdown": {
+      "recon_coverage": 0.2,
+      "attack_comprehensiveness": 0.3,
+      "vulnerability_confidence": 0.3,
+      "payload_effectiveness": 0.2
+    },
+    "mission_grade": {
+      "grade": "F",
+      "description": "Incomplete security assessment"
+    },
+    "confidence_level": "LOW",
+    "recommended_next_steps": [
+      "Significantly expand reconnaissance phase",
+      "Increase payload diversity and volume",
+      "Review attack methodology and coverage"
+    ]
+  },
+  "false_positive_analysis": {},
+  "coverage_analysis": {},
+  "threat_intelligence": {},
+  "statistics": {
+    "evaluation_timestamp": "2025-06-07 11:44:58",
+    "total_attack_files_analyzed": 1,
+    "total_injection_tests_analyzed": 0,
+    "total_vulnerabilities_analyzed": 0,
+    "ai_evaluation_version": "ShadowFox AI v1.0",
+    "analysis_completeness": "COMPREHENSIVE"
+  }
+}

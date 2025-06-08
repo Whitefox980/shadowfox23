@@ -15,7 +15,7 @@
 
 ## 📋 Executive Summary
 
-Kritična Prototype Pollution ranjivost je identifikovana koja omogućava napadaču da manipuliše JavaScript Object prototype, što može rezultovati u privilege escalation, authorization bypass, i u najgorim slučajevima Remote Code Execution.
+A critical Prototype Pollution vulnerability has been identified that allows an attacker to manipulate the JavaScript Object prototype, which can result in privilege escalation, authorization bypass, and in worst-case scenarios Remote Code Execution.
 
 **💥 Impact Level:** COMPLETE SYSTEM COMPROMISE  
 **🎛️ Exploitation Complexity:** LOW  
@@ -24,7 +24,7 @@ Kritična Prototype Pollution ranjivost je identifikovana koja omogućava napada
 ## 🔍 Technical Details
 
 **Vulnerability Type:** Prototype Pollution  
-**Root Cause:** Insufficient input validation na JSON objektima koji omogućava manipulaciju __proto__ property  
+**Root Cause:** Insufficient input validation on JSON objects that allows manipulation __proto__ property  
 **Attack Vector:** HTTP POST requests sa malicious JSON payloadi
 
 ### 🧪 Proof of Concept Results
@@ -34,18 +34,18 @@ Kritična Prototype Pollution ranjivost je identifikovana koja omogućava napada
 
 ## 💼 Business Impact
 
-- **🔒 Confidentiality:** HIGH - Pristup privilegovanim informacijama
-- **🛡️ Integrity:** HIGH - Manipulacija korisničkih privilegija  
-- **⚡ Availability:** MEDIUM - Potencijalni DoS kroz RCE
-- **📊 Compliance Risk:** CRITICAL - Narušavanje bezbednosnih standarda
+- **🔒 Confidentiality:** HIGH - Access to privileged information
+- **🛡️ Integrity:** HIGH - Manipulation of user privileges  
+- **⚡ Availability:** MEDIUM - Potential DoS through RCE
+- **📊 Compliance Risk:** CRITICAL - Violation of security standards
 
 ## 🛠️ Recommendations
 
-1. **IMMEDIATE:** Implementirati input validation koja blokira __proto__ i constructor properties
-2. **HIGH:** Koristiti Object.create(null) ili Map umesto običnih objekata za user input
-3. **HIGH:** Implementirati JSON schema validation sa whitelisting pristupom
-4. **MEDIUM:** Code review svih JSON processing funkcija
-5. **MEDIUM:** Implementirati Content Security Policy i dodatne sigurnosne header-e
+1. **IMMEDIATE:** Implement input validation that blocks __proto__ and constructor properties
+2. **HIGH:** Use Object.create(null) or Map instead of regular objects for user input
+3. **HIGH:** implement JSON schema validation with whitelisting approach
+4. **MEDIUM:** CCode review of all JSON processing functions
+5. **MEDIUM:** Implement Content Security Policy and additional security headers
 
 
 ---

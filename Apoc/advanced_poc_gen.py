@@ -32,7 +32,7 @@ class AdvancedPoCGenerator:
     def load_agent_results(self):
         """Učitava rezultate iz AdvanceNapad/agent_x_results.json"""
         try:
-            with open('AdvanceNapad/agent_x_results.json', 'r') as f:
+            with open('AdvanceNapad/prototype_pollution_results.json', 'r') as f:
                 self.agent_results = json.load(f)
             print(f"🧠 [LOAD] Agent X rezultati učitani: {len(self.agent_results.get('vulnerabilities', []))} ranjivosti")
             return True

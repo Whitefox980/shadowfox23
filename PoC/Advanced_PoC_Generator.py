@@ -8,6 +8,8 @@ Autor: Whitefox980 | Verzija: 2025.06.06
 
 import requests
 import json
+from pathlib import Path
+
 import time
 import random
 import base64
@@ -46,13 +48,74 @@ class AdvancedPoCGenerator:
             print("❌ [ERROR] Meta/mission_info.json nije pronađen!")
             exit(1)
             
+    def ucitaj_poc_fajl(self, putanja):
+        with open(putanja, 'r') as f:
+            try:
+                podaci = json.load(f)
+            except json.JSONDecodeError as e:
+                print(f"[!] Neuspešno parsiranje JSON-a: {e}")
+                return []
+
+        rezultati = []
+
+        for zapis in podaci:
+            try:
+                if isinstance(zapis, str):
+                    if zapis.strip() == "":
+                        continue  # preskoči prazan string
+                    try:
+                        zapis = json.loads(zapis)
+                    except json.JSONDecodeError as e:
+                        print(f"[!] JSON decode failed unutar stringa: {e}")
+                        continue
+
+                if not isinstance(zapis, dict):
+                    continue
+
+                rezultat = {
+                    "endpoint": zapis.get("endpoint") or zapis.get("url"),
+                    "method": zapis.get("method", "POST"),
+                    "payload": zapis.get("payload"),
+                    "parameter": zapis.get("parameter", "q"),
+                    "evidence": zapis.get("evidence", "n/a"),
+                    "reflection": zapis.get("reflection", False),
+                    "vulnerable": zapis.get("vulnerable", False),
+                    "timestamp": zapis.get("timestamp", "n/a")
+                }
+                if rezultat["vulnerable"]:
+                    rezultati.append(rezultat)
+
+            except Exception as e:
+                print(f"[!] Greška pri obradi zapisa: {e}")
+                continue
+
+        return rezultati
+
+
+
+    def generisi_poc(rezultati):
+        for idx, r in enumerate(rezultati, 1):
+            print(f"\n--- PoC #{idx} ---")
+            print(f"Endpoint: {r['method']} {r['endpoint']}")
+            print(f"Parametar: {r['parameter']}")
+            print(f"Payload: {r['payload']}")
+            print(f"Refleksija: {r['reflection']}")
+            print(f"Vulnerabilno: {r['vulnerable']}")
+            print(f"Dokaz: {r['evidence']}")
+            print(f"Vreme: {r['timestamp']}")
+
+
+
     def load_vulnerability_data(self):
         """Učitava podatke o ranjivosti iz prethodnih modula"""
         sources = [
             "ShadowRecon/shadow_recon.json",
+            "AdvanceNapad/prototype_pollution_results.json",
             "Napad/attack_param_fuzz.json",
+            "PoC/shadowfox_prototype_pollution_poc_20250608_154711.json",
             "Centar/mutator_core.json",
             "Centar/ai_evaluator.json"
+
         ]
         
         vulnerabilities = []
@@ -461,7 +524,8 @@ The application fails to properly sanitize user input in the search parameter be
         # 1. Učitaj konfiguracije
         self.load_meta_config()
         vulnerabilities = self.load_vulnerability_data()
-        
+        vulnerabilities += self.ucitaj_poc_fajl("PoC/shadowfox_prototype_pollution_poc_20250608_154711.json")
+
         if not vulnerabilities:
             print("❌ [ERROR] Nema pronađenih ranjivosti za PoC")
             return
@@ -471,7 +535,8 @@ The application fails to properly sanitize user input in the search parameter be
         
         # 3. Procesiranje svake ranjivosti
         for vuln in vulnerabilities:
-            if vuln.get('severity', '').upper() in ['MEDIUM', 'HIGH', 'CRITICAL']:
+            if vuln.get('vulnerable') is True:
+
                 print(f"\n🎯 [PROCESSING] {vuln.get('type', 'Unknown')} - {vuln.get('url', 'Unknown')}")
                 
                 # Generate WAF bypass payloads

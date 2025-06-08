@@ -1,0 +1,29 @@
+{
+  "mission_info": {
+    "mission_id": "SHADOW_SYFE",
+    "target": "https://uat-bugbounty.nonprod.syfe.com/",
+    "headers": {
+      "User-Agent": "ShadowFoxAgent/1.0",
+      "X-HackerOne-Research": "H1:whitefox980"
+    },
+    "stealth_mode": true,
+    "aggression_level": "low",
+    "retries": 1,
+    "timeout": 10,
+    "verbose": false
+  },
+  "cors_vulnerabilities": [],
+  "tested_endpoints": [],
+  "bypass_techniques": [],
+  "high_risk_findings": [],
+  "statistics": {
+    "total_tests_performed": 185,
+    "total_endpoints_tested": 0,
+    "vulnerabilities_found": 0,
+    "high_risk_findings": 0,
+    "severity_breakdown": {},
+    "bypass_techniques_successful": 0,
+    "scan_timestamp": "2025-06-07 21:22:13",
+    "most_vulnerable_endpoints": []
+  }
+}

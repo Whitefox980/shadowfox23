@@ -5,6 +5,7 @@
     "User-Agent": "ShadowFoxAgent/1.0",
     "X-HackerOne-Research": "H1:whitefox980"
   },
+  "target_root": "https://uat-bugbounty.nonprod.syfe.com",
   "stealth_mode": true,
   "aggression_level": "low",
   "retries": 1,

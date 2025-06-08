@@ -1,842 +1,524 @@
 #!/usr/bin/env python3
 """
-🤖 SHADOWFOX AI EVALUATOR - MOŽDANA KORA ANALIZE
-Inteligentna analiza attack rezultata i preporuke za unapređenje
-Autor: Whitefox980 | Verzija: 2025.06.06
+🧠 SHADOWFOX AI EVALUATOR MODULE - FIXED VERSION
+AI analiza napada i scoring sistema
+Autor: Whitefox980 | Verzija: 2025.06.06 | PATCH: Agent X Compatibility
 """
 
 import json
-import os
-import glob
-import time
 import re
-from collections import defaultdict, Counter
-import statistics
+import time
+from datetime import datetime
+import os
 
 class ShadowAIEvaluator:
     def __init__(self):
-        self.meta_config = {}
-        self.attack_results = []
-        self.recon_data = {}
-        self.evaluation_results = {
+        self.results = {
             "mission_info": {},
-            "analysis_summary": {},
-            "payload_effectiveness": {},
-            "parameter_risk_analysis": {},  
-            "attack_pattern_analysis": {},
-            "improvement_recommendations": [],
-            "ai_scoring": {},
-            "false_positive_analysis": {},
-            "coverage_analysis": {},
-            "threat_intelligence": {},
-            "statistics": {}
+            "evaluation_summary": {},
+            "payload_analysis": {},
+            "risk_assessment": {},
+            "recommendations": [],
+            "ai_scoring": {}
         }
+        self.meta_config = {}
         
-        # AI scoring criteria
-        self.scoring_weights = {
-            "severity_multiplier": {"CRITICAL": 5.0, "HIGH": 4.0, "MEDIUM": 3.0, "LOW": 2.0, "INFO": 1.0},
-            "confidence_factors": {
-                "sql_error_detected": 0.9,
-                "command_output_detected": 0.95,
-                "file_content_disclosed": 0.9,
-                "payload_reflected": 0.8,
-                "template_evaluation": 0.85,
-                "status_code_change": 0.6,
-                "response_length_anomaly": 0.4,
-                "response_time_anomaly": 0.3
-            },
-            "payload_success_weight": 0.3,
-            "parameter_frequency_weight": 0.2,
-            "response_consistency_weight": 0.3
-        }
-        
-    def load_dependencies(self):
-        """Učitava sve potrebne podatke"""
+    def load_meta_config(self):
+        """Učitava Meta konfiguraciju misije"""
         try:
-            # Meta config
             with open('Meta/mission_info.json', 'r') as f:
                 self.meta_config = json.load(f)
-                self.evaluation_results["mission_info"] = self.meta_config
-                
-            # Recon podaci
-            if os.path.exists('ShadowRecon/shadow_recon.json'):
-                with open('ShadowRecon/shadow_recon.json', 'r') as f:
-                    self.recon_data = json.load(f)
+                self.results["mission_info"] = self.meta_config
+                print(f"🧠 [META] Misija: {self.meta_config.get('mission_id', 'UNKNOWN')}")
+        except FileNotFoundError:
+            print("❌ [ERROR] Meta/mission_info.json nije pronađen!")
+            exit(1)
+            
+    def load_attack_data(self):
+        """Učitava podatke iz Agent X rezultata - FIXED VERSION"""
+        attack_data = {}
+        
+        # Pokušaj učitavanje iz različitih lokacija
+        possible_files = [
+            'AdvanceNapad/agent_x_results.json',
+            'Napad/attack_param_fuzz.json',
+            'Centar/mutator_core.json'
+        ]
+        
+        for file_path in possible_files:
+            if os.path.exists(file_path):
+                try:
+                    with open(file_path, 'r') as f:
+                        data = json.load(f)
+                        attack_data[file_path] = data
+                        print(f"✅ [LOAD] Učitano: {file_path}")
+                except Exception as e:
+                    print(f"⚠️  [WARNING] Greška pri čitanju {file_path}: {str(e)}")
                     
-            print(f"🧠 [META] Misija: {self.meta_config.get('mission_id', 'UNKNOWN')}")
+        if not attack_data:
+            print("❌ [ERROR] Nijedan attack fajl nije pronađen!")
+            return {}
             
-        except FileNotFoundError as e:
-            print(f"❌ [ERROR] Nedostaje dependency: {str(e)}")
-            exit(1)
-            
-    def load_attack_results(self):
-        """Učitava sve .json fajlove iz Napad/ foldera"""
-        attack_files = glob.glob("Napad/*.json")
+        return attack_data
         
-        if not attack_files:
-            print("❌ [ERROR] Nema attack rezultata u Napad/ folderu!")
-            exit(1)
-            
-        for file_path in attack_files:
-            try:
-                with open(file_path, 'r') as f:
-                    attack_data = json.load(f)
-                    attack_data['source_file'] = os.path.basename(file_path)
-                    self.attack_results.append(attack_data)
-                    print(f"📄 [LOAD] {os.path.basename(file_path)}")
-            except Exception as e:
-                print(f"❌ [LOAD ERROR] {file_path}: {str(e)}")
-                
-        print(f"✅ [LOAD] Učitano {len(self.attack_results)} attack rezultata")
-
-    def identify_payload_chains(self):
-        """
-        Pokušava da detektuje povezane payload-e koji rade zajedno – tzv. chain attack paterni.
-        """
-        try:
-            chains = []
-            previous_payload = None
-            for attack in self.attack_data:
-                current_payload = attack.get("payload", "")
-                if previous_payload and previous_payload in current_payload:
-                    chains.append({
-                        "from": previous_payload,
-                        "to": current_payload,
-                        "type": "chained"
-                    })
-                previous_payload = current_payload
-            return chains
-        except Exception as e:
-            return {"error": str(e)} 
-
-    def analyze_payload_effectiveness(self):
-        """Analiza efikasnosti payload-a kroz sve attack rezultate"""
-        payload_stats = defaultdict(lambda: {
-            "total_attempts": 0,
-            "successful_hits": 0,
-            "vulnerability_types": set(),
-            "affected_parameters": set(),
-            "success_rate": 0.0,
-            "avg_confidence": 0.0,
-            "response_patterns": []
-        })
+    def parse_agent_x_results(self, data):
+        """Parsiranje Agent X rezultata u standardni format"""
+        parsed_results = []
         
-        for attack_result in self.attack_results:
-            injection_results = attack_result.get('injection_results', [])
-            
-            for injection in injection_results:
-                payload = injection.get('payload', '')
-                payload_category = injection.get('payload_category', 'unknown')
-                vulnerability_indicators = injection.get('vulnerability_indicators', [])
-                
-                # Stat tracking
-                payload_stats[payload]["total_attempts"] += 1
-                payload_stats[payload]["affected_parameters"].add(injection.get('parameter', ''))
-                
-                if vulnerability_indicators:
-                    payload_stats[payload]["successful_hits"] += 1
-                    for vuln in vulnerability_indicators:
-                        payload_stats[payload]["vulnerability_types"].add(vuln.get('type', ''))
-                        
-                # Response pattern analysis
-                response_pattern = {
-                    "status_code": injection.get('status_code'),
-                    "response_length": injection.get('response_length'),
-                    "has_vulnerabilities": len(vulnerability_indicators) > 0
+        # Agent X format: successful_attacks, failed_attacks, interesting_responses
+        if 'successful_attacks' in data:
+            for attack in data['successful_attacks']:
+                parsed_attack = {
+                    "attack_id": attack.get('attack_id', 'UNKNOWN'),
+                    "payload": attack.get('mutated_payload', ''),
+                    "method": attack.get('method', 'GET'),
+                    "url": attack.get('endpoint', ''),
+                    "status_code": attack.get('test_result', {}).get('status_code', 0),
+                    "response_length": attack.get('test_result', {}).get('content_length', 0),
+                    "response_time": attack.get('test_result', {}).get('response_time', 0),
+                    "vulnerability_indicators": attack.get('vulnerability_indicators', []),
+                    "risk_level": attack.get('risk_level', 'MEDIUM'),
+                    "confidence": self.calculate_confidence_from_indicators(
+                        attack.get('vulnerability_indicators', [])
+                    )
                 }
-                payload_stats[payload]["response_patterns"].append(response_pattern)
+                parsed_results.append(parsed_attack)
                 
-        # Calculate effectiveness scores
-        effective_payloads = []
-        for payload, stats in payload_stats.items():
-            if stats["total_attempts"] > 0:
-                stats["success_rate"] = stats["successful_hits"] / stats["total_attempts"]
+        # Dodaj i failed_attacks kao LOW risk
+        if 'failed_attacks' in data:
+            for attack in data['failed_attacks']:
+                parsed_attack = {
+                    "attack_id": attack.get('attack_id', 'FAILED'),
+                    "payload": attack.get('mutated_payload', ''),
+                    "method": attack.get('method', 'GET'),
+                    "url": attack.get('endpoint', ''),
+                    "status_code": attack.get('test_result', {}).get('status_code', 0),
+                    "response_length": attack.get('test_result', {}).get('content_length', 0),
+                    "response_time": attack.get('test_result', {}).get('response_time', 0),
+                    "vulnerability_indicators": [],
+                    "risk_level": "LOW",
+                    "confidence": 0.1
+                }
+                parsed_results.append(parsed_attack)
                 
-                # AI effectiveness score
-                effectiveness_score = self.calculate_payload_effectiveness_score(stats)
-                stats["ai_effectiveness_score"] = effectiveness_score
+        # Dodaj interesting_responses kao MEDIUM risk
+        if 'interesting_responses' in data:
+            for response in data['interesting_responses']:
+                parsed_attack = {
+                    "attack_id": response.get('attack_id', 'INTERESTING'),
+                    "payload": response.get('mutated_payload', ''),
+                    "method": response.get('method', 'GET'),
+                    "url": response.get('endpoint', ''),
+                    "status_code": response.get('test_result', {}).get('status_code', 0),
+                    "response_length": response.get('test_result', {}).get('content_length', 0),
+                    "response_time": response.get('test_result', {}).get('response_time', 0),
+                    "vulnerability_indicators": response.get('vulnerability_indicators', []),
+                    "risk_level": "MEDIUM",
+                    "confidence": 0.6
+                }
+                parsed_results.append(parsed_attack)
                 
-                # Convert sets to lists for JSON serialization
-                stats["vulnerability_types"] = list(stats["vulnerability_types"])
-                stats["affected_parameters"] = list(stats["affected_parameters"])
-                
-                if stats["success_rate"] > 0:
-                    effective_payloads.append((payload, stats))
-                    
-        # Sort by effectiveness
-        effective_payloads.sort(key=lambda x: x[1]["ai_effectiveness_score"], reverse=True)
+        return parsed_results
         
-        self.evaluation_results["payload_effectiveness"] = {
-            "all_payloads": dict(payload_stats),
-            "top_effective_payloads": dict(effective_payloads[:20]),
-            "payload_categories_performance": self.analyze_category_performance(),
-            "recommendations": []
-        }
-    def map_attack_vectors(self):
-        """
-        Mapira tipične vektore napada iz payload-a (npr. XSS, SQLi, LFI, RCE...).
-        """
-        try:
-            vectors = {
-                "XSS": [],
-                "SQLi": [],
-                "LFI": [],
-                "RCE": [],
-                "SSRF": [],
-                "Unknown": []
-            }
-
-            for attack in self.attack_data:
-                payload = attack.get("payload", "").lower()
-                if "<script>" in payload or "onerror=" in payload:
-                    vectors["XSS"].append(payload)
-                elif "select" in payload or "union" in payload:
-                    vectors["SQLi"].append(payload)
-                elif "../../../../" in payload or "/etc/passwd" in payload:
-                    vectors["LFI"].append(payload)
-                elif "wget" in payload or "curl" in payload:
-                    vectors["RCE"].append(payload)
-                elif "http://" in payload or "https://" in payload and "127.0.0.1" in payload:
-                    vectors["SSRF"].append(payload)
-                else:
-                    vectors["Unknown"].append(payload)
-
-            return vectors
-        except Exception as e:
-            return {"error": str(e)} 
-
-    def calculate_payload_effectiveness_score(self, stats):
-        """AI scoring za efikasnost payload-a"""
-        base_score = stats["success_rate"] * 10  # 0-10 based on success rate
-        
-        # Bonus for diversity of vulnerability types
-        vuln_diversity_bonus = len(stats["vulnerability_types"]) * 0.5
-        
-        # Bonus for affecting multiple parameters  
-        param_diversity_bonus = len(stats["affected_parameters"]) * 0.3
-        
-        # Penalty for inconsistent responses
-        response_consistency = self.calculate_response_consistency(stats["response_patterns"])
-        consistency_bonus = response_consistency * 2
-        
-        final_score = base_score + vuln_diversity_bonus + param_diversity_bonus + consistency_bonus
-        return min(final_score, 10.0)  # Cap at 10
-        
-    def calculate_response_consistency(self, response_patterns):
-        """Kalkulacija konzistentnosti response-a"""
-        if len(response_patterns) < 2:
-            return 1.0
-            
-        status_codes = [p["status_code"] for p in response_patterns]
-        status_consistency = len(set(status_codes)) / len(status_codes)
-        
-        return 1.0 - status_consistency  # Higher consistency = higher score
-        
-    def analyze_category_performance(self):
-        """Analiza performansi po kategorijama payload-a"""
-        category_performance = defaultdict(lambda: {
-            "total_payloads": 0,
-            "successful_payloads": 0,
-            "avg_success_rate": 0.0,
-            "total_vulnerabilities_found": 0,
-            "top_payloads": []
-        })
-        
-        for attack_result in self.attack_results:
-            injection_results = attack_result.get('injection_results', [])
-            
-            for injection in injection_results:
-                category = injection.get('payload_category', 'unknown')
-                payload = injection.get('payload', '')
-                vulnerability_indicators = injection.get('vulnerability_indicators', [])
-                
-                category_performance[category]["total_payloads"] += 1
-                
-                if vulnerability_indicators:
-                    category_performance[category]["successful_payloads"] += 1
-                    category_performance[category]["total_vulnerabilities_found"] += len(vulnerability_indicators)
-                    
-        # Calculate averages
-        for category, stats in category_performance.items():
-            if stats["total_payloads"] > 0:
-                stats["avg_success_rate"] = stats["successful_payloads"] / stats["total_payloads"]
-                
-        return dict(category_performance)
-        
-    def analyze_parameter_risk_profiles(self):
-        """AI analiza risk profila parametara"""
-        parameter_risks = defaultdict(lambda: {
-            "total_tests": 0,
-            "vulnerabilities_found": 0,
-            "vulnerability_types": set(),
-            "severity_distribution": defaultdict(int),
-            "most_effective_payloads": [],
-            "risk_score": 0.0,
-            "attack_surface_analysis": {},
-            "behavioral_patterns": []
-        })
-        
-        for attack_result in self.attack_results:
-            injection_results = attack_result.get('injection_results', [])
-            
-            for injection in injection_results:
-                param_name = injection.get('parameter', '')
-                vulnerability_indicators = injection.get('vulnerability_indicators', [])
-                payload = injection.get('payload', '')
-                
-                parameter_risks[param_name]["total_tests"] += 1
-                
-                if vulnerability_indicators:
-                    parameter_risks[param_name]["vulnerabilities_found"] += len(vulnerability_indicators)
-                    
-                    for vuln in vulnerability_indicators:
-                        vuln_type = vuln.get('type', 'Unknown')
-                        severity = vuln.get('severity', 'UNKNOWN')
-                        
-                        parameter_risks[param_name]["vulnerability_types"].add(vuln_type)
-                        parameter_risks[param_name]["severity_distribution"][severity] += 1
-                        
-                        # Track effective payloads
-                        if payload not in [p["payload"] for p in parameter_risks[param_name]["most_effective_payloads"]]:
-                            parameter_risks[param_name]["most_effective_payloads"].append({
-                                "payload": payload,
-                                "vulnerability_type": vuln_type,
-                                "severity": severity
-                            })
-                            
-        # Calculate AI risk scores
-        for param_name, risk_data in parameter_risks.items():
-            risk_score = self.calculate_parameter_risk_score(risk_data)
-            risk_data["risk_score"] = risk_score
-            risk_data["vulnerability_types"] = list(risk_data["vulnerability_types"])
-            risk_data["severity_distribution"] = dict(risk_data["severity_distribution"])
-            
-            # AI-based risk classification
-            risk_data["risk_classification"] = self.classify_parameter_risk(risk_score, risk_data)
-            
-        # Sort by risk score
-        sorted_risks = sorted(parameter_risks.items(), key=lambda x: x[1]["risk_score"], reverse=True)
-        
-        self.evaluation_results["parameter_risk_analysis"] = {
-            "all_parameters": dict(parameter_risks),
-            "high_risk_parameters": dict(sorted_risks[:10]),
-            "risk_distribution": self.analyze_risk_distribution(parameter_risks),
-            "attack_surface_summary": self.generate_attack_surface_summary(parameter_risks)
-        }
-        
-    def calculate_parameter_risk_score(self, risk_data):
-        """AI kalkulacija risk score-a za parametar"""
-        if risk_data["total_tests"] == 0:
+    def calculate_confidence_from_indicators(self, indicators):
+        """Računanje confidence na osnovu vulnerability indicators"""
+        if not indicators:
             return 0.0
             
-        # Base vulnerability rate
-        vuln_rate = risk_data["vulnerabilities_found"] / risk_data["total_tests"]
-        base_score = vuln_rate * 5  # 0-5 based on vulnerability rate
+        confidence = 0.0
         
-        # Severity weighting
-        severity_bonus = 0
-        for severity, count in risk_data["severity_distribution"].items():
-            if severity in self.scoring_weights["severity_multiplier"]:
-                severity_bonus += count * (self.scoring_weights["severity_multiplier"][severity] / 10)
-                
-        # Diversity bonus (multiple vulnerability types = higher risk)
-        diversity_bonus = len(risk_data["vulnerability_types"]) * 0.5
+        # Scoring na osnovu indikatora
+        indicator_scores = {
+            "ACCESS_FORBIDDEN": 0.9,
+            "Error": 0.7,
+            "SQL": 0.8,
+            "XSS": 0.8,
+            "IDOR": 0.9,
+            "Path Traversal": 0.8,
+            "Command Injection": 0.9,
+            "SSRF": 0.8,
+            "XXE": 0.7,
+            "Deserialization": 0.8
+        }
         
-        # Frequency bonus (more tests = more confidence)
-        frequency_factor = min(risk_data["total_tests"] / 50, 1.0)  # Max bonus at 50+ tests
+        for indicator in indicators:
+            indicator_str = str(indicator)
+            for pattern, score in indicator_scores.items():
+                if pattern.lower() in indicator_str.lower():
+                    confidence = max(confidence, score)
+                    
+        return min(confidence, 1.0)
         
-        final_score = (base_score + severity_bonus + diversity_bonus) * (0.5 + frequency_factor * 0.5)
-        return min(final_score, 10.0)
+    def ai_payload_analysis(self, parsed_attacks):
+        """AI analiza payload-a i njihove efikasnosti"""
+        analysis = {
+            "total_payloads": len(parsed_attacks),
+            "effective_payloads": 0,
+            "payload_categories": {},
+            "top_payloads": [],
+            "pattern_analysis": {}
+        }
         
-    def classify_parameter_risk(self, risk_score, risk_data):
-        """AI klasifikacija rizika parametra"""
-        if risk_score >= 8.0:
-            return {
-                "level": "CRITICAL",
-                "description": "Parametar pokazuje visoku sklonost ka kritičnim ranjivostima",
-                "priority": "IMMEDIATE",
-                "recommended_actions": [
-                    "Hitna manual verifikacija",
-                    "Deep payload testing",
-                    "Business logic analysis"
-                ]
-            }
-        elif risk_score >= 6.0:
-            return {
-                "level": "HIGH", 
-                "description": "Parametar ima značajne sigurnosne probleme",
-                "priority": "HIGH",
-                "recommended_actions": [
-                    "Extended fuzzing",
-                    "Context-specific payloads",
-                    "Input validation bypass testing"
-                ]
-            }
-        elif risk_score >= 4.0:
-            return {
-                "level": "MEDIUM",
-                "description": "Parametar pokazuje potencijalne sigurnosne probleme",
-                "priority": "MEDIUM", 
-                "recommended_actions": [
-                    "Targeted payload testing",
-                    "Response pattern analysis"
-                ]
-            }
-        else:
-            return {
-                "level": "LOW",
-                "description": "Parametar ima nizak sigurnosni rizik",
-                "priority": "LOW",
-                "recommended_actions": [
-                    "Occasional monitoring",
-                    "Business logic testing"
-                ]
-            }
-    def identify_defensive_patterns(self):
-        """
-        Analizira odgovore servera u cilju otkrivanja zaštitnih mehanizama (WAF, 403, CAPTCHA, itd).
-        """
-        try:
-            defensive_hits = {
-                "WAF_detected": 0,
-                "403_forbidden": 0,
-                "CAPTCHA": 0,
-                "Rate_Limit": 0,
-                "Unknown": 0
-            }
-
-            for attack in self.attack_data:
-                response = attack.get("response", "").lower()
-
-                if "access denied" in response or "waf" in response:
-                    defensive_hits["WAF_detected"] += 1
-                elif "403 forbidden" in response:
-                    defensive_hits["403_forbidden"] += 1
-                elif "captcha" in response:
-                    defensive_hits["CAPTCHA"] += 1
-                elif "rate limit" in response or "too many requests" in response:
-                    defensive_hits["Rate_Limit"] += 1
-                else:
-                    defensive_hits["Unknown"] += 1
-
-            return defensive_hits
-        except Exception as e:
-            return {"error": str(e)}
+        if not parsed_attacks:
+            return analysis
             
-    def analyze_risk_distribution(self, parameter_risks):
-        """Analizira raspodelu rizika po nivoima"""
-        distribution = {"CRITICAL": 0, "HIGH": 0, "MEDIUM": 0, "LOW": 0}
-    
-        for param, risk_data in parameter_risks.items():
-            level = risk_data.get("risk_classification", {}).get("level", "LOW")
-            if level in distribution:
-                distribution[level] += 1
-    
-        return distribution
+        # Kategorisanje payload-a
+        categories = {
+            "XSS": ["<script", "javascript:", "onerror", "onload", "alert("],
+            "SQL_INJECTION": ["'", "UNION", "SELECT", "DROP", "INSERT", "OR 1=1"],
+            "PATH_TRAVERSAL": ["../", "..\\", "%2e%2e", "....//"],
+            "COMMAND_INJECTION": [";", "&", "|", "`", "$(", "${"],
+            "SSRF": ["http://", "https://", "file://", "gopher://"],
+            "XXE": ["<!ENTITY", "SYSTEM", "PUBLIC", "<!DOCTYPE"],
+            "IDOR": ["id=", "user=", "uid=", "account="],
+            "CSRF": ["csrf", "token", "_token", "authenticity"]
+        }
+        
+        for attack in parsed_attacks:
 
-    def generate_attack_surface_summary(self, parameter_risks):
-        """Generiše kratak rezime attack surface-a"""
-        total_params = len(parameter_risks)
-        high_risk = sum(1 for r in parameter_risks.values() if r.get("risk_classification", {}).get("level") in ["CRITICAL", "HIGH"])
-    
-        return {
-            "total_parameters": total_params,
-            "high_risk_count": high_risk,
-            "risk_ratio": round(high_risk / total_params, 2) if total_params else 0.0
-        }
-    def analyze_attack_patterns(self):
-        """Analiza attack paterna i behavior-a"""
-        attack_patterns = {
-            "temporal_patterns": self.analyze_temporal_patterns(),
-            "response_clustering": self.analyze_response_clusters(),
-            "payload_chains": self.identify_payload_chains(),
-            "attack_vectors": self.map_attack_vectors(),
-            "defensive_patterns": self.identify_defensive_patterns()
+            payload = str(attack.get('payload', '')).lower()
+            
+            # Confidence > 0.5 = efikasan payload
+            if attack.get('confidence', 0) > 0.5:
+                analysis["effective_payloads"] += 1
+                
+            # Kategorisanje
+            for category, patterns in categories.items():
+                if any(pattern.lower() in payload for pattern in patterns):
+                    if category not in analysis["payload_categories"]:
+                        analysis["payload_categories"][category] = 0
+                    analysis["payload_categories"][category] += 1
+                    
+        # Top 10 najuspešnijih payload-a
+        sorted_attacks = sorted(parsed_attacks, 
+                              key=lambda x: x.get('confidence', 0), 
+                              reverse=True)
+        analysis["top_payloads"] = sorted_attacks[:10]
+        
+        # Pattern analiza
+        analysis["pattern_analysis"] = self.analyze_payload_patterns(parsed_attacks)
+        
+        return analysis
+        
+    def analyze_payload_patterns(self, attacks):
+        """Analiza pattern-a u uspešnim payload-ima"""
+        patterns = {
+            "encoding_patterns": {},
+            "bypass_techniques": {},
+            "common_vectors": {}
         }
         
-        self.evaluation_results["attack_pattern_analysis"] = attack_patterns
+        effective_attacks = [a for a in attacks if a.get('confidence', 0) > 0.5]
         
-    def analyze_temporal_patterns(self):
-        """Analiza vremenskih paterna napada"""
-        # Implementacija analize vremenskih paterna
-        return {
-            "peak_vulnerability_times": [],
-            "response_time_correlation": {},
-            "attack_frequency_analysis": {}
+        # Encoding pattern-i
+        encoding_patterns = [
+            "%", "&#", "&amp;", "\\x", "\\u", "\\", 
+            "%20", "%3C", "%3E", "%22", "%27"
+        ]
+        
+        for pattern in encoding_patterns:
+            count = sum(1 for attack in effective_attacks 
+                       if pattern in attack.get('payload', ''))
+            if count > 0:
+                patterns["encoding_patterns"][pattern] = count
+                
+        # Bypass tehnike
+        bypass_patterns = [
+            "/*", "*/", "--", "#", "||", "&&", 
+            "eval", "setTimeout", "setInterval"
+        ]
+        
+        for pattern in bypass_patterns:
+            count = sum(1 for attack in effective_attacks 
+                       if pattern in attack.get('payload', ''))
+            if count > 0:
+                patterns["bypass_techniques"][pattern] = count
+                
+        return patterns
+        
+    def risk_assessment(self, parsed_attacks):
+        """CVSS-inspirisan risk assessment"""
+        assessment = {
+            "overall_risk": "LOW",
+            "risk_breakdown": {
+                "CRITICAL": 0,
+                "HIGH": 0, 
+                "MEDIUM": 0,
+                "LOW": 0
+            },
+            "vulnerability_types": {},
+            "attack_surface_coverage": 0.0
         }
-
-    def analyze_response_clusters(self):
-        """
-        Analizira odgovore servera i pokušava da klasifikuje sličnosti među njima
-        u cilju identifikacije ponašanja zaštita (WAF, redirect, fallback itd.)
-        """
-        try:
-            response_signatures = {}
-            for attack in self.attack_data:
-                url = attack.get("url")
-                status = attack.get("response_status")
-                length = attack.get("response_length")
-                sig = f"{status}-{length}"
-                if sig not in response_signatures:
-                    response_signatures[sig] = []
-                response_signatures[sig].append(url)
         
-            return {
-                "cluster_count": len(response_signatures),
-                "clusters": response_signatures
-            }
-        except Exception as e:
-            return {"error": str(e)} 
-    
-    def generate_improvement_recommendations(self):
-        """AI generisanje preporuka za unapređenje"""
+        if not parsed_attacks:
+            return assessment
+            
+        # Računanje risk levels
+        for attack in parsed_attacks:
+            confidence = attack.get('confidence', 0)
+            indicators = attack.get('vulnerability_indicators', [])
+            
+            # Risk scoring
+            risk_level = "LOW"
+            if confidence > 0.9 and len(indicators) > 2:
+                risk_level = "CRITICAL"
+            elif confidence > 0.7 and len(indicators) > 1:
+                risk_level = "HIGH"
+            elif confidence > 0.5:
+                risk_level = "MEDIUM"
+                
+            assessment["risk_breakdown"][risk_level] += 1
+            
+            # Vulnerability types
+            attack_id = attack.get('attack_id', 'UNKNOWN')
+            vuln_type = attack_id.split('_')[0] if '_' in attack_id else attack_id
+            if vuln_type not in assessment["vulnerability_types"]:
+                assessment["vulnerability_types"][vuln_type] = 0
+            assessment["vulnerability_types"][vuln_type] += 1
+            
+        # Overall risk
+        if assessment["risk_breakdown"]["CRITICAL"] > 0:
+            assessment["overall_risk"] = "CRITICAL"
+        elif assessment["risk_breakdown"]["HIGH"] > 0:
+            assessment["overall_risk"] = "HIGH"
+        elif assessment["risk_breakdown"]["MEDIUM"] > 0:
+            assessment["overall_risk"] = "MEDIUM"
+            
+        # Attack surface coverage (aproksimacija)
+        unique_endpoints = len(set(attack.get('url', '') for attack in parsed_attacks))
+        total_attacks = len(parsed_attacks)
+        if total_attacks > 0:
+            assessment["attack_surface_coverage"] = min(unique_endpoints / max(total_attacks, 1), 1.0)
+            
+        return assessment
+        
+    def generate_recommendations(self, payload_analysis, risk_assessment):
+        """Generisanje AI preporuka za poboljšanje"""
         recommendations = []
         
-        # Payload recommendations
-        payload_effectiveness = self.evaluation_results.get("payload_effectiveness", {})
-        top_payloads = payload_effectiveness.get("top_effective_payloads", {})
+        # Payload effectiveness preporuke
+        effective_ratio = (payload_analysis.get("effective_payloads", 0) / 
+                          max(payload_analysis.get("total_payloads", 1), 1))
         
-        if len(top_payloads) < 10:
+        if effective_ratio < 0.3:
             recommendations.append({
-                "category": "Payload Expansion",
+                "category": "Payload Improvement",
                 "priority": "HIGH",
-                "description": "Insufficient effective payloads detected",
+                "description": "Low payload effectiveness detected",
                 "specific_recommendations": [
-                    "Add more context-specific payloads",
                     "Implement custom payload generation",
-                    "Focus on application-specific injection vectors"
+                    "Focus on application-specific injection vectors",
+                    "Analyze failed payloads for patterns"
                 ],
                 "impact": "Increased vulnerability detection rate"
             })
             
-        # Parameter coverage recommendations
-        param_analysis = self.evaluation_results.get("parameter_risk_analysis", {})
-        high_risk_params = param_analysis.get("high_risk_parameters", {})
-        
-        if high_risk_params:
+        # Coverage preporuke
+        coverage = risk_assessment.get("attack_surface_coverage", 0)
+        if coverage < 0.5:
             recommendations.append({
-                "category": "High-Risk Parameter Focus",
-                "priority": "CRITICAL",
-                "description": f"Found {len(high_risk_params)} high-risk parameters requiring immediate attention",
+                "category": "Coverage Improvement", 
+                "priority": "MEDIUM",
+                "description": "Limited attack surface coverage detected",
                 "specific_recommendations": [
-                    f"Prioritize manual testing of: {', '.join(list(high_risk_params.keys())[:5])}",
-                    "Implement parameter-specific payload customization",
-                    "Increase test coverage for high-risk parameters"
+                    "Expand endpoint discovery",
+                    "Test more parameter combinations",
+                    "Include additional attack categories"
                 ],
-                "impact": "Higher chance of finding critical vulnerabilities"
-            })
-            
-        # Coverage gap analysis
-        coverage_gaps = self.identify_coverage_gaps()
-        if coverage_gaps:
-            recommendations.append({
-                "category": "Coverage Improvement",
-                "priority": "MEDIUM", 
-                "description": "Identified gaps in attack coverage",
-                "specific_recommendations": coverage_gaps,
                 "impact": "More comprehensive security assessment"
             })
             
-        self.evaluation_results["improvement_recommendations"] = recommendations
-        
-    def identify_coverage_gaps(self):
-        """Identifikacija praznina u coverage-u"""
-        gaps = []
-        
-        # Check for missing attack categories
-        tested_categories = set()
-        for attack_result in self.attack_results:
-            for injection in attack_result.get('injection_results', []):
-                tested_categories.add(injection.get('payload_category', ''))
-                
-        expected_categories = {'sqli_basic', 'xss_basic', 'path_traversal', 'command_injection'}
-        missing_categories = expected_categories - tested_categories
+        # Missing attack categories
+        tested_categories = set(payload_analysis.get("payload_categories", {}).keys())
+        all_categories = {"XSS", "SQL_INJECTION", "PATH_TRAVERSAL", "COMMAND_INJECTION", 
+                         "SSRF", "XXE", "IDOR", "CSRF"}
+        missing_categories = all_categories - tested_categories
         
         if missing_categories:
-            gaps.append(f"Missing attack categories: {', '.join(missing_categories)}")
+            recommendations.append({
+                "category": "Attack Diversification",
+                "priority": "MEDIUM", 
+                "description": f"Missing attack categories: {', '.join(missing_categories)}",
+                "specific_recommendations": [
+                    f"Add {cat} payload templates" for cat in missing_categories
+                ],
+                "impact": "Broader vulnerability coverage"
+            })
             
-        return gaps
+        return recommendations
         
-    def calculate_overall_ai_scores(self):
-        """AI skoring celog assessment-a"""
-        # Mission completeness score
-        completeness_factors = {
-            "recon_coverage": self.calculate_recon_coverage_score(),
-            "attack_comprehensiveness": self.calculate_attack_comprehensiveness_score(),
-            "vulnerability_confidence": self.calculate_vulnerability_confidence_score(),
-            "payload_effectiveness": self.calculate_overall_payload_effectiveness()
+    def calculate_ai_score(self, payload_analysis, risk_assessment):
+        """AI scoring algoritam (0.0 - 5.0)"""
+        score_components = {
+            "payload_effectiveness": 0.0,
+            "vulnerability_confidence": 0.0,
+            "attack_diversity": 0.0,
+            "coverage_score": 0.0
         }
         
-        # Weighted average
-        weights = {"recon_coverage": 0.2, "attack_comprehensiveness": 0.3, 
-                  "vulnerability_confidence": 0.3, "payload_effectiveness": 0.2}
+        # Payload effectiveness (0-1.5)
+        effective_ratio = (payload_analysis.get("effective_payloads", 0) / 
+                          max(payload_analysis.get("total_payloads", 1), 1))
+        score_components["payload_effectiveness"] = effective_ratio * 1.5
         
-        overall_score = sum(completeness_factors[factor] * weights[factor] 
-                           for factor in completeness_factors)
+        # Vulnerability confidence (0-2.0)
+        risk_weights = {"CRITICAL": 2.0, "HIGH": 1.5, "MEDIUM": 1.0, "LOW": 0.3}
+        total_weighted = sum(count * risk_weights.get(level, 0) 
+                           for level, count in risk_assessment.get("risk_breakdown", {}).items())
+        total_attacks = sum(risk_assessment.get("risk_breakdown", {}).values())
         
-        ai_scoring = {
-            "overall_mission_score": overall_score,
-            "completeness_factors": completeness_factors,
-            "score_breakdown": weights,
-            "mission_grade": self.grade_mission(overall_score),
-            "confidence_level": self.calculate_confidence_level(),
-            "recommended_next_steps": self.recommend_next_steps(overall_score)
+        if total_attacks > 0:
+            avg_risk_weight = total_weighted / total_attacks
+            score_components["vulnerability_confidence"] = min(avg_risk_weight, 2.0)
+            
+        # Attack diversity (0-1.0)
+        categories_tested = len(payload_analysis.get("payload_categories", {}))
+        max_categories = 8  # Ukupno kategorija
+        score_components["attack_diversity"] = min(categories_tested / max_categories, 1.0)
+        
+        # Coverage score (0-0.5)
+        coverage = risk_assessment.get("attack_surface_coverage", 0)
+        score_components["coverage_score"] = coverage * 0.5
+        
+        # Ukupan AI score
+        total_score = sum(score_components.values())
+        
+        return {
+            "total_score": round(total_score, 2),
+            "components": score_components,
+            "grade": self.score_to_grade(total_score),
+            "description": self.score_description(total_score)
         }
         
-        self.evaluation_results["ai_scoring"] = ai_scoring
-        
-    def grade_mission(self, score):
-        """AI grade-ovanje misije"""
-        if score >= 9.0:
-            return {"grade": "A+", "description": "Exceptional security assessment"}
-        elif score >= 8.0:
-            return {"grade": "A", "description": "Comprehensive security assessment"}
-        elif score >= 7.0:
-            return {"grade": "B+", "description": "Good security assessment with minor gaps"}
-        elif score >= 6.0:
-            return {"grade": "B", "description": "Adequate security assessment"}
-        elif score >= 5.0:
-            return {"grade": "C", "description": "Basic security assessment with significant gaps"}
+    def score_to_grade(self, score):
+        """Konverzija score u grade"""
+        if score >= 4.5:
+            return "A+"
+        elif score >= 4.0:
+            return "A"
+        elif score >= 3.5:
+            return "B+"
+        elif score >= 3.0:
+            return "B"
+        elif score >= 2.5:
+            return "C+"
+        elif score >= 2.0:
+            return "C"
+        elif score >= 1.5:
+            return "D+"
+        elif score >= 1.0:
+            return "D"
         else:
-            return {"grade": "F", "description": "Incomplete security assessment"}
+            return "F"
             
-    def calculate_recon_coverage_score(self):
-        """Score za recon coverage"""
-        if not self.recon_data:
-            return 0.0
-            
-        recon_stats = self.recon_data.get('statistics', {})
-        total_endpoints = recon_stats.get('total_endpoints', 0)
-        total_parameters = recon_stats.get('total_parameters', 0)
-        
-        # Scoring based on discovery depth
-        base_score = min(total_endpoints / 20, 1.0) * 5  # Max 5 points for endpoint discovery
-        param_score = min(total_parameters / 30, 1.0) * 5  # Max 5 points for parameter discovery
-        
-        return base_score + param_score
-        
-    def calculate_attack_comprehensiveness_score(self):
-        """Score za attack comprehensiveness"""
-        total_tests = sum(len(result.get('injection_results', [])) for result in self.attack_results)
-        
-        # Scoring based on test volume and diversity
-        volume_score = min(total_tests / 500, 1.0) * 7  # Max 7 points for volume
-        
-        # Category diversity score
-        categories_tested = set()
-        for result in self.attack_results:
-            for injection in result.get('injection_results', []):
-                categories_tested.add(injection.get('payload_category', ''))
-                
-        diversity_score = len(categories_tested) * 0.5  # 0.5 points per category
-        
-        return volume_score + diversity_score
-        
-    def calculate_vulnerability_confidence_score(self):
-        """Score za confidence u pronađenim ranjivostima"""
-        total_vulns = 0
-        confidence_sum = 0
-        
-        for result in self.attack_results:
-            for injection in result.get('injection_results', []):
-                for vuln in injection.get('vulnerability_indicators', []):
-                    total_vulns += 1
-                    # Confidence based on vulnerability type and indicators
-                    confidence = self.get_vulnerability_confidence(vuln)
-                    confidence_sum += confidence
-                    
-        if total_vulns == 0:
-            return 5.0  # Neutral score if no vulnerabilities
-            
-        avg_confidence = confidence_sum / total_vulns
-        return avg_confidence * 10
-        
-    def get_vulnerability_confidence(self, vulnerability):
-        """Confidence score za pojedinačnu ranjivost"""
-        vuln_type = vulnerability.get('type', '').lower()
-        indicator = vulnerability.get('indicator', '').lower()
-        
-        # High confidence indicators
-        high_confidence_patterns = ['sql error', 'command output', 'file content disclosed']
-        if any(pattern in indicator for pattern in high_confidence_patterns):
-            return 0.9
-            
-        # Medium confidence
-        medium_confidence_patterns = ['payload reflected', 'template evaluation']
-        if any(pattern in indicator for pattern in medium_confidence_patterns):
-            return 0.7
-            
-        # Lower confidence
-        return 0.5
-        
-    def calculate_overall_payload_effectiveness(self):
-        """Overall payload effectiveness score"""
-        payload_data = self.evaluation_results.get("payload_effectiveness", {})
-        top_payloads = payload_data.get("top_effective_payloads", {})
-        
-        if not top_payloads:
-            return 0.0
-            
-        effectiveness_scores = [payload_info.get("ai_effectiveness_score", 0) 
-                              for payload_info in top_payloads.values()]
-        
-        return statistics.mean(effectiveness_scores) if effectiveness_scores else 0.0
-        
-    def calculate_confidence_level(self):
-        """Calculation of overall confidence level"""
-        factors = []
-        
-        # Volume confidence
-        total_tests = sum(len(result.get('injection_results', [])) for result in self.attack_results)
-        volume_confidence = min(total_tests / 1000, 1.0)
-        factors.append(volume_confidence)
-        
-        # Diversity confidence  
-        categories = set()
-        for result in self.attack_results:
-            for injection in result.get('injection_results', []):
-                categories.add(injection.get('payload_category', ''))
-        diversity_confidence = len(categories) / 8  # Expecting 8 categories
-        factors.append(diversity_confidence)
-        
-        # Response consistency confidence
-        consistency_scores = []
-        for result in self.attack_results:
-            injections = result.get('injection_results', [])
-            if injections:
-                status_codes = [inj.get('status_code') for inj in injections]
-                consistency = len(set(status_codes)) / len(status_codes) if status_codes else 1
-                consistency_scores.append(1 - consistency)  # Higher consistency = higher confidence
-                
-        consistency_confidence = statistics.mean(consistency_scores) if consistency_scores else 0.5
-        factors.append(consistency_confidence)
-        
-        overall_confidence = statistics.mean(factors)
-        
-        if overall_confidence >= 0.8:
-            return "HIGH"
-        elif overall_confidence >= 0.6:
-            return "MEDIUM"
+    def score_description(self, score):
+        """Opis score-a"""
+        if score >= 4.0:
+            return "Excellent security assessment with high-confidence vulnerabilities"
+        elif score >= 3.0:
+            return "Good security assessment with moderate vulnerabilities detected"
+        elif score >= 2.0:
+            return "Basic security assessment - room for improvement"
         else:
-            return "LOW"
+            return "Limited security assessment - significant improvements needed"
             
-    def recommend_next_steps(self, overall_score):
-        """AI preporuke za sledeće korake"""
-        if overall_score >= 8.0:
-            return [
-                "Proceed to manual verification of found vulnerabilities",
-                "Prepare detailed PoC reports",
-                "Consider advanced attack scenarios"
-            ]
-        elif overall_score >= 6.0:
-            return [
-                "Expand payload coverage in weak areas",
-                "Increase parameter testing depth",
-                "Manual verification of high-confidence findings"
-            ]
-        else:
-            return [
-                "Significantly expand reconnaissance phase",
-                "Increase payload diversity and volume",
-                "Review attack methodology and coverage"
-            ]
-            
-    def generate_statistics(self):
-        """Generisanje finalne statistike"""
-        total_attack_results = len(self.attack_results)
-        total_injection_tests = sum(len(result.get('injection_results', [])) for result in self.attack_results)
-        total_vulnerabilities = sum(len([inj for inj in result.get('injection_results', []) 
-                                       if inj.get('vulnerability_indicators')]) 
-                                  for result in self.attack_results)
-        
-        stats = {
-            "evaluation_timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
-            "total_attack_files_analyzed": total_attack_results,
-            "total_injection_tests_analyzed": total_injection_tests,
-            "total_vulnerabilities_analyzed": total_vulnerabilities,
-            "ai_evaluation_version": "ShadowFox AI v1.0",
-            "analysis_completeness": "COMPREHENSIVE"
-        }
-        
-        self.evaluation_results["statistics"] = stats
-        
     def save_results(self):
-        """Snimanje AI evaluation rezultata"""
+        """Snimanje AI evaluacije u ai_evaluator.json"""
         output_file = "Centar/ai_evaluator.json"
         
         try:
             with open(output_file, 'w') as f:
-                json.dump(self.evaluation_results, f, indent=2, ensure_ascii=False)
-            print(f"💾 [SAVE] AI Evaluation snimljen: {output_file}")
+                json.dump(self.results, f, indent=2, ensure_ascii=False)
+            print(f"💾 [SAVE] AI evaluacija snimljena: {output_file}")
         except Exception as e:
             print(f"❌ [SAVE ERROR] {str(e)}")
             
-    def display_ai_summary(self):
-        """Prikaz AI evaluation sažetka"""
-        ai_scoring = self.evaluation_results.get("ai_scoring", {})
-        stats = self.evaluation_results.get("statistics", {})
-        
-        print("\n🤖 SHADOWFOX AI EVALUATOR - INTELIGENTNA ANALIZA")
-        print("=" * 60)
-        print(f"📊 Mission Score: {ai_scoring.get('overall_mission_score', 0):.2f}/10")
-        print(f"🎓 Mission Grade: {ai_scoring.get('mission_grade', {}).get('grade', 'N/A')}")
-        print(f"🔍 Confidence Level: {ai_scoring.get('confidence_level', 'UNKNOWN')}")
-        
-        # Payload effectiveness
-        payload_eff = self.evaluation_results.get("payload_effectiveness", {})
-        top_payloads = payload_eff.get("top_effective_payloads", {})
-        print(f"🎯 Top Effective Payloads: {len(top_payloads)}")
-        
-        # Parameter risks
-        param_risks = self.evaluation_results.get("parameter_risk_analysis", {})
-        high_risk = param_risks.get("high_risk_parameters", {})
-        print(f"⚠️  High-Risk Parameters: {len(high_risk)}")
-        
-        # Recommendations
-        recommendations = self.evaluation_results.get("improvement_recommendations", [])
-        print(f"💡 AI Recommendations: {len(recommendations)}")
-        
-        # Top recommendations
-        if recommendations:
-            print(f"\n🏆 TOP AI PREPORUKE:")
-            for i, rec in enumerate(recommendations[:3], 1):
-                print(f"   {i}. [{rec.get('priority', 'UNKNOWN')}] {rec.get('category', 'Unknown')}")
-                print(f"      {rec.get('description', 'No description')}")
-                
-        print(f"\n📈 STATISTIKA:")
-        print(f"   • Attack fajlovi analizirani: {stats.get('total_attack_files_analyzed', 0)}")
-        print(f"   • Injection testovi analizirani: {stats.get('total_injection_tests_analyzed', 0)}")
-        print(f"   • Ranjivosti analizirane: {stats.get('total_vulnerabilities_analyzed', 0)}")
-        
-        print(f"\n✅ Detaljan AI report: Centar/ai_evaluator.json")
-        
     def run_evaluation(self):
-        """Glavna AI evaluation operacija"""
-        print("🤖 SHADOWFOX AI EVALUATOR - POKRETANJE INTELIGENTNE ANALIZE")
-        print("=" * 70)
+        """Glavna AI evaluacija"""
+        print("🧠 SHADOWFOX AI EVALUATOR - POKRETANJE ANALIZE")
+        print("=" * 60)
         
-        # 1. Load dependencies
-        self.load_dependencies()
+        # 1. Učitaj Meta config
+        self.load_meta_config()
         
-        # 2. Load svih attack rezultata
-        self.load_attack_results()
+        # 2. Učitaj attack podatke
+        print("📊 [AI] Učitavanje attack podataka...")
+        attack_data = self.load_attack_data()
         
-        # 3. Analiza payload effectiveness
-        print("🎯 [AI] Analiza payload efikasnosti...")
-        self.analyze_payload_effectiveness()
+        if not attack_data:
+            print("❌ [AI] Nema podataka za analizu!")
+            return
+            
+        # 3. Parsiraj podatke iz različitih izvora
+        all_parsed_attacks = []
+        for file_path, data in attack_data.items():
+            print(f"🔍 [AI] Parsiranje: {file_path}")
+            parsed = self.parse_agent_x_results(data)
+            all_parsed_attacks.extend(parsed)
+            
+        print(f"✅ [AI] Ukupno parsiranih napada: {len(all_parsed_attacks)}")
         
-        # 4. Parameter risk analysis
-        print("⚠️  [AI] Analiza parameter rizika...")
-        self.analyze_parameter_risk_profiles()
+        # 4. Payload analiza
+        print("🎯 [AI] Payload analiza...")
+        payload_analysis = self.ai_payload_analysis(all_parsed_attacks)
+        self.results["payload_analysis"] = payload_analysis
         
-        # 5. Attack pattern analysis
-        print("🔍 [AI] Analiza attack paterna...")
-        self.analyze_attack_patterns()
-        self.generate_improvement_recommendations()
-        self.calculate_overall_ai_scores()
-        self.generate_statistics()
+        # 5. Risk assessment
+        print("⚠️  [AI] Risk assessment...")
+        risk_assessment = self.risk_assessment(all_parsed_attacks)
+        self.results["risk_assessment"] = risk_assessment
+        
+        # 6. Generisanje preporuka
+        print("💡 [AI] Generisanje preporuka...")
+        recommendations = self.generate_recommendations(payload_analysis, risk_assessment)
+        self.results["recommendations"] = recommendations
+        
+        # 7. AI scoring
+        print("🏆 [AI] AI scoring...")
+        ai_score = self.calculate_ai_score(payload_analysis, risk_assessment)
+        self.results["ai_scoring"] = ai_score
+        
+        # 8. Evaluation summary
+        self.results["evaluation_summary"] = {
+            "timestamp": datetime.now().isoformat(),
+            "total_attacks_analyzed": len(all_parsed_attacks),
+            "effective_attacks": payload_analysis.get("effective_payloads", 0),
+            "overall_risk": risk_assessment.get("overall_risk", "LOW"),
+            "ai_score": ai_score.get("total_score", 0.0),
+            "ai_grade": ai_score.get("grade", "F"),
+            "recommendations_count": len(recommendations)
+        }
+        
+        # 9. Snimanje rezultata
         self.save_results()
-        self.display_ai_summary()
-if __name__ == "__main__":
+        
+        # 10. Prikaz sažetka
+        self.display_summary()
+        
+    def display_summary(self):
+        """Prikaz sažetka AI evaluacije"""
+        summary = self.results["evaluation_summary"]
+        scoring = self.results["ai_scoring"]
+        
+        print("\n🧠 SHADOWFOX AI EVALUATOR - SAŽETAK")
+        print("=" * 60)
+        print(f"📊 Analizirani napadi: {summary['total_attacks_analyzed']}")
+        print(f"🎯 Efikasni napadi: {summary['effective_attacks']}")
+        print(f"⚠️  Ukupan rizik: {summary['overall_risk']}")
+        print(f"🏆 AI Score: {summary['ai_score']}/5.0 ({summary['ai_grade']})")
+        print(f"💡 Preporuke: {summary['recommendations_count']}")
+        
+        print(f"\n📈 SCORE BREAKDOWN:")
+        components = scoring.get("components", {})
+        for component, score in components.items():
+            print(f"   • {component}: {score:.2f}")
+            
+        print(f"\n📝 {scoring.get('description', 'N/A')}")
+        print(f"\n✅ Rezultati: Centar/ai_evaluator.json")
+
+def main():
     evaluator = ShadowAIEvaluator()
     evaluator.run_evaluation()
+
+if __name__ == "__main__":
+    main()

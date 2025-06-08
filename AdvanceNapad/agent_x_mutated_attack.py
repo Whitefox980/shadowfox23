@@ -47,7 +47,7 @@ class AgentX:
         try:
             with open('Centar/mutator_core.json', 'r') as f:
                 mutator_results = json.load(f)
-                self.mutated_data = mutator_results.get('mutated_payloads', [])
+                self.mutated_data = mutator_results.get("mutation_tests", [])
                 print(f"🧬 [MUTATOR] Učitano {len(self.mutated_data)} mutiranih payloada")
                 
                 if not self.mutated_data:
@@ -86,51 +86,58 @@ class AgentX:
             time.sleep(random.uniform(0.1, 0.5))
             
     def execute_attack(self, mutated_payload):
-        """Izvršava jedan mutiran napad"""
-        endpoint = mutated_payload.get('endpoint')
-        method = mutated_payload.get('method', 'GET').upper()
-        headers = mutated_payload.get('headers', {})
-        params = mutated_payload.get('params', {})
-        data = mutated_payload.get('data', {})
-        payload_info = mutated_payload.get('payload_info', {})
-        
-        attack_id = hashlib.md5(f"{endpoint}{method}{str(params)}{str(data)}".encode()).hexdigest()[:8]
-        
-        print(f"🚀 [ATTACK] {attack_id}: {method} {endpoint}")
-        print(f"   🧬 Payload: {payload_info.get('type', 'UNKNOWN')} | {payload_info.get('description', 'N/A')}")
-        
+        """Izvršava jedan mutirani napad"""
+        endpoint = mutated_payload.get("endpoint")
+        method = mutated_payload.get("method", "GET").upper()
+        headers = mutated_payload.get("headers", {})
+        params = mutated_payload.get("params", {})
+        data = mutated_payload.get("data", {})
+        payload_info = mutated_payload.get("payload_info", {})
+        strategy = mutated_payload.get("mutation_type", "")
+        original_payload = mutated_payload.get("original_payload", {})
+        payload_value = mutated_payload.get("payload", "UNKNOWN")
+
+        attack_id = hashlib.md5(f"{endpoint}{str(params)}{str(data)}".encode()).hexdigest()[:8]
+        print(f"\n🔫 [ATTACK] {attack_id}: {method} {endpoint}")
+        print(f"💣 Payload: {payload_value} | Strategy: {strategy} | AI: {mutated_payload.get('ai_score', 'N/A')}")
+
+        request_headers = {**self.session.headers, **headers}
+        self.intelligent_delay()
+
         try:
-            # Kombinuj headers iz Meta i mutator-a
-            request_headers = {**self.session.headers, **headers}
-            
-            # Inteligentno kašnjenje
-            self.intelligent_delay()
-            
-            # Započni merenje vremena
             start_time = time.time()
-            
-            # Izvršavanje napada
-            if method == 'GET':
-                response = self.session.get(endpoint, params=params, headers=request_headers)
-            elif method == 'POST':
-                response = self.session.post(endpoint, data=data, params=params, headers=request_headers)
-            elif method == 'PUT':
-                response = self.session.put(endpoint, data=data, params=params, headers=request_headers)
-            elif method == 'DELETE':
-                response = self.session.delete(endpoint, params=params, headers=request_headers)
+
+            if method == "GET":
+                response = self.session.get(endpoint, params={**params, "test": payload_value}, headers=request_headers, timeout=10)
+            elif method == "POST":
+                response = self.session.post(endpoint, data={**params, "test": payload_value}, headers=request_headers, timeout=10)
+            elif method == "PUT":
+                response = self.session.put(endpoint, data={**params, "test": payload_value}, headers=request_headers, timeout=10)
+            elif method == "DELETE":
+                response = self.session.delete(endpoint, params=params, headers=request_headers, timeout=10)
             else:
-                response = self.session.request(method, endpoint, data=data, params=params, headers=request_headers)
-                
+                response = self.session.request(method, endpoint, data=data, params=params, headers=request_headers, timeout=10)
+
             end_time = time.time()
             response_time = end_time - start_time
-            
-            # Analiza response-a
-            attack_result = self.analyze_response(
-                attack_id, mutated_payload, response, response_time
-            )
-            
+
+            attack_result = self.analyze_response(attack_id, mutated_payload, response, response_time)
+
+    # BLIND DETEKCIJA
+            if "blind" in strategy and response_time > 3.0:
+                if "vulnerability_indicators" not in attack_result:
+                    attack_result["vulnerability_indicators"] = []
+                attack_result["vulnerability_indicators"].append("TIMING_ANOMALY")
+
+    # Evaluator-friendly rezultat (uvek)
+            attack_result["injection_results"] = [{
+                "payload": mutated_payload.get("payload", ""),
+                "parameter": "test",
+                "payload_category": mutated_payload.get("mutation_type", "unknown"),
+                "vulnerability_indicators": attack_result.get("vulnerability_indicators", [])
+            }]
             return attack_result
-            
+
         except Exception as e:
             error_result = {
                 "attack_id": attack_id,
@@ -139,11 +146,11 @@ class AgentX:
                 "mutated_payload": mutated_payload,
                 "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
             }
-            
             print(f"❌ [ATTACK FAILED] {attack_id}: {str(e)}")
             self.attack_results["failed_attacks"].append(error_result)
             return error_result
-            
+
+
     def analyze_response(self, attack_id, mutated_payload, response, response_time):
         """Duboka analiza response-a za detekciju ranjivosti"""
         

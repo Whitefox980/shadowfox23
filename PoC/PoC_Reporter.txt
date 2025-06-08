@@ -1,0 +1,20 @@
+🦊 SHADOWFOX SECURITY RESEARCH
+==================================================
+
+VULNERABILITY SUMMARY
+------------------------------
+Title: Reflected Cross-Site Scripting (XSS) in Search Parameter
+Severity: Medium
+CVSS Score: 6.1
+Affected URL: https://uat-bugbounty.nonprod.syfe.com/search
+Parameter: q
+
+PROOF OF CONCEPT
+------------------------------
+Step 1: Navigate to the search functionality
+Action: Open browser and go to: https://uat-bugbounty.nonprod.syfe.com/search
+
+Step 2: Inject XSS payload in search parameter
+Action: Modify URL to: https://uat-bugbounty.nonprod.syfe.com/search?q=<script>alert('ShadowFox-XSS-PoC')</script>
+
+Step 3: Observe JavaScript execution

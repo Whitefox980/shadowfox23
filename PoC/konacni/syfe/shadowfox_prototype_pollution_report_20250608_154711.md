@@ -9,7 +9,7 @@
 **🔥 Severity:** `CRITICAL (CVSS 10.0)`  
 **🧬 CWE:** `CWE-1321: Improperly Controlled Modification of Object Prototype`  
 **📅 Discovery Date:** `2025-06-08`  
-**👨‍💻 Researchers:** `Whitefox980, `
+**👨‍💻 Researchers:** `Whitefox980, Claude AI Assistant`
 
 ---
 

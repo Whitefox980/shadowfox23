@@ -8,7 +8,7 @@
 **🎯 Target:** `https://uat-bugbounty.nonprod.syfe.com`  
 **🔥 Severity:** `CRITICAL (CVSS 10.0)`  
 **🧬 CWE:** `CWE-1321: Improperly Controlled Modification of Object Prototype`  
-**📅 Discovery Date:** `2025-06-08`  
+**📅 Discovery Date:** `2025-06-09`  
 **👨‍💻 Researchers:** `Whitefox980, `
 
 ---
@@ -56,7 +56,7 @@ Kritična Prototype Pollution ranjivost je identifikovana koja omogućava napada
 **Lead Researchers:** Whitefox980, Chupko  
 **Motto:** *...*
 
-**Generated:** 2025-06-08 15:47:11
+**Generated:** 2025-06-09 13:36:20
 
 ---
 
